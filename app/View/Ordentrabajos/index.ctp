@@ -115,7 +115,7 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 		</tfoot>
 		<tbody>
 			<?php 
-			//echo print_r($ordentrabajos);
+			$esOperario = $usuarioTipo == 'operario';
 			foreach ($ordentrabajos as $ordentrabajo): ?>
 			<tr>					
 				<td>
@@ -189,14 +189,15 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
                                             echo $this->Html->link( $ips, array('controller'=>'ordentrabajos','action'=>'ordenips',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
                                         }
 					echo $this->Html->link( $print_img, array('controller'=>'ordentrabajos','action'=>'view',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
-					echo $this->Html->link( $edit_img, array('controller'=>'ordentrabajos','action'=>'edit',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
-
-					echo $this->Form->postLink(
-						$delete_img,
-						array('action' => 'delete', $ordentrabajo['Ordentrabajo']['id']),
-						['escape'=>false],
-						__('Esta seguro que desea eliminar la orden # %s?', $ordentrabajo['Ordentrabajo']['id'])
-					); ?>
+					if(!$esOperario) {
+						echo $this->Html->link( $edit_img, array('controller'=>'ordentrabajos','action'=>'edit',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
+						echo $this->Form->postLink(
+							$delete_img,
+							array('action' => 'delete', $ordentrabajo['Ordentrabajo']['id']),
+							['escape'=>false],
+							__('Esta seguro que desea eliminar la orden # %s?', $ordentrabajo['Ordentrabajo']['id'])
+						);
+					} ?>
 
 				</td>
 			</tr>

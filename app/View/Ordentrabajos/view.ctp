@@ -333,6 +333,10 @@
 			}?>
 		</td>
 	</tr>
+	<?php 
+	$esOperario = $usuarioTipo == 'operario';
+	if(!$esOperario) {
+	?>
 	<tr  class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
 		<td class="print_td_title_1">
 			<?php echo __('Total:'); ?>			
@@ -353,12 +357,20 @@
 			<?php echo $ordentrabajo['Ordentrabajo']['saldo']; ?>
 		</td>
 	</tr>
+	<?php
+	}
+	?>
 	<tr class="all">
 		<td>Productos:</td>
 		<td colspan="80" class="all" style="border-bottom: 1px dotted;">
 			<?php
 			foreach ($ordentrabajo['Detalleordentrabajo'] as $detalleordentrabajo) {
-				echo $detalleordentrabajo['Producto']['nombre']."-".$detalleordentrabajo['cantidad']."-$".$detalleordentrabajo['precio']." / ";
+				echo $detalleordentrabajo['Producto']['nombre']."-".$detalleordentrabajo['cantidad'];
+				if(!$esOperario) {
+					echo "-$".$detalleordentrabajo['precio']." / ";
+				}else{
+					echo " / ";
+				}
 			}
 			?>
 		</td>

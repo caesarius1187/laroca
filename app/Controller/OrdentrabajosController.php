@@ -44,6 +44,7 @@ class OrdentrabajosController extends AppController {
 		//$this->Ordentrabajo->recursive = 0;
 		$this->set('ordentrabajos', $this->Ordentrabajo->find('all',$options));
 		$this->set('estadousado', $estadoUsado);
+		$this->set('usuarioTipo', $this->Session->read('Auth.User.tipo'));		
 	}
 
 /**
@@ -70,6 +71,7 @@ class OrdentrabajosController extends AppController {
 		);
 		$ordentrabajo=$this->Ordentrabajo->find('first', $options);
 		$this->set('ordentrabajo', $ordentrabajo);
+		$this->set('usuarioTipo', $this->Session->read('Auth.User.tipo'));
 		
 		//$this->loadModel('Producto');
 		
