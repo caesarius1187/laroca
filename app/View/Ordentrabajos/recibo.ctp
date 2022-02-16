@@ -1,0 +1,238 @@
+<?php echo $this->Html->script('ordentrabajos/view',array('inline'=>false));
+?>
+<style type="text/css">
+	/*.print_td_border{
+		border-bottom: 1px dotted;
+	}*/
+	.print_td_title_1{
+		width: 130px;
+	}
+	.print_td_title_2{
+		width: 110px;
+	}	
+	.print_td_title_3{
+		width: 70px;
+	}		
+</style>
+<script type="text/javascript">
+	var reducida = false;
+	function reducir(){
+		if(!reducida){
+			$(".notInReducida").hide();
+			reducida = true;
+		}else{
+			//$(".notInReducida").show();
+			reducida = false;
+			mostrarTipoDeOrdenInicial();		
+			mostrarTipoDeOrdenInicial();			
+		}
+
+	}
+</script>
+
+<?php echo $this->Form->input('tipoorden',array('type'=>'hidden','value'=>$ordentrabajo['Ordentrabajo']['tipoorden'])); 
+	$esOperario = $usuarioTipo == 'operario';
+?>
+<div class="ordentrabajos" id="otrabajoid" style="width:100%;">
+<table class="tbl_ot" cellspacing="0" id="">
+	<tr  class="all">
+		<td colspan="3" rowspan="4" style="text-align:center">
+			<?php echo $this->Html->image('inmemorianlogo.png',array('alt'=>'logo inmemorian','style'=>'')); ?> 
+		</td> 	
+	</tr>
+	<tr  class="all">
+		<td colspan="3" style="text-align:center">
+			<h3>E-mail: inmemorian-salta@live.com.ar</h3>
+		</td> 
+	</tr>
+	<tr  class="all">
+		<td colspan="3" style="text-align:center">
+			<h3>Direcci&oacute;n: Alvarado 1129</h3>
+		</td> 
+	</tr>
+	<tr  class="all">
+		<td colspan="3" style="text-align:center">
+			<h3>Tel&eacute;fono: 2437408 (FIJO)</h3>
+		</td> 			
+	</tr>
+	<tr class="all">
+		<td colspan="1"  class="print_td_title_1">
+			Cliente
+		</td>
+		<td>
+				<?php
+	            if($ordentrabajo['Cliente']['nombre']!='PARTICULAR') {
+	                echo $ordentrabajo['Cliente']['nombre'] ;
+	            }
+				echo " " . $ordentrabajo['Ordentrabajo']['solicnombre'];?>
+		</td>
+		<td colspan="6" >
+			Recibo N°<?php echo 5 ?>
+		</td>
+	</tr>
+	<tr class="all">
+		<td colspan="1"  class="print_td_title_1">
+			Orden
+		</td>
+		<td>
+				<?php echo $ordentrabajo['Ordentrabajo']['id']; ?>
+		</td>
+		<td colspan="3" >
+			Cementerio
+		</td>
+		<td colspan="3" >
+			Fecha <?php echo date('d-m-Y'); ?>
+		</td>
+	</tr>
+	<tr class="all">
+		<td>Concepto</td>
+		<td>Cantidad</td>
+		<td>Precio Unit</td>
+		<td>Total</td>
+	</tr>
+	<?php foreach ($ordentrabajo['Detalleordentrabajo'] as $detalleordentrabajo) {
+		?>
+		<tr>
+			<td>
+				<?php echo $detalleordentrabajo['Producto']['nombre'] ?>
+			</td>
+			<td>
+				<?php echo $detalleordentrabajo['cantidad'] ?>
+			</td>
+			<td>
+				$<?php echo number_format($detalleordentrabajo['precio']*1,2,',','.') ?>
+			</td>
+			<td>
+				<?php echo 8 ?>
+			</td>
+			<?php
+	} ?>
+	<tr class="all">
+		<td class="print_td_title_1">	
+			<?php echo __('Fecha Encargo:'); ?>			
+		</td>
+		<td style="border-bottom: 1px dotted;">	
+			<?php 
+			$isDate = validateDate($ordentrabajo['Ordentrabajo']['fechaencargo']);
+			if($isDate){
+				echo date('d-m-Y',strtotime($ordentrabajo['Ordentrabajo']['fechaencargo'])); 
+			}else{
+				echo ''; 
+			}?>
+		</td>
+		
+		<td class="print_td_title_2">
+			<?php echo __('Fecha Entrega:'); ?>			
+		</td>
+		<td colspan="3" style="border-bottom: 1px dotted;">
+			<?php 
+			$isDate = validateDate($ordentrabajo['Ordentrabajo']['fechaentrega']);
+			if($isDate){
+				echo date('d-m-Y',strtotime($ordentrabajo['Ordentrabajo']['fechaentrega'])); 
+			}else{
+				echo ''; 
+			}?>
+		</td>
+	</tr>
+	
+	<tr class="all">
+		<td>Productos:</td>
+		<td colspan="80" class="all" style="border-bottom: 1px dotted;">
+			<?php
+			
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="6" style="height:40px"></td>
+	</tr>
+	<?php 
+	if(!$esOperario) {
+	?>
+	<tr  class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
+		<td class="print_td_title_1">
+			<?php echo __('Total:'); ?>			
+		</td>
+		<td style="border-bottom: 1px dotted;">	
+			<?php echo $ordentrabajo['Ordentrabajo']['total']; ?>
+		</td>
+		<td class="print_td_title_3">	
+			<?php echo __('A Cuenta:'); ?>			
+		</td>
+		<td style="border-bottom: 1px dotted;">	
+			<?php echo $ordentrabajo['Ordentrabajo']['acuenta']; ?>
+		</td>
+		<td class="print_td_title_3">
+			<?php echo __('Saldo:'); ?>			
+		</td>
+		<td style="border-bottom: 1px dotted;">
+			<?php echo $ordentrabajo['Ordentrabajo']['saldo']; ?>
+		</td>
+	</tr>
+	<?php
+	}
+	?>
+</table>
+<table class="tbl_ot" cellspacing="0">
+	<tr class="all">
+		<td colspan="2" style="text-align:center">
+			<?php echo __('Cliente'); ?>
+		</td>		
+		<td colspan="2" style="text-align:center">
+			<?php echo __('Atendio'); ?>
+		</td>		
+	</tr>
+	<tr class="all">
+		<td colspan="4" style="height:20px"></td>
+	</tr>
+	<tr class="all">
+		<td>
+			<?php echo __('Firma:'); ?>
+		</td>
+		<td>
+		_______________________________
+		</td>		
+		<td >
+			<?php echo __('Firma:'); ?>
+		</td>
+		<td>		
+		_______________________________
+		</td>			
+	</tr>
+	<tr class="all">
+		<td colspan="4" style="height:20px"></td>
+	</tr>
+	<tr class="all">
+		<td>
+			<?php echo __('Aclaracion:'); ?>
+		</td>
+		<td> 			
+		_______________________________
+		</td>		
+		<td>
+			<?php echo __('Aclaracion:'); ?>
+		</td>
+		<td>			
+		_______________________________
+		</td>					
+	</tr>
+</table>
+</div>
+<div>
+<?php echo $this->Form->button('Imprimir', 
+                                    array('type' => 'button',
+                                          'onClick' => "imprimir()",
+                                          'id' =>'btn_ot'
+
+                                         )
+            );?> 
+</div>
+<?php
+function validateDate($date, $format = 'Y-m-d')
+{
+    $d = DateTime::createFromFormat($format, $date);
+    if(in_array($date,['0000-00-00','01-01-1970','1970-01-01',''])){
+        return false;
+    }
+    return $d && $d->format($format) == $date;
+}?>

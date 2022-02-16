@@ -193,10 +193,7 @@ $(document).ready(function(){
 });
 //vamos a inicializar el formulario en caso de que el campo Tipo de Orden venga con un valor predeterminado
 function calcularSaldo(){
-	var total = $("#OrdentrabajoTotal").val();
-	var acuenta = $("#OrdentrabajoAcuenta").val();
-	var saldo = total - acuenta;
-	$("#OrdentrabajoSaldo").val(saldo);
+
 }
 function mostrarTipoDeOrdenInicial(){
 	switch($('#OrdentrabajoTipoorden').val()){
@@ -322,7 +319,83 @@ function getProductosDetalle(){
 		});	
 		return false; 
 }	
+//Agrega un pagos para la orden de trabajo
+function agregarpago(){
+		 
+	var numPago = $('#OrdentrabajoNumPago').val()*1+1;
 
+	var rowPago = $("<tr>")
+						.attr('id',"RowPago"+numPago);
+
+	var dt = new Date();
+
+	var dd = String(dt.getDate()).padStart(2, '0');
+	var mm = String(dt.getMonth() + 1).padStart(2, '0'); //January is 0!
+	var yyyy = dt.getFullYear();
+	var date = yyyy + "-" + mm + "-" + dd;
+
+	var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+	var montoDejado = $("#OrdentrabajoMontoPagado").val();
+	var mediopago = $('#OrdentrabajoMedioPago').val()
+	rowPago
+		.append(
+			$('<td>').html(numPago)
+		)
+		.append(
+			$('<td>')
+				.append(
+					$('<div>')
+						.addClass('input text')
+						.append(
+							$('<input>')
+								.attr('id','Pago'+numPago+'Fecha')
+								.attr('name','data[Pago]['+numPago+'][fecha]')
+								.val(date + " " + time)
+						)
+				)		
+		)
+		.append(
+			$('<td>').append(
+				$('<div>')
+					.addClass('input text')
+					.append(
+						$('<input>')
+							.attr('id','Pago'+numPago+'Montodejado')
+							.attr('name','data[Pago]['+numPago+'][montodejado]')
+							.addClass('porPagar')
+							.val(montoDejado)
+					)
+			)	
+		)
+		.append(
+			$('<td>').append(
+				$('<div>')
+					.addClass('input text')
+					.append(
+						$('<input>')
+							.attr('id','Pago'+numPago+'Mediodepago')
+							.attr('name','data[Pago]['+numPago+'][mediodepago]')
+							.val(mediopago)
+					)
+			)	
+		)
+		.append(
+			$('<td>').append(
+				$('<input>')
+					.attr('onClick', 'eliminarDetalleOnTheFly('+numPago+')')
+					.attr('type','button')
+					.attr('value','X')
+					.attr('title','Eliminar')
+			)
+		);
+	$("#tablePagos").find('tbody').append(rowPago);
+	$('#OrdentrabajoNumPago').val(numPago*1+1);	
+	actualizarTotal();
+}
+function eliminarDetalleOnTheFly(numPago){
+	$("#RowPago"+numPago).remove();
+	actualizarTotal();
+}
 //Agrega un producto para vender en la orden de trabajo
 function agregarproducto(){
 	if(!checkstock()){
@@ -434,8 +507,22 @@ function actualizarTotal(){
 			total += precio*cantidad;
 		}		
 	}*/
+	var yaPagado = 0;	
+	$(".pagadoYaCargado").each(function () {
+		yaPagado += $(this).val()*1;
+	});
+	$(".porPagar").each(function () {
+		yaPagado += $(this).val()*1;
+	})
+
 	$('#OrdentrabajoCosto').val(total);
+	$('#OrdentrabajoPagado').val(yaPagado);
+	$('#OrdentrabajoSaldoTotal').val(total-yaPagado);
+	$('#OrdentrabajoSaldo').val(total-yaPagado);
+	$('#OrdentrabajoAcuenta').val(yaPagado);
 	$('#OrdentrabajoTotal').val(total);
+	OrdentrabajoAcuenta
+
     calcularSaldo();
 }
 //Obtiene los detalles del producto seleccionado para vender en la orden de trabajo

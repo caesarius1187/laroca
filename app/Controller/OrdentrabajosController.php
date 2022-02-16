@@ -81,6 +81,38 @@ class OrdentrabajosController extends AppController {
 
 		//$this->set(compact('productos'));
 	}
+
+	public function recibo($id = null) {
+		if (!$this->Ordentrabajo->exists($id)) {
+			throw new NotFoundException(__('Invalid ordentrabajo'));
+		}
+		$options = array(
+			'contain'=>[
+				'Detalleordentrabajo'=>[
+					'Producto'
+				],
+				'Pago'=>[
+					'order' => ['id' => 'DESC']
+				],
+				'Cliente'
+			],
+			'conditions' => array(
+				'Ordentrabajo.' . $this->Ordentrabajo->primaryKey => $id
+			)
+		);
+		$ordentrabajo=$this->Ordentrabajo->find('first', $options);
+		$this->set('ordentrabajo', $ordentrabajo);
+		$this->set('usuarioTipo', $this->Session->read('Auth.User.tipo'));
+		
+		//$this->loadModel('Producto');
+		
+		//$productos = $this->Producto->find('list');
+
+		//$producto = $this->Producto->find('first',$productosCond);	
+
+		//$this->set(compact('productos'));
+	}
+
 	public function ordenips($id = null) {
 		if (!$this->Ordentrabajo->exists($id)) {
 			throw new NotFoundException(__('Invalid ordentrabajo'));
@@ -263,6 +295,8 @@ class OrdentrabajosController extends AppController {
 										      'Detalleordentrabajo'=>array(
 										      	'Producto'=>array('fields'=>array('nombre'))
 										      	),
+										      'Pago'=>array(
+										      	),
 										      'Manoobraxordentrabajo' =>array(
 										      	'Manodeobra'=>array('fields'=>array('nombre'))
 										      	)										      	
@@ -275,7 +309,7 @@ class OrdentrabajosController extends AppController {
 		}		
 		
 		$this->loadModel('Producto');
-		//$this->loadModel('Manoobraxordentrabajo');
+		$this->loadModel('Pago');
 		//$this->loadModel('Manodeobra');
 
 		$userCond = array('conditions' => array('User.id' => $this->request->data['Ordentrabajo']['user_id'] ));

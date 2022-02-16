@@ -556,6 +556,9 @@
             <td colspan="2" class="td_1">
                 <h2>Productos</h2>
             </td>
+            <td colspan="2" class="td_2">
+                <h2>Pagos</h2>
+            </td>
             <td colspan="2" class="td_2" style="display:none">
                 <h2>Mano de Obra</h2>
             </td>
@@ -563,28 +566,47 @@
         <tr class="all">
             <td class="td_3">
                 <!--<?php echo $this->Form->input('productodetalle_id',array('label'=>'Producto','onChange'=>'getDetallesProducto()', 'style' => 'max-width:240px')); ?>-->
-
-
                 <?php echo $this->Form->input('producto_id',array('label'=>'Producto','style' => 'max-width:240px', 'onChange'=>'getDetallesProducto()')); ?>
-
-
                 <input type="button" value="Agregar Producto" id="btnAgregarProducto" onClick="agregarproducto()" class="btn_ot"/>
             </td>
             <td id="tdDetalleProducto" class="td_4">
 
             </td>
+
+            <td class="td_5" colspan="2">
+            	<table>
+            		<tr class="all">
+            			<td>
+			                <?php
+			                echo $this->Form->input('montoPagado',array('label'=>'Monto pagado','type'=>'number'));
+			                ?>
+			            </td>
+			            <td>
+			                <?php
+			                echo $this->Form->input('medioPago',array(
+			                	'label'=>'Medio de pago',
+			                	'options'=>['efectivo'=>'Efectivo','tarjeta'=>'Tarjeta'],
+			                ));
+			                ?>
+			            </td>
+			            <td>
+                			<input type="button" value="Agregar Pago" id="btnAgregarPago" onClick="agregarpago()" class="btn_ot" />
+                		</td>
+                	</tr>
+                </table>
+            </td>
+
+            <td id="tdDetalleManodeobra" class="td_6" style="display:none">
+            </td>
+
             <td class="td_5" style="display:none">
                 <?php
                 echo $this->Form->input('manodeobra_id',array('label'=>'Mano de obra','onChange'=>'getDetallesManoDeObra()'));
                 ?>
-
                 <!--<?php echo $this->Html->image('add.png', array('id' => 'btnAgregarManoDeObra','onClick' => 'agregarmanodeobra()', 'class' => 'image', 'title' =>'Agregar mano de obra'));?>	-->
-
-
                 <input type="button" value="Agregar Mano de Obra" id="btnAgregarManoDeObra" onClick="agregarmanodeobra()" class="btn_ot"/>
             </td>
             <td id="tdDetalleManodeobra" class="td_6" style="display:none">
-
             </td>
         </tr>
         <tr class="all">
@@ -627,6 +649,46 @@
 				</table>
                 <?php echo $this->Form->input('numDetalle',array('value'=>$k+1,'type'=>'hidden')); ?>
             </td>
+            <td colspan="2">
+				<table id="tablePagos" cellpadding="0" cellspacing="0" class="tbl_add">
+					<thead>
+						<tr class="all">
+							<th>Num Pago</th>
+							<th>Fecha</th>
+							<th>Monto</th>
+							<th>Metodo</th>
+						</tr>						
+					</thead>
+					<tbody>						
+						<?php
+                        $j=0;
+						foreach ($this->request->data['Pago'] as $j => $pago) {
+							?>
+                            <tr id="RowPago<?php echo $pago['id'] ?>" class="all">
+                                <td>
+                                    <?php echo $this->Form->label($pago['id']) ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->label($pago['fecha']) ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->label($pago['montodejado']) ?>
+                                    <?php echo $this->Form->input('montodejado'.$pago['id'], ['value'=>$pago['montodejado'], 'type'=>'hidden', 'class'=>'pagadoYaCargado']) ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->label($pago['mediodepago']) ?>
+                                </td>
+                                <td>
+                                    <input  type="button" value="I"  title="Imprimir" onclick="Imprimir(<?php echo $pago['id']; ?>)" class="imprimir">
+                                    <input  type="button" value="X"  title="Eliminar" onclick="eliminarPagoGuardado(<?php echo $pago['id']; ?>)" class="eliminar">
+                                </td>
+							</tr>
+						<?php
+						} ?>						
+					</tbody>
+				</table>
+                <?php echo $this->Form->input('numPago',array('value'=>$j+1,'type'=>'hidden')); ?>
+            </td>
 			<td colspan="2" style="display:none">
 				<?php echo $this->Form->input('numDetalleManoDeObra',array('value'=>0,'type'=>'hidden')); ?>
 				<table id="tableDMOXOT" cellpadding="0" cellspacing="0" class="tbl_add">
@@ -651,10 +713,7 @@
 			</td>
 		</tr>
         <tr class="all">
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>
+            <td colspan="4">
                 <table cellpadding="0" cellspacing="0">
                     <tr class="all">
                         <td style="text-align: right; vertical-align:middle;">
@@ -662,6 +721,16 @@
                         </td>
                         <td width="40%">
                             <?php echo $this->Form->input('costo', array('type' => 'money','value'=>0, 'label'=>'', 'style' => 'width:90%; font-size:150%;')); ?></td>
+                        <td style="text-align: right; vertical-align:middle;">
+                            <label class="lbl_ot">Pagado</label>
+                        </td>
+                        <td width="40%">
+                            <?php echo $this->Form->input('pagado', array('type' => 'money','value'=>0, 'label'=>'', 'style' => 'width:90%; font-size:150%;')); ?></td>
+                        <td style="text-align: right; vertical-align:middle;">
+                            <label class="lbl_ot">Saldo Total</label>
+                        </td>
+                        <td width="40%">
+                            <?php echo $this->Form->input('saldoTotal', array('type' => 'money','value'=>0, 'label'=>'', 'style' => 'width:90%; font-size:150%;')); ?></td>
                     </tr>
                 </table>
             </td>
