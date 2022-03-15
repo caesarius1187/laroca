@@ -92,7 +92,8 @@ class OrdentrabajosController extends AppController {
 					'Producto'
 				],
 				'Pago'=>[
-					'order' => ['id' => 'DESC']
+					'order' => ['id' => 'DESC'],
+					'limit'=>1
 				],
 				'Cliente'
 			],

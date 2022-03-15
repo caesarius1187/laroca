@@ -36,7 +36,7 @@
 <div class="ordentrabajos" id="otrabajoid" style="width:100%;">
 <table class="tbl_ot" cellspacing="0" id="">
 	<tr  class="all">
-		<td colspan="3" rowspan="4" style="text-align:center">
+		<td colspan="3" rowspan="8" style="text-align:center">
 			<?php echo $this->Html->image('inmemorianlogo.png',array('alt'=>'logo inmemorian','style'=>'')); ?> 
 		</td> 	
 	</tr>
@@ -55,6 +55,27 @@
 			<h3>Tel&eacute;fono: 2437408 (FIJO)</h3>
 		</td> 			
 	</tr>
+	<tr  class="all">
+		<td colspan="3" style="text-align:center">
+			<h3>Whatsapp: 3875459412 </h3>
+		</td> 			
+	</tr>
+	<tr  class="all">
+		<td colspan="3" style="text-align:center">
+			<h3>Facebook: In Memoriam </h3>
+		</td> 			
+	</tr>
+	<tr  class="all">
+		<td colspan="3" style="text-align:center">
+			<h3>Instagram: @inmemoriam.salta </h3>
+		</td> 			
+	</tr>
+	<tr  class="all">
+		<td colspan="3" style="text-align:center">
+			<h3>Web: https://inmemoriam.com.ar/ </h3>
+		</td> 			
+	</tr>
+	
 	<tr class="all">
 		<td colspan="1"  class="print_td_title_1">
 			Cliente
@@ -67,7 +88,7 @@
 				echo " " . $ordentrabajo['Ordentrabajo']['solicnombre'];?>
 		</td>
 		<td colspan="6" >
-			Recibo N°<?php echo 5 ?>
+			Recibo N: <?php echo $ordentrabajo['Pago'][0]['id'] ?>
 		</td>
 	</tr>
 	<tr class="all">
@@ -75,10 +96,10 @@
 			Orden
 		</td>
 		<td>
-				<?php echo $ordentrabajo['Ordentrabajo']['id']; ?>
+				<?php echo $ordentrabajo['Ordentrabajo']['numerodeorden']; ?>
 		</td>
 		<td colspan="3" >
-			Cementerio
+			Cementerio: <?php echo $ordentrabajo['Ordentrabajo']['cementerio']; ?>
 		</td>
 		<td colspan="3" >
 			Fecha <?php echo date('d-m-Y'); ?>
@@ -103,7 +124,10 @@
 				$<?php echo number_format($detalleordentrabajo['precio']*1,2,',','.') ?>
 			</td>
 			<td>
-				<?php echo 8 ?>
+				$<?php 
+				$total = $detalleordentrabajo['cantidad']*1 * $detalleordentrabajo['precio']*1;
+				echo number_format($total,2,',','.') 
+				?>
 			</td>
 			<?php
 	} ?>
@@ -132,15 +156,6 @@
 			}else{
 				echo ''; 
 			}?>
-		</td>
-	</tr>
-	
-	<tr class="all">
-		<td>Productos:</td>
-		<td colspan="80" class="all" style="border-bottom: 1px dotted;">
-			<?php
-			
-			?>
 		</td>
 	</tr>
 	<tr>
@@ -175,10 +190,7 @@
 </table>
 <table class="tbl_ot" cellspacing="0">
 	<tr class="all">
-		<td colspan="2" style="text-align:center">
-			<?php echo __('Cliente'); ?>
-		</td>		
-		<td colspan="2" style="text-align:center">
+		<td colspan="4" style="text-align:center">
 			<?php echo __('Atendio'); ?>
 		</td>		
 	</tr>
@@ -186,12 +198,6 @@
 		<td colspan="4" style="height:20px"></td>
 	</tr>
 	<tr class="all">
-		<td>
-			<?php echo __('Firma:'); ?>
-		</td>
-		<td>
-		_______________________________
-		</td>		
 		<td >
 			<?php echo __('Firma:'); ?>
 		</td>
@@ -203,11 +209,6 @@
 		<td colspan="4" style="height:20px"></td>
 	</tr>
 	<tr class="all">
-		<td>
-			<?php echo __('Aclaracion:'); ?>
-		</td>
-		<td> 			
-		_______________________________
 		</td>		
 		<td>
 			<?php echo __('Aclaracion:'); ?>

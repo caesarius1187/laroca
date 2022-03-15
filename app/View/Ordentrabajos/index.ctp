@@ -94,6 +94,7 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 			<th>Pintada </th>							
 			<th>Terminada </th>							
 			<th>Para IPS </th>							
+			<th>Saldo</th>							
 			<th class="actions" style="text-align:center">Acciones</th>
 		</tr>
 		</thead>
@@ -104,6 +105,7 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 			<th></th>
 			<th></th>
 			<th></th>						
+			<th></th>
 			<th></th>
 			<th></th>
 			<th></th>
@@ -179,15 +181,20 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 				<td>
 					<?php echo $ordentrabajo['Ordentrabajo']['paraips']? "SI":"NO"; ?>
 				</td>	
+				<td>
+					<?php echo number_format($ordentrabajo['Ordentrabajo']['saldo'],2,',','.'); ?>
+				</td>	
 				<td class="actions" style="text-align:center">
 					<?php
 					$print_img = $this->Html->image('print.png',array('alt'=>'edit',));
+					$money_img = $this->Html->image('print.png',array('alt'=>'edit',));
 					$edit_img = $this->Html->image('edit_view.png',array('alt'=>'edit',));
 					$ips = $this->Html->image('ips.jpg',array('alt'=>'ips','style'=>'width:32px;height:20px'));
 					$delete_img = $this->Html->image('ic_delete_black_24dp.png',array('alt'=>'edit',));
                                         if($ordentrabajo['Ordentrabajo']['paraips']){
                                             echo $this->Html->link( $ips, array('controller'=>'ordentrabajos','action'=>'ordenips',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
                                         }
+					echo $this->Html->link( "$", array('controller'=>'ordentrabajos','action'=>'recibo',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
 					echo $this->Html->link( $print_img, array('controller'=>'ordentrabajos','action'=>'view',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
 					if(!$esOperario) {
 						echo $this->Html->link( $edit_img, array('controller'=>'ordentrabajos','action'=>'edit',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
