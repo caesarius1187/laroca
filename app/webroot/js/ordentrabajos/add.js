@@ -438,6 +438,48 @@ function agregarproducto(){
 	$('#tableDOT').append(newDetalle);
 	actualizarTotal();
 }
+function agregarobservacion(){
+	if(!$("#OrdentrabajoObservaciondescripcion").val()!=""){
+		alert("Agregue una descripcion");
+		return;
+	}
+	
+	var numDetalle = $('#OrdentrabajoNumObservacion').val();
+	var userId = $('#OrdentrabajoUserId').val();
+	var userName = $('#OrdentrabajoUserName').val();
+	var newDetalle = '<tr id="RowObservacion'+numDetalle+'">';
+	var dt = new Date();
+
+	var dd = String(dt.getDate()).padStart(2, '0');
+	var mm = String(dt.getMonth() + 1).padStart(2, '0'); //January is 0!
+	var yyyy = dt.getFullYear();
+	var date = dd + "-" + mm + "-" + yyyy;
+	var dateO = yyyy + "-" + mm + "-" + dd;
+
+	newDetalle +=' <td>';
+	newDetalle +='	<div class="input text">';
+	var descripcion = $('#OrdentrabajoObservaciondescripcion').val();
+	newDetalle +='		<input name="data[Observacione]['+numDetalle+'][descripcion]" readonly="readonly" id="Observacione'+numDetalle+'Descripcion" type="text" value="'+descripcion+'">';
+	newDetalle +='	</div>';
+	newDetalle +='</td> ';
+	newDetalle +=' <td>';
+	newDetalle +='	<div class="input text">';
+	newDetalle +='		<input name="data[Observacione]['+numDetalle+'][user_id]" readonly="readonly" id="Observacione'+numDetalle+'UserId" type="hidden" value="'+userId+'">';
+	newDetalle +='		<input name="data[Observacione]['+numDetalle+'][userName]" readonly="readonly" id="Observacione'+numDetalle+'UserName" type="text" value="'+userName+'">';
+	newDetalle +='	</div>';
+	newDetalle +='</td> ';
+	newDetalle +=' <td>';
+	newDetalle +='	<div class="input text">';
+	newDetalle +='		<input name="data[Observacione]['+numDetalle+'][creadoEl]" readonly="readonly" id="Observacione'+numDetalle+'CreadoEl" type="text" value="'+dateO+'">';
+	newDetalle +='	</div>';
+	newDetalle +='</td> ';
+	newDetalle +='<td>';
+	newDetalle +='	<input  type="button" value="X"  title="Eliminar" onclick="eliminarObservacion('+numDetalle+')" class="eliminar">';
+	newDetalle +='</td>';
+	newDetalle +='</tr>';
+	$('#OrdentrabajoNumObservacion').val(numDetalle*1+1);	
+	$('#tableObservaciones').append(newDetalle);
+}
 //Elimina un producto a vender en la orden de trabajo
 function eliminarDetalle(numDetalle){
 	$('#RowDetalle'+numDetalle).remove() ;

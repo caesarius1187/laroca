@@ -467,6 +467,7 @@
 		<?php
 		/*AVANCES DEL TRABAJO	*/
 		?>
+
 		<tr class="all">
 			<td colspan="4" style="text-align:center"><h2><?php echo __('Avances del Trabajo'); ?></h2></td>
 		</tr>	
@@ -509,6 +510,7 @@
 		                                      )); ?>
 			</td>
 		</tr>		
+		
 		<tr class="all">
 			<td width="25%">				
 				<?php 
@@ -552,6 +554,67 @@
 		                                      )); ?>
 			</td>			
 		</tr>
+		<tr class="all">
+			<td colspan="4" style="text-align:center"><h2><?php echo __('Observaciones'); ?></h2></td>
+		</tr>
+		<tr class="all">
+            <td class="td_3">
+                <?php 
+                echo $this->Form->input('observaciondescripcion',array(
+                	'label'=>'Descripcion',
+                	'style' => 'max-width:240px;display: inline', 
+                	'onChange'=>'')); 
+            	?>
+                <input type="button" style="display:inline;" value="Agregar Observacion" id="btnAgregarObservacion" onClick="agregarobservacion()" class="btn_ot"/>
+            </td>
+            <td id="tdDetalleObservacion" class="td_4" colspan="4">
+            	<table id="tableObservaciones" cellpadding="0" cellspacing="0" class="tbl_add">
+					<thead>
+						<tr class="all">
+							<th>Descripcion</th>
+							<th>Creador</th>
+							<th>Creado el</th>
+							<th>Acciones</th>
+						</tr>						
+					</thead>
+					<tbody>						
+						<?php
+                        $k=0;
+						foreach ($this->request->data['Observacione'] as $k => $observacion) {
+							?>
+                            <tr id="RowObservacion<?php echo $observacion['id'] ?>" class="all">
+                                <td>
+                                    <?php echo $this->Form->input('Observacione.'.$k.'.id',['value'=>$observacion['id'],'type'=>'hidden','disabled'=>true]) ?>
+                                    <?php echo $this->Form->input('Observacione.'.$k.'.descripcion',['value'=>$observacion['descripcion'],'disabled'=>true]) ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->input('Observacione.'.$k.'.usuario_id',[
+                                    	'value'=>$observacion['User']['nombre'],
+                                    	'options'=>$users,
+                                    	'disabled'=>true
+                                    ]) ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->input('Observacione.'.$k.'.created',[
+                                    	'type'=> 'text',
+                                    	'value'=>date('d-m-Y',strtotime($observacion['created'])),
+                                    	'disabled'=>true
+                                    ]) ?>
+                                </td>
+                                <td>
+                                    <!--<input  type="button" value="X"  title="Eliminar" onclick="eliminarObservacionGuardada(<?php echo $observacion['id']; ?>)" class="eliminar">-->
+                                </td>
+							</tr>
+							<?php
+						}?>						
+					</tbody>
+				</table>
+                <?php echo $this->Form->input('numObservacion',array('value'=>$k+1,'type'=>'hidden')); ?>
+                <?php echo $this->Form->input('userName',array('value'=>$this->Session->read('Auth.User.username'),'type'=>'hidden')); ?>
+                <?php echo $this->Form->input('userId',array('value'=>$this->Session->read('Auth.User.id'),'type'=>'hidden')); ?>
+
+            </td>	
+        </tr>
         <tr class="all">
             <td colspan="2" class="td_1">
                 <h2>Productos</h2>

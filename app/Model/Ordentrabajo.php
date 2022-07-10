@@ -125,9 +125,21 @@ class Ordentrabajo extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		),
+		'Observacione' => array(
+			'className' => 'Observacione',
+			'foreignKey' => 'ordentrabajo_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
 		)
 	);
-
 
 /**
  * hasAndBelongsToMany associations

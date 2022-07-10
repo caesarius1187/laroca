@@ -47,6 +47,30 @@ class OrdentrabajosController extends AppController {
 		$this->set('usuarioTipo', $this->Session->read('Auth.User.tipo'));		
 	}
 
+	public function informe($clienteId=null) {
+		$options = array(
+			'contain'=>array(
+				'User',
+				'Prepara',
+				'Cliente',
+				'Tipocliente',
+				'Detalleordentrabajo'=>array(
+					'Producto'
+				),
+			),
+			'conditions'=>array(
+				'Ordentrabajo.cliente_id'=>$clienteId,
+				'Ordentrabajo.saldo > 0'
+			),
+			'limit'=>500,
+			'order'=>['Ordentrabajo.id DESC']
+		);
+		//$this->Ordentrabajo->recursive = 0;
+		$this->set('ordentrabajos', $this->Ordentrabajo->find('all',$options));
+		$this->set('clienteId', $clienteId);
+		$this->set('usuarioTipo', $this->Session->read('Auth.User.tipo'));		
+	}
+
 /**
  * view method
  *
@@ -292,6 +316,7 @@ class OrdentrabajosController extends AppController {
 										      
 										      'Cliente',
 										      'Tipocliente',
+										      'Observacione'=>['User'],
 										      //'Producto',										      	
 										      'Detalleordentrabajo'=>array(
 										      	'Producto'=>array('fields'=>array('nombre'))

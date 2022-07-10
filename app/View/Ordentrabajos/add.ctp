@@ -487,9 +487,33 @@
 				
 				<input type="button" value="Agregar Producto" id="btnAgregarProducto" onClick="agregarproducto()" class="btn_ot"/>
 			</td>
+
 			<td id="tdDetalleProducto" class="td_4">
 				
 			</td>		
+			<td class="td_5" colspan="2">
+            	<table>
+            		<tr class="all">
+            			<td>
+			                <?php
+			                echo $this->Form->input('montoPagado',array('label'=>'Monto pagado','type'=>'number'));
+			                ?>
+			            </td>
+			            <td>
+			                <?php
+			                echo $this->Form->input('medioPago',array(
+			                	'label'=>'Medio de pago',
+			                	'options'=>['efectivo'=>'Efectivo','tarjeta'=>'Tarjeta'],
+			                ));
+			                ?>
+			            </td>
+			            <td>
+                			<input type="button" value="Agregar Pago" id="btnAgregarPago" onClick="agregarpago()" class="btn_ot" />
+                		</td>
+                	</tr>
+                </table>
+            </td>
+
 			<td class="td_5" style="display:none">
 				<?php 					
 					echo $this->Form->input('manodeobra_id',array('label'=>'Mano de obra','onChange'=>'getDetallesManoDeObra()')); 
@@ -531,6 +555,22 @@
 					</tbody>
 				</table>
 			</td>
+			<td colspan="2">
+				<table id="tablePagos" cellpadding="0" cellspacing="0" class="tbl_add">
+					<thead>
+						<tr class="all">
+							<th>Num Pago</th>
+							<th>Fecha</th>
+							<th>Monto</th>
+							<th>Metodo</th>
+						</tr>						
+					</thead>
+					<tbody>						
+							
+					</tbody>
+				</table>
+                <?php echo $this->Form->input('numPago',array('value'=>0,'type'=>'hidden')); ?>
+            </td>
 			<td colspan="2" style="display:none">  
 				<?php echo $this->Form->input('numDetalleManoDeObra',array('value'=>0,'type'=>'hidden')); ?>
 				<table id="tableDMOXOT" cellpadding="0" cellspacing="0" class="tbl_add" style="margin-top:20px;">

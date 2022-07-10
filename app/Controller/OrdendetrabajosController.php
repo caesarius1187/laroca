@@ -74,10 +74,10 @@ class OrdendetrabajosController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Ordendetrabajo->save($this->request->data)) {
-				$this->Session->setFlash(__('The ordendetrabajo has been saved.'));
+				$this->Session->setFlash(__('La orden de trabajo ha sido guardada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The ordendetrabajo could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Error. La orden de trabajo ha sido no guardada, intente de nuevo mas tarde'));
 			}
 		} else {
 			$options = array('conditions' => array('Ordendetrabajo.' . $this->Ordendetrabajo->primaryKey => $id));

@@ -88,7 +88,16 @@
 				echo " " . $ordentrabajo['Ordentrabajo']['solicnombre'];?>
 		</td>
 		<td colspan="6" >
-			Recibo N: <?php echo $ordentrabajo['Pago'][0]['id'] ?>
+			<?php
+			if(isset($ordentrabajo['Pago'][0])){
+				?>
+				Recibo N: <?php echo $ordentrabajo['Pago'][0]['id'] ?>
+				<?php
+			}else{
+				 echo "No se realizo ningun pago" ;
+			}
+			?>
+			
 		</td>
 	</tr>
 	<tr class="all">
@@ -96,7 +105,7 @@
 			Orden
 		</td>
 		<td>
-				<?php echo $ordentrabajo['Ordentrabajo']['numerodeorden']; ?>
+			<?php echo $ordentrabajo['Ordentrabajo']['numerodeorden']; ?>
 		</td>
 		<td colspan="3" >
 			Cementerio: <?php echo $ordentrabajo['Ordentrabajo']['cementerio']; ?>
