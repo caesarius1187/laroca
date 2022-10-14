@@ -17,7 +17,7 @@ $(document).ready(function()
 <div class="compras">	
 	<table>
 		<tr>
-			<td colspan="3"><h2><?php echo __('Lista de Compras'); ?></h2></td>
+			<td colspan="3"><h2><?php echo __('Lista de Egresos'); ?></h2></td>
 			<td style="text-align: right;" title="Agregar Falla">
 		        <div class="fab blue">
 		        <core-icon icon="add" align="center">	            

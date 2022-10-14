@@ -386,11 +386,11 @@
 				<?php echo $this->Form->input('dedicatoria',array('type'=>'textarea','rows' => 2)); ?>
 			</td>
 		</tr>	
-		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
+		<!--<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
 			<td colspan="4" >
 				<?php echo $this->Form->input('observaciones',array('type'=>'textarea','rows' => 2)); ?>
 			</td>
-		</tr>
+		</tr>-->
 		<?php
 		/*Datos Del Solicitante*/
 		?>		

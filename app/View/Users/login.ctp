@@ -1,7 +1,7 @@
 <div class="page-container">
 	
 	<?php echo $this->Html->image('logo_login.png', array('alt' => 'In Memoriam', 'width' => '350')); ?>
-	<form action="login" id="UserLoginForm" method="post" accept-charset="utf-8">
+	<form action="users/login" controller="users" id="UserLoginForm" method="post" accept-charset="utf-8">
 		<div style="display:none;">
 			<input type="hidden" name="_method" value="POST">
 		</div>

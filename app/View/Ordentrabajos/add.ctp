@@ -334,12 +334,46 @@
 				<?php echo $this->Form->input('dedicatoria',array('type'=>'textarea','rows' => 2)); ?>
 			</td>
 		</tr>	
-		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
+		<!-- <tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
 			<td colspan="4">
 				<?php echo $this->Form->input('observaciones',array('type'=>'textarea','rows' => 2)); ?>
 			</td>
-		</tr>	
+		</tr>	-->
+		<tr class="all">
+			<td colspan="4" style="text-align:center"><h2><?php echo __('Observaciones'); ?></h2></td>
+		</tr>
+		<tr class="all">
+            <td class="td_3">
+                <?php 
+                echo $this->Form->input('observaciondescripcion',array(
+                	'label'=>'Descripcion',
+                	'style' => 'max-width:240px;display: inline', 
+                	'onChange'=>'')); 
+            	?>
+                <input type="button" style="display:inline;" value="Agregar Observacion" id="btnAgregarObservacion" onClick="agregarobservacion()" class="btn_ot"/>
+            </td>
+            <td id="tdDetalleObservacion" class="td_4" colspan="4">
+            	<table id="tableObservaciones" cellpadding="0" cellspacing="0" class="tbl_add">
+					<thead>
+						<tr class="all">
+							<th>Descripcion</th>
+							<th>Creador</th>
+							<th>Creado el</th>
+							<th>Acciones</th>
+						</tr>						
+					</thead>
+					<tbody>						
+						<?php
+                        $k=0;
+						?>
+					</tbody>
+				</table>
+                <?php echo $this->Form->input('numObservacion',array('value'=>$k+1,'type'=>'hidden')); ?>
+                <?php echo $this->Form->input('userName',array('value'=>$this->Session->read('Auth.User.username'),'type'=>'hidden')); ?>
+                <?php echo $this->Form->input('userId',array('value'=>$this->Session->read('Auth.User.id'),'type'=>'hidden')); ?>
 
+            </td>	
+        </tr>
 		<?php
 		/*Datos Del Solicitante*/
 		?>
