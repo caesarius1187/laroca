@@ -347,6 +347,7 @@
                 <?php 
                 echo $this->Form->input('observaciondescripcion',array(
                 	'label'=>'Descripcion',
+					'type'=>'textarea',
                 	'style' => 'max-width:240px;display: inline', 
                 	'onChange'=>'')); 
             	?>

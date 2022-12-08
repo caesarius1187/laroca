@@ -561,6 +561,7 @@
             <td class="td_3">
                 <?php 
                 echo $this->Form->input('observaciondescripcion',array(
+					'type'=>'textarea',
                 	'label'=>'Descripcion',
                 	'style' => 'max-width:240px;display: inline', 
                 	'onChange'=>'')); 
@@ -585,7 +586,7 @@
                             <tr id="RowObservacion<?php echo $observacion['id'] ?>" class="all">
                                 <td>
                                     <?php echo $this->Form->input('Observacione.'.$k.'.id',['value'=>$observacion['id'],'type'=>'hidden','disabled'=>true]) ?>
-                                    <?php echo $this->Form->input('Observacione.'.$k.'.descripcion',['value'=>$observacion['descripcion'],'disabled'=>true]) ?>
+                                    <?php echo $this->Form->input('Observacione.'.$k.'.descripcion',['type'=>'textarea','value'=>$observacion['descripcion'],'disabled'=>true]) ?>
                                 </td>
                                 <td>
                                     <?php echo $this->Form->input('Observacione.'.$k.'.usuario_id',[

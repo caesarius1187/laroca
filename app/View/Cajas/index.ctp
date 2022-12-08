@@ -99,6 +99,7 @@
 	<tbody>
 	<?php 
 	$existeCajaAbierta = false;
+	$ultimaCaja = 0;
 	foreach ($cajas as $caja): ?>
 	<tr>		
 		<td><?php echo h($caja['Caja']['fecha']); ?>&nbsp;</td>
@@ -110,10 +111,12 @@
 			<?php 
 			if($caja['Caja']['usuarioCierre_id']){
 				echo $this->Html->link(__('Ver Caja'), array('action' => 'edit', $caja['Caja']['id']));
+				$ultimaCaja = $caja['Caja']['montoCierre'];
+
 			}else{
 				echo $this->Html->link(__('Cerrar Caja'), array('action' => 'edit', $caja['Caja']['id']));
 				$existeCajaAbierta = true;
-			}
+			}	
 			?>	
 		</td>
 	</tr>
@@ -178,7 +181,7 @@ if($mostrarView){?>
 			if(!$existeCajaAbierta){
 				echo $this->Form->create('Caja', array('action' => 'add')); ?>
 				<h3><?php echo __('Abrir Caja'); ?></h3>
-				<?php echo $this->Form->input('montoApertura');?>
+				<?php echo $this->Form->input('montoApertura',['value'=>$ultimaCaja]);?>
 				<?php echo $this->Form->input('descripcionApertura');?>
 				<?php echo $this->Form->end(__('Aceptar')); ?>
 				<?php echo $this->Html->link(__('Cancelar'),array('action' => 'index'), array('class' => 'btn_cancelar')); 

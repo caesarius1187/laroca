@@ -87,7 +87,7 @@
 <!--	</tr>-->
 	<tr class="ncmg placnicho notInReducida">
 		<td class="print_td_title_1">
-		<?php echo __('N° de nicho:'); ?>
+		<?php echo __('Nï¿½ de nicho:'); ?>
 		</td>
 		<td colspan="5" style="border-bottom: 1px dotted;">
 			<?php echo $ordentrabajo['Ordentrabajo']['numnicho'];?>
@@ -281,6 +281,10 @@
 		</td>
 		<td colspan="5" style="border-bottom: 1px dotted;">
 			<?php echo $ordentrabajo['Ordentrabajo']['observaciones']; ?>
+			<?php 
+			foreach ($ordentrabajo['Observacione'] as $k => $observacion) {
+				echo $observacion['descripcion']."/ ";
+			}?>				
 		</td>		
 	</tr>	
 	<tr class="all">

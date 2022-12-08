@@ -84,6 +84,7 @@ class OrdentrabajosController extends AppController {
 		}
 		$options = array(
 			'contain'=>[
+				'Observacione'=>[],
 				'Detalleordentrabajo'=>[
 					'Producto'
 				],
