@@ -14,7 +14,8 @@ $(document).ready(function(){
             [ 10, 25, 50, -1 ],
             [ '10', '25', '50', 'todas' ]
         ],
-        order: [[0, "desc" ]]
+        order: [[0, "desc" ]],
+        iDisplayLength: 100
     } );
     
     calcularFooterTotales(misordenes);

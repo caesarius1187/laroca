@@ -126,16 +126,16 @@ class CajasController extends AppController {
  */
 	public function delete($id = null) 
 	{
-		$this->Cliente->id = $id;
-		if (!$this->Cliente->exists()) {
-			throw new NotFoundException(__('Invalid cliente'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Cliente->delete()) {
-			$this->Session->setFlash(__('El cliente ha sido eliminado.'));
-		} else {
-			$this->Session->setFlash(__('The cliente could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
+	//	$this->Cliente->id = $id;
+	//	if (!$this->Cliente->exists()) {
+	//		throw new NotFoundException(__('Invalid cliente'));
+	//	}
+	//	$this->request->onlyAllow('post', 'delete');
+	//	if ($this->Cliente->delete()) {
+	//		$this->Session->setFlash(__('El cliente ha sido eliminado.'));
+	//	} else {
+	//		$this->Session->setFlash(__('The cliente could not be deleted. Please, try again.'));
+	//	}
+	//	return $this->redirect(array('action' => 'index'));
 	}
 }

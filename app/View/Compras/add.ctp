@@ -91,10 +91,12 @@
 	</table>
 	<table id="tblDetalleCompra_agregar" cellpadding="0" cellspacing="0">
 		<tr>
-			<td>Producto</td>
+			<!--<td>Producto</td>
 			<td>Precio Compra - % Util. - % Flete</td>
 			<td>Precio Vta. - % Desc.</td>
 			<td>Precio Dto.</td>
+			-->
+			<td>Monto</td>
 			<td>Cantidad</td>
 			<td>Acciones</td>
 		</tr>

@@ -53,12 +53,14 @@ class ComprasController extends AppController {
 
 			if ($this->Compra->saveAll($this->request->data)) 
 			{	
-				foreach ($this->request->data['Detallecompra'] as $detalle) 
+				//esta seccion no la vamos a implementar mas por que ya no se van a guardar los datos necesario para mantener el stockactualizado
+				/*foreach ($this->request->data['Detallecompra'] as $detalle) 
 				{
 					if (!$this->Producto->exists($detalle['producto_id'])) 
 					{
 						throw new NotFoundException(__('Producto Invalido'));
 					}	
+
 					$this->Producto->read(null,$detalle['producto_id']);
 
 					//$this->Producto->id = $detalle['producto_id'];
@@ -88,7 +90,7 @@ class ComprasController extends AppController {
 					{
 						$msg ='La compra no se pudo guardar. Por favor, intente nuevamente.';												
 					}					
-				}
+				}*/
 				$this->Session->setFlash($msg);						
 				return $this->redirect(array('action' => 'index'));
 			} 

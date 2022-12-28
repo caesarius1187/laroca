@@ -31,6 +31,7 @@ class OrdentrabajosController extends AppController {
 				'Prepara',
 				'Cliente',
 				'Tipocliente',
+				'Observacione',
 				'Detalleordentrabajo'=>array(
 					'Producto'
 				),
@@ -172,7 +173,15 @@ class OrdentrabajosController extends AppController {
  * @return void
  */
 	public function add() {	
-		
+		$this->loadModel('Caja');
+		$conditions = array(
+		    'Caja.usuarioCierre_id' => null,
+		);
+		if (!$this->Caja->hasAny($conditions)){
+		    $msg = 'Primero debe abrir una caja';
+			$this->Session->setFlash($msg);
+		    return $this->redirect(array('action' => 'index'));
+		}
 		$this->loadModel('Producto');
 		$this->loadModel('Manodeobra');
 		if ($this->request->is('post')) {
@@ -262,6 +271,15 @@ class OrdentrabajosController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+		$this->loadModel('Caja');
+		$conditions = array(
+		    'Caja.usuarioCierre_id' => null,
+		);
+		if (!$this->Caja->hasAny($conditions)){
+		    $msg = 'Primero debe abrir una caja';
+			$this->Session->setFlash($msg);
+		    return $this->redirect(array('action' => 'index'));
+		}
 		if (!$this->Ordentrabajo->exists($id)) {
 			throw new NotFoundException(__('Invalid ordentrabajo'));
 		}

@@ -163,7 +163,12 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 					?>
 				</td>
 				<td>
-					<?php echo $ordentrabajo['Ordentrabajo']['observaciones']; ?>
+					<?php 
+					echo $ordentrabajo['Ordentrabajo']['observaciones']; 
+					foreach ($ordentrabajo['Observacione'] as $observacion) {
+						echo $observacion['descripcion'];
+					}
+					?>
 				</td>
 				<td>
 					<?php echo $ordentrabajo['Ordentrabajo']['vinilos'] ?>

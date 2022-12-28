@@ -99,11 +99,17 @@
 			</td>
 		</tr>
 		<tr class="all">
-                    <td>
-                            <?php echo $this->Form->input('paraips',array('label'=>'Para IPS','type'=>'checkbox')); ?>
-                    </td>
+            <td>
+		        <?php echo $this->Form->radio('paraips', [1 => 'Si' ,0 => 'No'], ['legend'=>'Para IPS']); ?>
+            </td>
+            <td>
+                <?php echo $this->Form->radio('placa', [1 => 'Si' ,0 => 'No']);  ?>
+            </td>
+            <td>
+                <?php echo $this->Form->radio('otro', [1 => 'Si' ,0 => 'No']); ?>
+            </td>
 		</tr>
-                <tr class="all paraips">
+        <tr class="all paraips">
 			<td>
 				<?php
                                 echo $this->Form->input('fchautorizacion',array(
@@ -382,9 +388,9 @@
 			<td colspan="4" style="text-align:center"><h2><?php echo __('Datos Solicitante'); ?></h2></td>
 		</tr>
 		<tr class="all">
-			<td width="25%">				
+			<!--<td width="25%">				
 				<?php echo $this->Form->input('tipocliente_id',array('label'=>'Tipo de Cliente')); ?>			
-			</td>
+			</td>-->
 			<td width="25%">				
 				<div class="input select">
 				<?php
@@ -423,7 +429,6 @@
 				<?php echo $this->Form->input('solictelefono',array('label'=>'Telefono')); ?>			
 			</td>
 		</tr>			
-			
 		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
 			<td width="25%">
 				<?php echo $this->Form->input('total',array('label'=>'Total $')); ?>
@@ -434,7 +439,6 @@
 			<td width="25%">
 				<?php echo $this->Form->input('saldo',array('label'=>'Saldo $')); ?>
 			</td>
-
 		</tr>	
 		<?php
 		/*AVANCES DEL TRABAJO	*/
@@ -442,8 +446,6 @@
 		<tr class="all">
 			<td colspan="4" style="text-align:center"><h2><?php echo __('Avances del Trabajo'); ?></h2></td>
 		</tr>	
-				
-
 		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placnicho">
 			<td width="25%">
 				<?php echo $this->Form->input('vinilos',array('label'=>'Vinilos')); ?>
@@ -538,7 +540,13 @@
 			                <?php
 			                echo $this->Form->input('medioPago',array(
 			                	'label'=>'Medio de pago',
-			                	'options'=>['efectivo'=>'Efectivo','tarjeta'=>'Tarjeta'],
+			                	'options'=>[
+			                		'efectivo'=>'Efectivo',
+			                		'tarjeta debito'=>'Tarjeta Debito',
+			                		'tarjeta credito'=>'Tarjeta Credito',
+			                		'cheque'=>'Cheque',
+			                		'transferencia'=>'Transferencia'
+			                	],
 			                ));
 			                ?>
 			            </td>

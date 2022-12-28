@@ -46,20 +46,20 @@ function agregarproducto()
 	var porcDesc = $('#tdPorcDesc_' + idProducto).html();
 
 	var newDetalle = '<tr id="RowDetalle_'+numDetalle+'">';
-	newDetalle +=' <td>';
-	newDetalle +='	<div class="input text">';	
-	newDetalle +='		<input readonly="readonly" value="'+nombreProducto+'" >';	
-	newDetalle +='		<input name="data[Detallecompra]['+numDetalle+'][producto_id]" readonly="readonly" id="Detallecompra'+numDetalle+'ProductoId" type="hidden" value="'+idProducto+'">';
-	newDetalle +='	</div>';
+	newDetalle +='<td>';
+	newDetalle +=' <div class="input text">';	
+	newDetalle +='  <input readonly="readonly" value="'+nombreProducto+'" >';	
+	newDetalle +='	<input name="data[Detallecompra]['+numDetalle+'][producto_id]" readonly="readonly" id="Detallecompra'+numDetalle+'ProductoId" type="hidden" value="'+idProducto+'">';
+	newDetalle +=' </div>';
 	newDetalle +='</td> ';
 	newDetalle +='<td>';
 	newDetalle +='	<div class="input number">';	
-	newDetalle +='		<input name="data[Detallecompra]['+numDetalle+'][precioproducto]" onchange="actualizarTotal('+numDetalle+');" step="any" id="Detallecompra'+numDetalle+'Precioproducto" value="'+precioCompra+'" style="width:80px"  >';
-	newDetalle +='		<input name="data[Detallecompra]['+numDetalle+'][porcutilidad]" onchange="sugerirPrecio('+numDetalle+');" id="Detallecompra'+numDetalle+'Porcutilidad" style="width:50px" value="'+porcUtilidad+'" type="number" step="any" >';
-	newDetalle +='		<input name="data[Detallecompra]['+numDetalle+'][porcflete]" onchange="sugerirPrecio('+numDetalle+');" id="Detallecompra'+numDetalle+'Porcflete" style="width:50px" value="'+porcFlete+'" type="number" step="any" >';
+	newDetalle +='	 <input name="data[Detallecompra]['+numDetalle+'][precioproducto]" onchange="actualizarTotal('+numDetalle+');" step="any" id="Detallecompra'+numDetalle+'Precioproducto" value="'+precioCompra+'" style="width:80px"  >';
+	//newDetalle +='		<input name="data[Detallecompra]['+numDetalle+'][porcutilidad]" onchange="sugerirPrecio('+numDetalle+');" id="Detallecompra'+numDetalle+'Porcutilidad" style="width:50px" value="'+porcUtilidad+'" type="number" step="any" >';
+	//newDetalle +='		<input name="data[Detallecompra]['+numDetalle+'][porcflete]" onchange="sugerirPrecio('+numDetalle+');" id="Detallecompra'+numDetalle+'Porcflete" style="width:50px" value="'+porcFlete+'" type="number" step="any" >';
 	newDetalle +='	</div>';
 	newDetalle +='</td> ';	
-	newDetalle +='<td>';
+	/*newDetalle +='<td>';
 	newDetalle +='	<div class="input number">';	
 	newDetalle +='		<input name="data[Detallecompra]['+numDetalle+'][precioventa]" onchange="sugerirPrecioDesc('+numDetalle+');" id="Detallecompra'+numDetalle+'Precioventa" style="width:80px" value="'+precioVta+'" >';
 	newDetalle +='		<input name="data[Detallecompra]['+numDetalle+'][porcdescuento]" onchange="sugerirPrecioDesc('+numDetalle+');" id="Detallecompra'+numDetalle+'Porcdescuento" style="width:50px" value="'+porcDesc+'" type="number" >';
@@ -69,10 +69,10 @@ function agregarproducto()
 	newDetalle +='	<div class="input number">';	
 	newDetalle +='		<input name="data[Detallecompra]['+numDetalle+'][preciodesc]" onchange="" id="Detallecompra'+numDetalle+'Preciodesc" style="width:100px" value="'+precioDto+'" >';	
 	newDetalle +='	</div>';
-	newDetalle +='</td>';
+	newDetalle +='</td>';*/
 	newDetalle +='<td>';
 	newDetalle +='	<div class="input number">';
-	newDetalle +='		<input name="data[Detallecompra]['+numDetalle+'][cantidad]" id="Detallecompra'+numDetalle+'Cantidad" type="number" value="0" onchange="actualizarTotal('+numDetalle+');" style="width:60px">';
+	newDetalle +='	 <input name="data[Detallecompra]['+numDetalle+'][cantidad]" id="Detallecompra'+numDetalle+'Cantidad" type="number" value="0" onchange="actualizarTotal('+numDetalle+');" style="width:60px">';
 	newDetalle +='	</div>';
 	newDetalle +='</td>';	
 	newDetalle +='<td>';
@@ -128,7 +128,7 @@ function actualizarTotal(numDetalle)
 	}
 	Total = parseFloat(Total).toFixed(2);
 	$("#CompraTotal").val(Total);	
-	sugerirPrecio(numDetalle);
+	//sugerirPrecio(numDetalle);
 }
 function sugerirPrecio(numDetalle)
 {

@@ -57,108 +57,108 @@ $(document).ready(function(){
               }, 300);
     })
     function hiddeAllRows(){
-            $('#tblAddOrdenTrabajo tr').each(function() {
-                    if(!$(this).hasClass('all')){
-                            $(this).hide();
-                    }
-            });
+        $('#tblAddOrdenTrabajo tr').each(function() {
+                if(!$(this).hasClass('all')){
+                        $(this).hide();
+                }
+        });
     }
     function activateRowsActives(){
-            if($('#btnN-CMG').hasClass("buttonTipoOrden")){
-                    showTrWithClass('ncmg');
-                    $('#OrdentrabajoTipoorden').val('ncmg');
-                    $('#OrdentrabajoTipotrabajo')
-                        .find('option')
-                        .remove()
-                        .end()
-                        .append('<option value="PLACA PARA NICHO NEGRO BRASIL">PLACA PARA NICHO NEGRO BRASIL</option>')
-                        .append('<option value="LATERALES">LATERALES</option>')
-                        .append('<option value="GRABADO">GRABADO</option>')
-                        .append('<option value="FLORERO DE ACERO 10 X 5">FLORERO DE ACERO 10 X 5</option>')
-                        .append('<option value="FOTO ENLOZADA 9 X 12">FOTO ENLOZADA 9 X 12</option>')
-                        .val('PLACA PARA NICHO NEGRO BRASIL')
-                    ;
-            }
-            if($('#btna1b1r1').hasClass("buttonTipoOrden")){
-                    showTrWithClass('a1b1r1');
-                    $('#OrdentrabajoTipoorden').val('a1b1r1');
-                    $('#OrdentrabajoTipotrabajo')
-                        .find('option')
-                        .remove()
-                        .end()
-                        .append('<option value="L�PIDA NUEVA CON GRABADO DE 1 NIVEL">L�PIDA NUEVA CON GRABADO DE 1 NIVEL</option>')
-                        .append('<option value="AGREGADO DE 1 NIVEL">AGREGADO DE 1 NIVEL</option>')
-                        .append('<option value="RESTAURACION DE 1 NIVEL">RESTAURACION DE 1 NIVEL</option>')
-                        .val('L�PIDA NUEVA CON GRABADO DE 1 NIVEL')
-                    ;
-            }
-            if($('#btna2b2r2').hasClass("buttonTipoOrden")){
-                    showTrWithClass('a2b2r2');
-                    $('#OrdentrabajoTipoorden').val('a2b2r2');
-                    $('#OrdentrabajoTipotrabajo')
-                        .find('option')
-                        .remove()
-                        .end()
-                        .append('<option value="L�PIDA NUEVA CON GRABADO DE 2 NIVEL">L�PIDA NUEVA CON GRABADO DE 2 NIVEL</option>')
-                        .append('<option value="AGREGADO DE 2 NIVEL">AGREGADO DE 2 NIVEL</option>')
-                        .append('<option value="RESTAURACION DE 2 NIVEL">RESTAURACION DE 2 NIVEL</option>')
-                        .val('L�PIDA NUEVA CON GRABADO DE 2 NIVEL')
-                    ;
-            }
-            if($('#btna3b3r3').hasClass("buttonTipoOrden")){
-                    showTrWithClass('a3b3r3');
-                    $('#OrdentrabajoTipoorden').val('a3b3r3');
-                    $('#OrdentrabajoTipotrabajo')
-                        .find('option')
-                        .remove()
-                        .end()
-                        .append('<option value="L�PIDA NUEVA CON GRABADO DE 3 NIVEL">L�PIDA NUEVA CON GRABADO DE 3 NIVEL</option>')
-                        .append('<option value="AGREGADO DE 3 NIVEL">AGREGADO DE 3 NIVEL</option>')
-                        .append('<option value="RESTAURACION DE 3 NIVEL">RESTAURACION DE 3 NIVEL</option>')
-                        .val('L�PIDA NUEVA CON GRABADO DE 3 NIVEL')
-                    ;
-            }
-            if($('#btnplacbronce').hasClass("buttonTipoOrden")){
-                    showTrWithClass('placbronce');
-                    $('#OrdentrabajoTipoorden').val('placbronce');
-                    $('#OrdentrabajoTipotrabajo')
-                        .find('option')
-                        .remove()
-                        .end()
-                        .append('<option value="PLACA DE BROCE">PLACA DE BROCE</option>')
-                        .val('PLACA DE BROCE')
-                    ; 
-            }
-            if($('#btnplacnicho').hasClass("buttonTipoOrden")){
-                    showTrWithClass('placnicho');
-                    $('#OrdentrabajoTipoorden').val('placnicho');
-                    $('#OrdentrabajoTipotrabajo')
-                        .find('option')
-                        .remove()
-                        .end()
+        if($('#btnN-CMG').hasClass("buttonTipoOrden")){
+                showTrWithClass('ncmg');
+                $('#OrdentrabajoTipoorden').val('ncmg');
+                $('#OrdentrabajoTipotrabajo')
+                    .find('option')
+                    .remove()
+                    .end()
                     .append('<option value="PLACA PARA NICHO NEGRO BRASIL">PLACA PARA NICHO NEGRO BRASIL</option>')
-                        .append('<option value="LATERALES">LATERALES</option>')
-                        .append('<option value="GRABADO">GRABADO</option>')
-                        .append('<option value="FLORERO DE ACERO 10 X 5">FLORERO DE ACERO 10 X 5</option>')
-                        .append('<option value="FOTO ENLOZADA 9 X 12">FOTO ENLOZADA 9 X 12</option>')
-                        .val('PLACA PARA NICHO NEGRO BRASIL')
-                    ; 
-            }
-            if($('#btnplacips').hasClass("buttonTipoOrden")){
-                    showTrWithClass('placips');
-                    $('#OrdentrabajoTipoorden').val('placips');
-                    $('#OrdentrabajoTipotrabajo')
-                        .find('option')
-                        .remove()
-                        .end()
-                    .append('<option value="PLACA PARA NICHO NEGRO BRASIL">PLACA PARA NICHO NEGRO BRASIL</option>')
-                        .append('<option value="LATERALES">LATERALES</option>')
-                        .append('<option value="GRABADO">GRABADO</option>')
-                        .append('<option value="FLORERO DE ACERO 10 X 5">FLORERO DE ACERO 10 X 5</option>')
-                        .append('<option value="FOTO ENLOZADA 9 X 12">FOTO ENLOZADA 9 X 12</option>')
-                        .val('PLACA PARA NICHO NEGRO BRASIL')
-                    ; 
-            }
+                    .append('<option value="LATERALES">LATERALES</option>')
+                    .append('<option value="GRABADO">GRABADO</option>')
+                    .append('<option value="FLORERO DE ACERO 10 X 5">FLORERO DE ACERO 10 X 5</option>')
+                    .append('<option value="FOTO ENLOZADA 9 X 12">FOTO ENLOZADA 9 X 12</option>')
+                    .val('PLACA PARA NICHO NEGRO BRASIL')
+                ;
+        }
+        if($('#btna1b1r1').hasClass("buttonTipoOrden")){
+                showTrWithClass('a1b1r1');
+                $('#OrdentrabajoTipoorden').val('a1b1r1');
+                $('#OrdentrabajoTipotrabajo')
+                    .find('option')
+                    .remove()
+                    .end()
+                    .append('<option value="L�PIDA NUEVA CON GRABADO DE 1 NIVEL">L�PIDA NUEVA CON GRABADO DE 1 NIVEL</option>')
+                    .append('<option value="AGREGADO DE 1 NIVEL">AGREGADO DE 1 NIVEL</option>')
+                    .append('<option value="RESTAURACION DE 1 NIVEL">RESTAURACION DE 1 NIVEL</option>')
+                    .val('L�PIDA NUEVA CON GRABADO DE 1 NIVEL')
+                ;
+        }
+        if($('#btna2b2r2').hasClass("buttonTipoOrden")){
+                showTrWithClass('a2b2r2');
+                $('#OrdentrabajoTipoorden').val('a2b2r2');
+                $('#OrdentrabajoTipotrabajo')
+                    .find('option')
+                    .remove()
+                    .end()
+                    .append('<option value="L�PIDA NUEVA CON GRABADO DE 2 NIVEL">L�PIDA NUEVA CON GRABADO DE 2 NIVEL</option>')
+                    .append('<option value="AGREGADO DE 2 NIVEL">AGREGADO DE 2 NIVEL</option>')
+                    .append('<option value="RESTAURACION DE 2 NIVEL">RESTAURACION DE 2 NIVEL</option>')
+                    .val('L�PIDA NUEVA CON GRABADO DE 2 NIVEL')
+                ;
+        }
+        if($('#btna3b3r3').hasClass("buttonTipoOrden")){
+                showTrWithClass('a3b3r3');
+                $('#OrdentrabajoTipoorden').val('a3b3r3');
+                $('#OrdentrabajoTipotrabajo')
+                    .find('option')
+                    .remove()
+                    .end()
+                    .append('<option value="L�PIDA NUEVA CON GRABADO DE 3 NIVEL">L�PIDA NUEVA CON GRABADO DE 3 NIVEL</option>')
+                    .append('<option value="AGREGADO DE 3 NIVEL">AGREGADO DE 3 NIVEL</option>')
+                    .append('<option value="RESTAURACION DE 3 NIVEL">RESTAURACION DE 3 NIVEL</option>')
+                    .val('L�PIDA NUEVA CON GRABADO DE 3 NIVEL')
+                ;
+        }
+        if($('#btnplacbronce').hasClass("buttonTipoOrden")){
+                showTrWithClass('placbronce');
+                $('#OrdentrabajoTipoorden').val('placbronce');
+                $('#OrdentrabajoTipotrabajo')
+                    .find('option')
+                    .remove()
+                    .end()
+                    .append('<option value="PLACA DE BROCE">PLACA DE BROCE</option>')
+                    .val('PLACA DE BROCE')
+                ; 
+        }
+        if($('#btnplacnicho').hasClass("buttonTipoOrden")){
+                showTrWithClass('placnicho');
+                $('#OrdentrabajoTipoorden').val('placnicho');
+                $('#OrdentrabajoTipotrabajo')
+                    .find('option')
+                    .remove()
+                    .end()
+                .append('<option value="PLACA PARA NICHO NEGRO BRASIL">PLACA PARA NICHO NEGRO BRASIL</option>')
+                    .append('<option value="LATERALES">LATERALES</option>')
+                    .append('<option value="GRABADO">GRABADO</option>')
+                    .append('<option value="FLORERO DE ACERO 10 X 5">FLORERO DE ACERO 10 X 5</option>')
+                    .append('<option value="FOTO ENLOZADA 9 X 12">FOTO ENLOZADA 9 X 12</option>')
+                    .val('PLACA PARA NICHO NEGRO BRASIL')
+                ; 
+        }
+        if($('#btnplacips').hasClass("buttonTipoOrden")){
+                showTrWithClass('placips');
+                $('#OrdentrabajoTipoorden').val('placips');
+                $('#OrdentrabajoTipotrabajo')
+                    .find('option')
+                    .remove()
+                    .end()
+                .append('<option value="PLACA PARA NICHO NEGRO BRASIL">PLACA PARA NICHO NEGRO BRASIL</option>')
+                    .append('<option value="LATERALES">LATERALES</option>')
+                    .append('<option value="GRABADO">GRABADO</option>')
+                    .append('<option value="FLORERO DE ACERO 10 X 5">FLORERO DE ACERO 10 X 5</option>')
+                    .append('<option value="FOTO ENLOZADA 9 X 12">FOTO ENLOZADA 9 X 12</option>')
+                    .val('PLACA PARA NICHO NEGRO BRASIL')
+                ; 
+        }
     }
     function showTrWithClass(classToShow){
             $('#tblAddOrdenTrabajo tr').each(function() {
@@ -182,8 +182,8 @@ $(document).ready(function(){
         actualizarTotal();
     });
     actualizarTotal();
-    $("#OrdentrabajoParaips").on('change',function(){
-        if($("#OrdentrabajoParaips").prop('checked') == true){    
+    $("input[type='radio'][name='data[Ordentrabajo][paraips]']").on('change',function(){
+        if( $("input[type='radio'][name='data[Ordentrabajo][paraips]']:checked").val() == '1'){    
             $(".paraips").show();
         }else{
             $(".paraips").hide();
@@ -479,6 +479,12 @@ function agregarobservacion(){
 	newDetalle +='</tr>';
 	$('#OrdentrabajoNumObservacion').val(numDetalle*1+1);	
 	$('#tableObservaciones').append(newDetalle);
+	$('#OrdentrabajoObservaciondescripcion').val('');	
+
+}
+
+function eliminarObservacion(numDetalle){
+	$("#RowObservacion"+numDetalle).remove();
 }
 //Elimina un producto a vender en la orden de trabajo
 function eliminarDetalle(numDetalle){
