@@ -44,9 +44,10 @@
 				<?php echo $this->Form->input('Detallecompra.'.$i.'.compra_id',array('type'=>'hidden','default'=>$this->data['Compra']['id'])); ?>
 
 				<td>
-					<?php echo $this->Form->input('Detallecompra.'.$i.'.producto_id',array('disabled'=>'disabled','default'=>$detallecompra['producto_id'], 'label' => false, 'style' =>'width:200px')); ?>
+					<?php //echo $this->Form->input('Detallecompra.'.$i.'.producto_id',array('disabled'=>'disabled','default'=>$detallecompra['producto_id'], 'label' => false, 'style' =>'width:200px')); 
 
-					
+					echo $this->Form->input('Detallecompra.'.$i.'.producto',array('type'=>'text','disabled'=>'disabled','default'=>$detallecompra['producto'], 'label' => false, 'style' =>'width:200px'));
+					?>
 				</td>
 				<td>
 					<?php echo $this->Form->input('Detallecompra.'.$i.'.precioproducto',array('type'=>'text','default'=>$detallecompra['precioproducto'],'readonly'=>'readonly', 'label' => false, 'style' => 'width:70px', 'div' => false));

@@ -105,7 +105,10 @@
 		<td><?php echo h($caja['Caja']['fecha']); ?>&nbsp;</td>
 		<td><?php echo h($caja['Caja']['horaApertura']); ?>&nbsp;</td>
 		<td><?php echo h($caja['Caja']['montoApertura']); ?>&nbsp;</td>
-		<td><?php echo h($caja['Caja']['horaCierre']); ?>&nbsp;</td>
+		<td><?php 
+			$dc = new DateTime($caja['Caja']['horaCierre'].' -3 hours');
+			echo h($dc->format('H:i:s')); ?>&nbsp;
+		</td>
 		<td><?php echo h($caja['Caja']['montoCierre']); ?>&nbsp;</td>
 		<td class="actions">			
 			<?php 

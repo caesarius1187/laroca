@@ -38,18 +38,23 @@ function agregarproducto()
 	var numDetalle = $('#hdnNroDetalleCompra').val();
 	var idProducto = $('#ddlListaProductos').val();
 	var nombreProducto = $('#tdProdNombre_' + idProducto).html();
-	var precioCompra = $('#tdProdPcioCompra_' + idProducto).html();
+	//var precioCompra = $('#tdProdPcioCompra_' + idProducto).html();
+	var precioCompra = 0;
 	var precioVta = $('#tdPcioVenta_' + idProducto).html();
 	var precioDto = $('#tdPcioDescuento_' + idProducto).html();
 	var porcUtilidad = $('#tdPorcUtilidad_' + idProducto).html();
 	var porcFlete = $('#tdPorcFlete_' + idProducto).html();
 	var porcDesc = $('#tdPorcDesc_' + idProducto).html();
 
+	var newnombreProducto = $('#ddlListaProducto').val();
+
+
 	var newDetalle = '<tr id="RowDetalle_'+numDetalle+'">';
 	newDetalle +='<td>';
 	newDetalle +=' <div class="input text">';	
-	newDetalle +='  <input readonly="readonly" value="'+nombreProducto+'" >';	
-	newDetalle +='	<input name="data[Detallecompra]['+numDetalle+'][producto_id]" readonly="readonly" id="Detallecompra'+numDetalle+'ProductoId" type="hidden" value="'+idProducto+'">';
+	//newDetalle +='  <input readonly="readonly" value="'+nombreProducto+'" >';	
+	//newDetalle +='	<input name="data[Detallecompra]['+numDetalle+'][producto_id]" readonly="readonly" id="Detallecompra'+numDetalle+'ProductoId" type="hidden" value="'+idProducto+'">';
+	newDetalle +='	<input name="data[Detallecompra]['+numDetalle+'][producto]" id="Detallecompra'+numDetalle+'Producto" type="text" value="'+newnombreProducto+'">';
 	newDetalle +=' </div>';
 	newDetalle +='</td> ';
 	newDetalle +='<td>';

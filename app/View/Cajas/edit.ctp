@@ -62,7 +62,11 @@
 			foreach ($compras as $compra) {
 			?>
 				<tr>
-					<td><?= $compra['Compras']['fecha'] ?></td>
+					<td><?php 			
+						$dc = new DateTime($compra['Compras']['created']);
+						$dc->setTimezone(new DateTimeZone('America/Buenos_Aires'));
+ 						echo  $dc->format('Y-m-d H:i:s');
+ 					?></td>
 					<td><?= $compra['Compras']['numerocomprobante'] ?></td>
 					<td><?= $compra['Compras']['total'] ?></td>
 				</tr>
@@ -80,14 +84,15 @@
 			echo $this->Form->input('usuarioCierre_id', ['type' => 'hidden']);
 			echo $this->Form->input('horaCierre', ['type' => 'hidden']);
 			echo $this->Form->label('Hora Cierre:');
-			$hc = new DateTime($this->data['Caja']['horaCierre']);
+			$hc = new DateTime($this->data['Caja']['horaCierre'].' -3 hours');
 			echo $this->Form->label($hc->format('H:i:s'));
 			echo $this->Form->input('montoCierre', ['readonly' => 'readonly']);
 			echo $this->Form->input('descripcionCierre', ['readonly' => 'readonly']);
 		} else {
-			echo $this->Form->input('descripcionApertura', ['readonly' => 'readonly']);
+			$montoApertura = $this->data['Caja']['montoApertura']*1;
+			echo $this->Form->input('descripcionCierre', ['readonly' => 'readonly']);
 			echo $this->Form->input('montoCierre',[
-				'value'=>$totalEgresos+$totalPagos,
+				'value' => $montoApertura + $totalPagos - $totalEgresos,
 				'readonly' => 'readonly'
 			]);
 			echo $this->Form->input('descripcionCierre');

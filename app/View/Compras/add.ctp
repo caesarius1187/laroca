@@ -77,7 +77,8 @@
 	<table cellpadding="0" cellspacing="0" class="tbl_add">
 		<tr>
 			<td style="width:25%">
-				<?php echo $this->Form->input('producto_id', array('id' => 'ddlListaProductos', 'label' => 'Agregar Productos a la Compra', 'style' => 'width:250px')) ?>
+				<?php //echo $this->Form->input('producto_id', array('id' => 'ddlListaProductos', 'label' => 'Agregar Productos a la Compra', 'style' => 'width:250px')) ?>
+				<?php echo $this->Form->input('producto', array('type' => 'text', 'id' => 'ddlListaProducto', 'label' => 'Agregar Productos a la Compra', 'style' => 'width:250px')) ?>
 			</td>
 			<td style="width:25%">
 				<div class='input select' style="margin-top:17px">
@@ -91,7 +92,8 @@
 	</table>
 	<table id="tblDetalleCompra_agregar" cellpadding="0" cellspacing="0">
 		<tr>
-			<!--<td>Producto</td>
+			<td>Producto</td>
+			<!--
 			<td>Precio Compra - % Util. - % Flete</td>
 			<td>Precio Vta. - % Desc.</td>
 			<td>Precio Dto.</td>

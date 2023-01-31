@@ -34,13 +34,13 @@
 	<div id="btna3b3r3" class="buttonTipoOrdenDesactivado">
 		A3-B3-R3
 	</div>
-	<div id="btnplacbronce" class="buttonTipoOrdenDesactivado">
+	<div id="btnplacbronce" class="buttonTipoOrdenDesactivado" style="display:none">
 		Placa de bronce
 	</div>
 	<div id="btnplacnicho" class="buttonTipoOrdenDesactivado" style="display:none">
 		Placa para nicho
 	</div>
-	<div id="btnplacips" class="buttonTipoOrdenDesactivado">
+	<div id="btnplacips" class="buttonTipoOrdenDesactivado"  style="display:none">
 		Placa para IPS
 	</div>
 </div>
@@ -62,7 +62,7 @@
 					'Cementerio'=>[
 						'La Paz'=>'La Paz',
 						'Santa Teresita'=>'Santa Teresita',
-						'Divina Mi Sericordia'=>'Divina Mi Sericordia',
+						'Divina Misericordia'=>'Divina Misericordia',
 						'San Antonio de Padua'=>'San Antonio de Padua',
 						'Santa Cruz'=>'Santa Cruz',
 						'Memorial'=>'Memorial',
@@ -111,10 +111,29 @@
                 <?php echo $this->Form->radio('paraips', [1 => 'Si' ,0 => 'No'], ['legend'=>'Para IPS']); ?>
             </td>
             <td>
-                <?php echo $this->Form->radio('placa', [1 => 'Si' ,0 => 'No']);  ?>
+                <?php echo $this->Form->radio('placa', [1 => 'Si' ,0 => 'No'], ['legend'=>'Bronce']);  
+                $isDate = validateDate($this->request->data['Ordentrabajo']['fechaencargobronce'],'Y-m-d h:i:s');
+                                
+				if($isDate){
+					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['fechaencargobronce']));
+				}else{
+					$procesedDate = "";
+				}
+				echo $this->Form->input('fechaencargobronce',array(
+		                                      'class'=>'datepicker', 
+		                                      'type'=>'text',
+		                                      'label'=>'Fch. Encargo Bronce',
+		                                      'value'=>$procesedDate,//date('d-m-Y'),
+		                                      'style'=>'width:75%'
+		                                      ));
+
+                ?>
             </td>
             <td>
                 <?php echo $this->Form->radio('otro', [1 => 'Si' ,0 => 'No']); ?>
+            </td>
+            <td>
+                <?php echo $this->Form->radio('corte', [1 => 'Si' ,0 => 'No']);  ?>
             </td>
 		</tr>
                 <tr class="all paraips">
@@ -159,14 +178,6 @@
 		<tr class="a1b1r1 a2b2r2 a3b3r3">		
 			<td>
 				<?php echo $this->Form->input('numsectorparcela',array('label'=>'N� y Sector de Parcela')); ?>
-			</td>
-		</tr>
-		<tr class="ncmg placnicho">
-			<td>
-				<?php echo $this->Form->input('medidasplaca',array('label'=>'Medida Placa')); ?>
-			</td>
-			<td>
-				<?php echo $this->Form->input('medidaslaterales',array('label'=>'Medida Laterales')); ?>
 			</td>
 		</tr>
 		<?php
@@ -489,12 +500,12 @@
 			</td>
 			<td width="25%">
 				<div style="margin-top:25px">
-				<?php echo $this->Form->input('grabada',array('label'=>'Grabada', 'div' => false)); ?>
+				<?php echo $this->Form->radio('retirar', [1 => 'Si' ,0 => 'No'], ['legend'=>'Retirar']); ?>
 				</div>
 			</td>
 			<td width="25%">
 				<div style="margin-top:25px">
-				<?php echo $this->Form->input('pintada',array('label'=>'Pintada', 'div' => false)); ?>
+				<?php echo $this->Form->radio('retirada', [1 => 'Si' ,0 => 'No'], ['legend'=>'Retirada']); ?>
 				</div>
 			</td>
 		</tr>	
@@ -560,6 +571,17 @@
 		                                      )); ?>
 			</td>			
 		</tr>
+		<tr class="all">
+			<td  colspan="1">
+				<?php echo $this->Form->input('material',array('label'=>'Material','type'=>'textarea','rows' => 2)); ?>
+			</td>
+			<td  colspan="1">
+				<?php echo $this->Form->input('medidas',array('label'=>'Medidas','type'=>'textarea','rows' => 2)); ?>
+			</td>
+            <td id="tdDetalleObservacion"  colspan="4">
+				<?php echo $this->Form->input('tipoycolorletra',array('label'=>'Tipo y Color de Letra','type'=>'textarea','rows' => 2)); ?>
+            </td>	
+        </tr>
 		<tr class="all">
 			<td colspan="4" style="text-align:center"><h2><?php echo __('Observaciones'); ?></h2></td>
 		</tr>
@@ -878,5 +900,5 @@ function validateDate($date, $format = 'Y-m-d')
     if(in_array($date,['0000-00-00','01-01-1970','1970-01-01',''])){
         return false;
     }
-    return $d && $d->format($format) == $date;
+    return $d && 1 == 1;
 }?>

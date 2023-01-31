@@ -33,85 +33,7 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 <div class="">	
 	<table cellpadding="0" cellspacing="0" class="tbl_dt">
 	<tr>
-		<td colspan="5"><h2><?php echo __('Lista de Ordenes de Trabajo'); ?></h2></td>	
-		<td colspan="5">
-		<?php
-		echo $this->Form->button('Ordenes para Retirar', 
-        	array('type' => 'button',
-                'class' =>"btn_ot",
-                'onClick' => "window.location.href='".Router::url(array(
-                                                    'controller'=>'Ordentrabajos', 
-                                                    'action'=>'placasaretirar')
-                                                     )."'"		   
-             	)	            							
-		    );
-    	echo $this->Form->button('Ordenes para corte', 
-        	array('type' => 'button',
-                'class' =>"btn_ot",
-                'style' =>"margin-left:5px",
-                'onClick' => "window.location.href='".Router::url(array(
-                                                    'controller'=>'Ordentrabajos', 
-                                                    'action'=>'corte')
-                                                     )."'"		   
-             )	            							
-	    );
-	    echo $this->Form->button('Ordenes Terminadas con Saldo', 
-        	array('type' => 'button',
-                'class' =>"btn_ot",
-                'style' =>"margin-left:5px",
-                'onClick' => "window.location.href='".Router::url(array(
-                                                    'controller'=>'Ordentrabajos', 
-                                                    'action'=>'terminadassaldo')
-                                                     )."'"		   
-             )	            							
-	    );
-		?>	
-		</td>	
-		<td  colspan="5" style="text-align: right;" title="Agregar Orden de Trabajo">
-	        <div class="fab blue">
-	        <core-icon icon="add" align="center">	            
-            <?php 
-
-            echo $this->Form->button('+', 
-            	array('type' => 'button',
-                        'class' =>"btn_add",
-                        'title' =>"Agregar Orden de Trabajo",
-                        'onClick' => "window.location.href='".Router::url(array(
-                                                            'controller'=>'Ordentrabajos', 
-                                                            'action'=>'add')
-                                                             )."'"		   
-                     )	            							
-			    );
-        	
-            ?> 
-	        </core-icon>
-	        <paper-ripple class="circle recenteringTouch" fit></paper-ripple>
-	        </div>
-	        <div class="fab blue">
-            <?php  $style =  $estadousado ? 'margin: 14px -47px;.'  : ''; ?>             
-	        <core-icon icon="add" align="center" style = "<?php echo $style ?>" >	   
-	        <?php
-	        $title =  $estadousado ? "Ver NO Entregados"  : "Ver Entregados";
-	        $marck =  $estadousado ? 'No E.'  : 'E.';
-	          
-             echo $this->Form->button($marck, 
-                                        	array('type' => 'button',
-		                                            'class' =>"btn_add",
-		                                            'title' =>$title,
-		                                            'onClick' => "window.location.href='".Router::url(array(
-				                                                                        'controller'=>'Ordentrabajos', 
-				                                                                        'action'=>'index',
-				                                                                        !$estadousado
-				                                                                        )
-				                                                                         )."'"		   
-	                                             )	            							
-                    					    );
-
-            ?> 
-	        </core-icon>
-	        <paper-ripple class="circle recenteringTouch" fit></paper-ripple>
-	        </div>
-		</td>
+		<td colspan="5"><h2><?php echo __('Lista de Ordenes a Retirar'); ?></h2></td>		
 	</tr>
 	</table>
 	<table cellpadding="0" cellspacing="0" id="tableOrdenTrabajo" class="tbl_dt" style="height: auto">
@@ -134,7 +56,6 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 			<th>Para IPS </th>							
 			<th>Saldo</th>							
 			<th class="actions" style="text-align:center">Acciones</th>
-		</tr>
 		</thead>
 		<tfoot>
 			<th></th>

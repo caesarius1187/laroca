@@ -22,7 +22,7 @@ class ComprasController extends AppController {
  */
 	public function index() {
 		$this->Compra->recursive = 0;
-		$this->set('compras', $this->Paginator->paginate());
+		$this->set('compras', $this->Compra->find('all'));
 	}
 
 /**

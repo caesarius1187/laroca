@@ -47,7 +47,89 @@ class OrdentrabajosController extends AppController {
 		$this->set('estadousado', $estadoUsado);
 		$this->set('usuarioTipo', $this->Session->read('Auth.User.tipo'));		
 	}
-
+	public function placasaretirar($retirar=null) {
+		$estadoRetirar = 1;
+		if($retirar!=null){
+			$estadoRetirar = $retirar;
+		}
+		$options = array(
+			'contain'=>array(
+				'User',
+				'Prepara',
+				'Cliente',
+				'Tipocliente',
+				'Observacione',
+				'Detalleordentrabajo'=>array(
+					'Producto'
+				),
+			),
+			'conditions'=>array(
+				'Ordentrabajo.retirar'=>1,
+				'Ordentrabajo.retirada'=>0,
+			),
+			'limit'=>500,
+			'order'=>['Ordentrabajo.id DESC']
+		);
+		//$this->Ordentrabajo->recursive = 0;
+		$this->set('ordentrabajos', $this->Ordentrabajo->find('all',$options));
+		$this->set('estadoRetirar', $estadoRetirar);
+		$this->set('usuarioTipo', $this->Session->read('Auth.User.tipo'));		
+	}
+	public function corte($corte=null) {
+		$estadoCorte = 1;
+		if($corte!=null){
+			$estadoCorte = $corte;
+		}
+		$options = array(
+			'contain'=>array(
+				'User',
+				'Prepara',
+				'Cliente',
+				'Tipocliente',
+				'Observacione',
+				'Detalleordentrabajo'=>array(
+					'Producto'
+				),
+			),
+			'conditions'=>array(
+				'Ordentrabajo.corte'=>1,
+			),
+			'limit'=>500,
+			'order'=>['Ordentrabajo.id DESC']
+		);
+		//$this->Ordentrabajo->recursive = 0;
+		$this->set('ordentrabajos', $this->Ordentrabajo->find('all',$options));
+		$this->set('estadoCorte', $estadoCorte);
+		$this->set('usuarioTipo', $this->Session->read('Auth.User.tipo'));		
+	}
+	public function terminadassaldo ($saldo=true) {
+		$estadoSaldo = '<=';
+		if($saldo){
+			$estadoSaldo = '>';
+		}
+		$options = array(
+			'contain'=>array(
+				'User',
+				'Prepara',
+				'Cliente',
+				'Tipocliente',
+				'Observacione',
+				'Detalleordentrabajo'=>array(
+					'Producto'
+				),
+			),
+			'conditions'=>array(
+				'Ordentrabajo.saldo '.$estadoSaldo => 0,
+				'Ordentrabajo.terminada' => 1,
+			),
+			'limit'=>500,
+			'order'=>['Ordentrabajo.id DESC']
+		);
+		//$this->Ordentrabajo->recursive = 0;
+		$this->set('ordentrabajos', $this->Ordentrabajo->find('all',$options));
+		$this->set('estadoSaldo', $estadoSaldo);
+		$this->set('usuarioTipo', $this->Session->read('Auth.User.tipo'));		
+	}
 	public function informe($clienteId=null) {
 		$options = array(
 			'contain'=>array(
@@ -210,6 +292,8 @@ class OrdentrabajosController extends AppController {
                             $this->request->data('Ordentrabajo.bronce',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['bronce'])));
 			if($this->request->data['Ordentrabajo']['entregada']!=null&&$this->request->data['Ordentrabajo']['entregada']!='')
                             $this->request->data('Ordentrabajo.entregada',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['entregada'])));
+            if($this->request->data['Ordentrabajo']['fechaencargobronce']!=null&&$this->request->data['Ordentrabajo']['fechaencargobronce']!='')
+                $this->request->data('Ordentrabajo.fechaencargobronce',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechaencargobronce'])));
 
 			/*$numerodeorden = $this->Ordentrabajo->find('first' , array ('fields' => array('MAX(Ordentrabajo.numerodeorden+1) as numerodeorden'  )));
 			if(!isset($numerodeorden[0]['numerodeorden'])){
@@ -291,13 +375,13 @@ class OrdentrabajosController extends AppController {
                         if($this->request->data['Ordentrabajo']['fechanacimiento1']!=null&&$this->request->data['Ordentrabajo']['fechanacimiento1']!='')
 			$this->request->data('Ordentrabajo.fechanacimiento1',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechanacimiento1'])));
 
-			if($this->request->data['Ordentrabajo']['fechanacimiento1']!=null&&$this->request->data['Ordentrabajo']['fechadefuncion1']!='')
+			if($this->request->data['Ordentrabajo']['fechadefuncion1']!=null&&$this->request->data['Ordentrabajo']['fechadefuncion1']!='')
 			$this->request->data('Ordentrabajo.fechadefuncion1',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechadefuncion1'])));
 
 			if($this->request->data['Ordentrabajo']['fechanacimiento2']!=null&&$this->request->data['Ordentrabajo']['fechanacimiento2']!='')
 			$this->request->data('Ordentrabajo.fechanacimiento2',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechanacimiento2'])));
 
-			if($this->request->data['Ordentrabajo']['fechanacimiento2']!=null&&$this->request->data['Ordentrabajo']['fechadefuncion2']!='')
+			if($this->request->data['Ordentrabajo']['fechadefuncion2']!=null&&$this->request->data['Ordentrabajo']['fechadefuncion2']!='')
 			$this->request->data('Ordentrabajo.fechadefuncion2',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechadefuncion2'])));
 
 			if($this->request->data['Ordentrabajo']['fechanacimiento3']!=null&&$this->request->data['Ordentrabajo']['fechanacimiento3']!='')
@@ -320,6 +404,9 @@ class OrdentrabajosController extends AppController {
 
 			if($this->request->data['Ordentrabajo']['entregada']!=null&&$this->request->data['Ordentrabajo']['entregada']!='')
 			$this->request->data('Ordentrabajo.entregada',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['entregada'])));
+
+			if($this->request->data['Ordentrabajo']['fechaencargobronce']!=null&&$this->request->data['Ordentrabajo']['fechaencargobronce']!='')
+			$this->request->data('Ordentrabajo.fechaencargobronce',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechaencargobronce'])));
 
 			if ($this->Ordentrabajo->saveAll($this->request->data, array('deep' => true))) {
 				$this->Session->setFlash(__('La orden de trabajo a sido guardada.'));

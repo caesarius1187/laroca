@@ -190,7 +190,17 @@ $(document).ready(function(){
         }
     });
     $("#OrdentrabajoParaips").trigger('change');
+    confirmParaIPS();
 });
+function confirmParaIPS(){
+	if( $("input[type='radio'][name='data[Ordentrabajo][paraips]']:checked").length = 0 ){
+		if (confirm('Esta orden es para IPS?')) {
+		    alert('Thanks for confirming');
+		} else {
+		    alert('Why did you press cancel? You should have confirmed');
+		}confirm("");
+	}
+}
 //vamos a inicializar el formulario en caso de que el campo Tipo de Orden venga con un valor predeterminado
 function calcularSaldo(){
 
@@ -518,6 +528,9 @@ function eliminarDetalleManoDeObra(numDetalle){
 }
 //Checkea el stock del producto que se quiere vender en la orden de trabajo
 function checkstock(){
+	//no vamos a checkiar el stock
+	return true;
+	
 	var cantidad=$('#OrdentrabajoCantidaddetalle').val()*1 ;
 	var stock=$('#OrdentrabajoStockdetalle').val()*1 ;
 	var left = stock-cantidad;
