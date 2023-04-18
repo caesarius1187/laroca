@@ -150,11 +150,16 @@ class ProductosController extends AppController {
 		$producto_id = 0;
 		if(isset($this->request->data['Ordentrabajo']))
 			$producto_id = $this->request->data['Ordentrabajo']['producto_id'];		
-		$productos = $this->Producto->find('first', array(
+			$productos = $this->Producto->find('first', array(
 			'conditions' => array('Producto.id' => $producto_id),
 			'recursive' => -1
 		));
-		 
+		if(isset($this->request->data['Presupuesto']))
+			$producto_id = $this->request->data['Presupuesto']['producto_id'];		
+			$productos = $this->Producto->find('first', array(
+			'conditions' => array('Producto.id' => $producto_id),
+			'recursive' => -1
+		)); 
 		$this->set('productos',$productos);
 		$this->layout = 'ajax';
 	}

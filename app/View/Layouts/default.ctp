@@ -102,13 +102,7 @@ $cakeDescription = __d('cake_dev', 'In Memorian');
 							</li>
 							<li class='has-sub'>
 								<?php
-								echo $this->Html->link(
-									"Lista Ordenes de Trabajo",
-									array(
-										'controller' => 'ordentrabajos',
-										'action' => 'index',
-									)
-								);
+								
 								?>
 							</li>
 							<li class='has-sub' style="display:none ">
@@ -124,7 +118,32 @@ $cakeDescription = __d('cake_dev', 'In Memorian');
 							</li>
 						</ul>
 					</li>
-
+					<li class='active has-sub'><a href='#'><span>Ordenes de Trabajo</span></a>
+						<ul>
+							<li class='has-sub'>
+								<?php
+								echo $this->Html->link(
+									"Ordenes de Trabajo",
+									array(
+										'controller' => 'ordentrabajos',
+										'action' => 'index',
+									)
+								);
+								?>
+							</li>
+							<li class='has-sub'>
+								<?php
+								echo $this->Html->link(
+									"Presupuestos",
+									array(
+										'controller' => 'presupuestos',
+										'action' => 'index',
+									)
+								);
+								?>
+							</li>
+						</ul>
+					</li>
 					<li class='active has-sub'><a href='#'><span>Productos</span></a>
 						<ul>
 							<li class='has-sub'>

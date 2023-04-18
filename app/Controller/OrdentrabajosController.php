@@ -25,23 +25,25 @@ class OrdentrabajosController extends AppController {
 		if($estado!=null){
 			$estadoUsado = $estado;
 		}
-		$options = array(
-			'contain'=>array(
+		$options = [
+			'contain'=>[
 				'User',
 				'Prepara',
 				'Cliente',
 				'Tipocliente',
 				'Observacione',
-				'Detalleordentrabajo'=>array(
-					'Producto'
-				),
-			),
-			'conditions'=>array(
+				'Detalleordentrabajo'=>[
+					'Producto'=>[
+						'fields'=>['codigo','cantidad'],
+					]
+				],
+			],
+			'conditions'=>[
 				'Ordentrabajo.yaentregada'=>$estadoUsado
-			),
+			],
 			'limit'=>500,
 			'order'=>['Ordentrabajo.id DESC']
-		);
+		];
 		//$this->Ordentrabajo->recursive = 0;
 		$this->set('ordentrabajos', $this->Ordentrabajo->find('all',$options));
 		$this->set('estadousado', $estadoUsado);
