@@ -89,10 +89,10 @@
 							<?= $detallepresupuesto['Producto']['nombre'] ?>
 						</td>
 						<td colspan="" class="print_td_title_1" style="border: 1px solid;">
-							<?= $detallepresupuesto['Producto']['cantidad'] ?>
+							<?= $detallepresupuesto['cantidad'] ?>
 						</td>
 						<td colspan="" class="print_td_title_1" style="border: 1px solid;">
-							$<?= $detallepresupuesto['Producto']['precio'] ?>
+							$<?= $detallepresupuesto['precio']*$detallepresupuesto['cantidad'] ?>
 						</td>
 					</tr>
 				<?php

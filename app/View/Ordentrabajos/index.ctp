@@ -247,8 +247,8 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
                                         }
 					echo $this->Html->link( "$", array('controller'=>'ordentrabajos','action'=>'recibo',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
 					echo $this->Html->link( $print_img, array('controller'=>'ordentrabajos','action'=>'view',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
+					echo $this->Html->link( $edit_img, array('controller'=>'ordentrabajos','action'=>'edit',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
 					if(!$esOperario) {
-						echo $this->Html->link( $edit_img, array('controller'=>'ordentrabajos','action'=>'edit',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
 						echo $this->Form->postLink(
 							$delete_img,
 							array('action' => 'delete', $ordentrabajo['Ordentrabajo']['id']),

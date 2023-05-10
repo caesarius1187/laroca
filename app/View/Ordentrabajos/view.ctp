@@ -277,6 +277,26 @@
 	</tr>	
 	<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho notInReducida">
 		<td class="print_td_title_1">
+			<?php echo __('Material:'); ?>
+		</td>
+		<td colspan="1" style="border-bottom: 1px dotted;">
+			<?php echo $ordentrabajo['Ordentrabajo']['material']; ?>
+		</td>		
+		<td class="print_td_title_1">
+			<?php echo __('Medidas:'); ?>
+		</td>
+		<td colspan="1" style="border-bottom: 1px dotted;">
+			<?php echo $ordentrabajo['Ordentrabajo']['medidas']; ?>
+		</td>		
+		<td class="print_td_title_1">
+			<?php echo __('Tipo y Color de letra:'); ?>
+		</td>
+		<td colspan="1" style="border-bottom: 1px dotted;">
+			<?php echo $ordentrabajo['Ordentrabajo']['tipoycolorletra']; ?>
+		</td>		
+	</tr>	
+	<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho notInReducida">
+		<td class="print_td_title_1">
 			<?php echo __('Observaciones:'); ?>
 		</td>
 		<td colspan="5" style="border-bottom: 1px dotted;">
