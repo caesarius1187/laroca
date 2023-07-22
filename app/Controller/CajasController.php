@@ -131,7 +131,7 @@ class CajasController extends AppController {
 			$hasta = null;
 		}
 		if($desde == null){
-			$fd = new DateTime('2000-12-23');
+			$fd = new DateTime('-1 Months');
 		}else{
 			$fd = new DateTime($desde);
 		}
