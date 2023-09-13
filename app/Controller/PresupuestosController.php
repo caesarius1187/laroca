@@ -159,7 +159,6 @@ class PresupuestosController extends AppController {
 										      'User',
 										      
 										      'Cliente',
-										      'Tipocliente',
 										      'Observacione'=>['User'],
 										      //'Producto',										      	
 										      'Detallepresupuesto'=>array(
@@ -190,11 +189,10 @@ class PresupuestosController extends AppController {
 		
 		//$cliCond = array('conditions' => array('Cliente.id' => $this->request->data['Presupuesto']['cliente_id'] ));
 		$clientes = $this->Presupuesto->Cliente->find('list');//,$cliCond);		
-		$tipoclientes = $this->Presupuesto->Tipocliente->find('list');		
 		$tablaclientes = $this->Presupuesto->Cliente->find('all',['fields'=>['id','nombre'],'contain'=>[]]);
 		$optionProductos=array('order' => 'Producto.nombre', );
 		$productos = $this->Producto->find('list',$optionProductos);
-		$this->set(compact('users', 'clientes','tipoclientes','tablaclientes','productos','userPreparas'));
+		$this->set(compact('users', 'clientes','tablaclientes','productos','userPreparas'));
 	}
 
 /**

@@ -11,6 +11,9 @@
 			<td>
 				<?php echo $this->Form->input('nombre',array('label'=>'Nombre y Apellido')); ?>
 			</td>
+			<td>
+				<?php echo $this->Form->input('direccion',array('label'=>'Direccion')); ?>
+			</td>
 			<td width="25%">
 				<?php echo $this->Form->input('total',array('label'=>'Total $')); ?>
 			</td>
@@ -43,11 +46,13 @@
 				<?php echo $this->Form->input('numDetalle',array('value'=>0,'type'=>'hidden')); ?>
 				<table id="tableDOT" cellpadding="0" cellspacing="0" class="tbl_add" style="margin-top:20px;">
 					<thead>
-						<th>Producto</th>
-						<th>Precio</th>
-						<th>Cantidad</th>
-						<th>Descripcion</th>
-						<th>Accion</th>
+						<th>CONCEPTO</th>
+						<th>ANCHO</th>
+						<th>LARGO</th>
+						<th>CANT. M2/ML</th>
+						<th>PRECIO UNIT.</th>
+						<th>TOTAL</th>
+						<th>DESCRIPCION</th>
 					</thead>
 					<!--<tfoot>
 						<th></th>
@@ -57,6 +62,8 @@
 						<th></th>
 					</tfoot>-->
 					<tbody>
+						<td></td>
+						<td></td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -77,7 +84,7 @@
 							<label class="lbl_ot">Precio</label>
 						</td>
 						<td width="40%">
-							<?php echo $this->Form->input('costo', array('type' => 'money','value'=>0, 'label'=>'', 'style' => 'width:90%; font-size:150%;')); ?></td>
+							<?php echo $this->Form->input('total2', array('type' => 'money','value'=>0, 'label'=>'', 'style' => 'width:90%; font-size:150%;')); ?></td>
 					</tr>
 				</table>
 			</td>

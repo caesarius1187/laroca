@@ -25,7 +25,7 @@ $cakeDescription = __d('cake_dev', 'In Memorian');
 
 <head>
 	<script type="text/javascript">
-		var serverLayoutURL = "/inmemorian";
+		var serverLayoutURL = "/laroca";
 	</script>
 	<?php echo $this->Html->charset(); ?>
 	<title>
@@ -56,7 +56,7 @@ $cakeDescription = __d('cake_dev', 'In Memorian');
 		</script>
 		<div id="header">
 			<!--<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>-->
-			<?php echo $this->Html->image('logo_header.png', array('alt' => 'Azul Refrigeracion', 'height' => '60')); ?>
+			<?php echo $this->Html->image('larokalogo.jpg', array('alt' => 'Azul Refrigeracion', 'height' => '60')); ?>
 			<!--<div style="height:60px; width:200px"><h1>INMEMORIAN</h1></div>-->
 
 			<?php if ($this->Session->read('Auth.User.username')) { ?>
@@ -84,17 +84,6 @@ $cakeDescription = __d('cake_dev', 'In Memorian');
 									"Lista de Clientes",
 									array(
 										'controller' => 'clientes',
-										'action' => 'index',
-									)
-								);
-								?>
-							</li>
-							<li class='has-sub'>
-								<?php
-								echo $this->Html->link(
-									"Tipo de Clientes",
-									array(
-										'controller' => 'tipoclientes',
 										'action' => 'index',
 									)
 								);

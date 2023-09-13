@@ -3,6 +3,7 @@ $(document).ready(function(){
         actualizarTotal();
     });
     actualizarTotal();
+     $('#PresupuestoProductoId').trigger('change');
 });
 //Obtiene los detalles del producto seleccionado para vender en la orden de trabajo
 function getDetallesProducto(){
@@ -15,7 +16,9 @@ function getDetallesProducto(){
 			data: formData, 
 			success: function(data,textStatus,xhr){ 
 				$('#tdDetalleProducto').empty();
-				$('#tdDetalleProducto').html(data);				
+				$('#tdDetalleProducto').html(data);		
+ 				$("#OrdentrabajoCantidaddetalle").parent().hide();
+
 				}, 
 			error: function(xhr,textStatus,error){ 
 				alert(textStatus); 
@@ -23,7 +26,16 @@ function getDetallesProducto(){
 		});	
 		return false; 
 }	
-
+function actualizarDetalle(numDetalle){
+	var ancho = $('#Detallepresupuesto'+numDetalle+'Ancho').val();
+	var largo = $('#Detallepresupuesto'+numDetalle+'Largo').val();
+	var cantidad = ancho*largo;
+	$('#Detallepresupuesto'+numDetalle+'Cantidad').val(cantidad);
+	var precio = $('#Detallepresupuesto'+numDetalle+'Precio').val();
+	var subtotal = precio*cantidad;
+	$('#Detallepresupuesto'+numDetalle+'Subtotal').val(subtotal);
+	actualizarTotal();
+}
 //Agrega un producto para vender en la orden de trabajo
 function agregarproducto(){
 	
@@ -37,6 +49,24 @@ function agregarproducto(){
 	newDetalle +='		<input name="data[Detallepresupuesto]['+numDetalle+'][producto_id]" readonly="readonly" id="Detallepresupuesto'+numDetalle+'ProductoId" type="hidden" value="'+idProducto+'">';
 	newDetalle +='	</div>';
 	newDetalle +='</td> ';
+	
+	newDetalle +='<td>';
+	newDetalle +='	<div class="input number">';
+	var precioProducto = $('#OrdentrabajoPreciodetalle').val();
+	newDetalle +='		<input name="data[Detallepresupuesto]['+numDetalle+'][ancho]" onchange="actualizarDetalle('+numDetalle+');" step="any" id="Detallepresupuesto'+numDetalle+'Ancho" type="number" value="" class="changeTotal">';
+	newDetalle +='	</div>';
+	newDetalle +='</td> ';
+	newDetalle +='<td>';
+	newDetalle +='	<div class="input number">';
+	var precioProducto = $('#OrdentrabajoPreciodetalle').val();
+	newDetalle +='		<input name="data[Detallepresupuesto]['+numDetalle+'][largo]" onchange="actualizarDetalle('+numDetalle+');" step="any" id="Detallepresupuesto'+numDetalle+'Largo" type="number" value="" class="changeTotal">';
+	newDetalle +='	</div>';
+	newDetalle +='</td> ';
+	newDetalle +='<td>';
+	newDetalle +='	<div class="input number">';
+	newDetalle +='		<input name="data[Detallepresupuesto]['+numDetalle+'][cantidad]" id="Detallepresupuesto'+numDetalle+'Cantidad" type="number" value="" class="changeTotal">';
+	newDetalle +='	</div>';
+	newDetalle +='</td>';
 	newDetalle +='<td>';
 	newDetalle +='	<div class="input number">';
 	var precioProducto = $('#OrdentrabajoPreciodetalle').val();
@@ -45,10 +75,10 @@ function agregarproducto(){
 	newDetalle +='</td> ';
 	newDetalle +='<td>';
 	newDetalle +='	<div class="input number">';
-	var cantidadProducto = $('#OrdentrabajoCantidaddetalle').val();
-	newDetalle +='		<input name="data[Detallepresupuesto]['+numDetalle+'][cantidad]" readonly="readonly" id="Detallepresupuesto'+numDetalle+'Cantidad" type="number" value="'+cantidadProducto+'" class="changeTotal">';
+	var precioProducto = $('#OrdentrabajoPreciodetalle').val();
+	newDetalle +='		<input name="data[Detallepresupuesto]['+numDetalle+'][subtotal]" onchange="actualizarDetalle('+numDetalle+');" step="any" id="Detallepresupuesto'+numDetalle+'Subtotal" type="number" value="'+precioProducto+'" class="changeTotal">';
 	newDetalle +='	</div>';
-	newDetalle +='</td>';
+	newDetalle +='</td> ';
 	newDetalle +='<td>';
 	newDetalle +='	<div class="input number">';
 	newDetalle +='		<input name="data[Detallepresupuesto]['+numDetalle+'][descripcion]" id="Detallepresupuesto'+numDetalle+'Descripcion" value="" >';
@@ -89,6 +119,7 @@ function actualizarTotal(){
 		}		
 	}*/
 	$('#PresupuestoTotal').val(total);
+	$('#PresupuestoTotal2').val(total);
     calcularSaldo();
 }
 function calcularSaldo(){

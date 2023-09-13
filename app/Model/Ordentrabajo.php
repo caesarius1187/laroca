@@ -6,7 +6,6 @@ App::uses('AppModel', 'Model');
  * @property Usuario $Usuario
  * @property UsuarioRepara $UsuarioRepara
  * @property Cliente $Cliente
- * @property Tipocliente $Tipocliente
  * @property Producto $Producto
  * @property Venta $Venta
  * @property Falla $Falla
@@ -68,13 +67,6 @@ class Ordentrabajo extends AppModel {
 		'Cliente' => array(
 			'className' => 'Cliente',
 			'foreignKey' => 'cliente_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Tipocliente' => array(
-			'className' => 'Tipocliente',
-			'foreignKey' => 'tipocliente_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

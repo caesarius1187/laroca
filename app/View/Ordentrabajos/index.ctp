@@ -36,7 +36,7 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 		<td colspan="5"><h2><?php echo __('Lista de Ordenes de Trabajo'); ?></h2></td>	
 		<td colspan="5">
 		<?php
-		echo $this->Form->button('Ordenes para Retirar', 
+		/*echo $this->Form->button('Ordenes para Retirar', 
         	array('type' => 'button',
                 'class' =>"btn_ot",
                 'onClick' => "window.location.href='".Router::url(array(
@@ -44,7 +44,7 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
                                                     'action'=>'placasaretirar')
                                                      )."'"		   
              	)	            							
-		    );
+		    );*/
     	echo $this->Form->button('Ordenes para corte', 
         	array('type' => 'button',
                 'class' =>"btn_ot",
@@ -118,20 +118,15 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 		<thead>
 		<tr>					
 			<th>N&ordm; Orden </th>
-			<th>Nombre(placa) </th>
-			<th>Cementerio</th>			
+			<th>Nombre</th>
 			<th>Cliente </th>
 			<th>Fch. Encargo </th>
 			<th>Fch. Entrega </th>
 			<th>Detalle </th>
 			<th>Obvservacion </th>
-			<th>Bronce </th>							
-			<th>Fch. Encargo Bronce </th>
-			<th>Vinilo </th>							
 			<th>Retirar </th>							
 			<th>Retirada </th>							
 			<th>Terminada </th>							
-			<th>Para IPS </th>							
 			<th>Saldo</th>							
 			<th class="actions" style="text-align:center">Acciones</th>
 		</tr>
@@ -149,11 +144,6 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 			<th></th>
 			<th></th>
 			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
 		</tfoot>
 		<tbody>
 			<?php 
@@ -164,11 +154,8 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 					<?php echo str_pad($ordentrabajo['Ordentrabajo']['numerodeorden'], 9, "0", STR_PAD_LEFT); ?>&nbsp;
 				</td>
 				<td>
-					<?php echo $ordentrabajo['Ordentrabajo']['nombreyapellido3']."-".$ordentrabajo['Ordentrabajo']['nombreyapellido2']."-".$ordentrabajo['Ordentrabajo']['nombreyapellido1']; ?>
+					<?php echo $ordentrabajo['Ordentrabajo']['solicnombre']?>
 				</td>	
-				<td>
-					<?php echo $ordentrabajo['Ordentrabajo']['cementerio']; ?>
-				</td>		
 				<td>
 					<?php echo $ordentrabajo['Cliente']['nombre']; ?>
 				</td>			
@@ -197,27 +184,11 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 				</td>
 				<td>
 					<?php 
-					echo $ordentrabajo['Ordentrabajo']['observaciones']; 
 					foreach ($ordentrabajo['Observacione'] as $observacion) {
 						echo $observacion['descripcion'];
 					}
 					?>
 				</td>
-				<td>
-					<?php echo $ordentrabajo['Ordentrabajo']['placa']? "SI":"NO";  ?>
-				</td>
-				<td>
-					<span style="display:none">					
-						<?php 
-						echo date('Y-m-d',strtotime($ordentrabajo['Ordentrabajo']['fechaencargobronce'])); 
-						?>
-					</span>
-
-					<?php echo $ordentrabajo['Ordentrabajo']['fechaencargobronce']?date('d-m-Y',strtotime($ordentrabajo['Ordentrabajo']['fechaencargobronce'])):''; ?>
-				</td>
-				<td>
-					<?php echo $ordentrabajo['Ordentrabajo']['vinilos'] ?>
-				</td>	
 				<td>
 					<?php echo $ordentrabajo['Ordentrabajo']['retirar']? "SI":"NO"; ?>
 				</td>
@@ -229,9 +200,7 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 				<td>
 					<?php echo $ordentrabajo['Ordentrabajo']['terminada']? "SI":"NO"; ?>
 				</td>	
-				<td>
-					<?php echo $ordentrabajo['Ordentrabajo']['paraips']? "SI":"NO"; ?>
-				</td>	
+				
 				<td>
 					<?php echo number_format($ordentrabajo['Ordentrabajo']['saldo'],2,',','.'); ?>
 				</td>	
@@ -240,11 +209,9 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 					$print_img = $this->Html->image('print.png',array('alt'=>'edit',));
 					$money_img = $this->Html->image('print.png',array('alt'=>'edit',));
 					$edit_img = $this->Html->image('edit_view.png',array('alt'=>'edit',));
-					$ips = $this->Html->image('ips.jpg',array('alt'=>'ips','style'=>'width:32px;height:20px'));
+				
 					$delete_img = $this->Html->image('ic_delete_black_24dp.png',array('alt'=>'edit',));
-                                        if($ordentrabajo['Ordentrabajo']['paraips']){
-                                            echo $this->Html->link( $ips, array('controller'=>'ordentrabajos','action'=>'ordenips',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
-                                        }
+                                      
 					echo $this->Html->link( "$", array('controller'=>'ordentrabajos','action'=>'recibo',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
 					echo $this->Html->link( $print_img, array('controller'=>'ordentrabajos','action'=>'view',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));
 					echo $this->Html->link( $edit_img, array('controller'=>'ordentrabajos','action'=>'edit',$ordentrabajo['Ordentrabajo']['id']), array('target' => '_blank','escape'=>false));

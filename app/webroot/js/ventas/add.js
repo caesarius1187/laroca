@@ -81,7 +81,7 @@ function agregarproducto(){
 
 	newDetalle +='<td>';
 	newDetalle +='	<div class="input number">';
-	newDetalle +='		<input name="data[Detalleventa]['+numDetalle+'][cantidad]" onchange="checkstock('+numDetalle+');" id="Detalleventa'+numDetalle+'Cantidad" type="number" value="0" class="changeTotal">';
+	newDetalle +='		<input name="data[Detalleventa]['+numDetalle+'][cantidad]" onchange="" id="Detalleventa'+numDetalle+'Cantidad" type="number" value="0" class="changeTotal">';
 	newDetalle +='	</div>';
 	newDetalle +='</td>';
 	newDetalle +='<td>';

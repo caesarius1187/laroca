@@ -332,8 +332,7 @@ fieldset {
 	padding: 16px 10px;
 }
 fieldset legend {
-	color: #e32;
-	font-size: 160%;
+	font-size: 100%;
 	font-weight: bold;
 }
 fieldset fieldset {
@@ -372,7 +371,7 @@ form div.submit {
 	text-align: right;
 }
 label {
-	display: block;
+	display: inline;
 	font-size: 100%;
 	margin-bottom:3px;
 }
@@ -406,7 +405,7 @@ div.checkbox label {
 	display: inline;
 }
 input[type=radio] {
-	float:left;
+	display: inline;
 	width:auto;
 	margin: 6px 0;
 	padding: 0;
@@ -1243,7 +1242,7 @@ pre {
 	cursor: pointer;
 }
 .changeTotal{
-	width: 50px;
+	width: 100px;
 }
 
 .lbl_ot{

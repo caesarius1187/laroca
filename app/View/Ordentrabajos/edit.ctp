@@ -21,29 +21,6 @@
 	});
 </script>
 <!--<div class="ordendetrabajos form">-->
-<div id="bottoneraHead" style="width:100%">
-	<div id="btnN-CMG" class="buttonTipoOrdenDesactivado">
-		N-CMG
-	</div>
-	<div id="btna1b1r1" class="buttonTipoOrdenDesactivado">
-		A1-B1-R1
-	</div>
-	<div id="btna2b2r2" class="buttonTipoOrdenDesactivado">
-		A2-B2-R2
-	</div>
-	<div id="btna3b3r3" class="buttonTipoOrdenDesactivado">
-		A3-B3-R3
-	</div>
-	<div id="btnplacbronce" class="buttonTipoOrdenDesactivado" style="display:none">
-		Placa de bronce
-	</div>
-	<div id="btnplacnicho" class="buttonTipoOrdenDesactivado" style="display:none">
-		Placa para nicho
-	</div>
-	<div id="btnplacips" class="buttonTipoOrdenDesactivado"  style="display:none">
-		Placa para IPS
-	</div>
-</div>
 <div class="div_ot">
 <?php echo $this->Form->create('Ordentrabajo'); ?>
 	<table cellpadding="0" cellspacing="0" class="tbl_add" id="tblAddOrdenTrabajo">
@@ -52,425 +29,89 @@
 				<h2><?php echo __('Modificar Orden de Trabajo'); ?></h2>
 			</td> 			
 		</tr>	
+		<?php
+		/*DATOS ORDEN DE TRABAJO*/
+		?>
 		<tr class="all">
 			<td >
 				<?php echo $this->Form->input('numerodeorden',array('label'=>'Pedido N�', 'style'=>'width:70%')); ?>
 			</td>
-			<td>
-				<?php
-				$optionCementerio = array(
-					'Cementerio'=>[
-						'La Paz'=>'La Paz',
-						'Santa Teresita'=>'Santa Teresita',
-						'Divina Misericordia'=>'Divina Misericordia',
-						'San Antonio de Padua'=>'San Antonio de Padua',
-						'Santa Cruz'=>'Santa Cruz',
-						'Memorial'=>'Memorial',
-						'San Lorenzo'=>'San Lorenzo',
-						'Jardin Celestial'=>'Jardin Celestial',
-						'Jardin de la Paz'=>'Jardin de la Paz',
-						'Rosario de Lerma'=>'Rosario de Lerma',
-						'San Lucas'=>'San Lucas',
-						'Zenta'=>'Zenta',
-						'Otro'=>'Otro',
-					],
-					'Agencia'=>[
-						'Capital'=>'Capital',
-						'Cafayate'=>'Cafayate',
-						'Rosario de la Frontera'=>'Rosario de la Frontera',
-						'Metan'=>'Metan',
-						'Guemes'=>'Guemes',
-						'Joaquin V. Gonzales'=>'Joaquin V. Gonzales',
-						'Tartagal'=>'Tartagal',
-						'Oran'=>'Oran',
-						'Cachi'=>'Cachi',
-						'Otra Agencia'=>'Otra Agencia'
-					]
-				);
-				echo $this->Form->input('cementerio',array(
-					'type'=>'select',
-					'options'=>$optionCementerio,
-					'label'=>'Cementerio/Agencia')); ?>
-			</td>
 			<td >
-				<?php echo $this->Form->input('id',array('type'=>'hidden')); ?>
 				<?php echo $this->Form->input('user_id',array('label'=>'Usuario')); ?>
-				<?php echo $this->Form->input('tipoorden',array('type'=>'hidden')); ?>
-			</td>
-			<td style="vertical-align:middle">
-				<?php echo $this->Form->input('ocultarprecioenimpresion',array('label'=>'Ocultar precios en impresi&oacute;n', 'style' => 'margin-top:5px')); ?>			
-			</td>
-		</tr>		
-		<tr class="ncmg placnicho">
-                    <td>
-                        <?php echo $this->Form->input('numnicho',array('label'=>'N� Nicho')); ?>
-                    </td>
-		</tr>
-        <tr class="all">
-            <td>
-                <?php echo $this->Form->radio('paraips', [1 => 'Si' ,0 => 'No'], ['legend'=>'Para IPS']); ?>
-            </td>
-            <td>
-                <?php echo $this->Form->radio('placa', [1 => 'Si' ,0 => 'No'], ['legend'=>'Bronce']);  
-                $isDate = validateDate($this->request->data['Ordentrabajo']['fechaencargobronce'],'Y-m-d h:i:s');
-                                
-				if($isDate){
-					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['fechaencargobronce']));
-				}else{
-					$procesedDate = "";
-				}
-				echo $this->Form->input('fechaencargobronce',array(
-		                                      'class'=>'datepicker', 
-		                                      'type'=>'text',
-		                                      'label'=>'Fch. Encargo Bronce',
-		                                      'value'=>$procesedDate,//date('d-m-Y'),
-		                                      'style'=>'width:75%'
-		                                      ));
-
-                ?>
-            </td>
-            <td>
-                <?php echo $this->Form->radio('otro', [1 => 'Si' ,0 => 'No']); ?>
-            </td>
-            <td>
-                <?php echo $this->Form->radio('corte', [1 => 'Si' ,0 => 'No']);  ?>
-            </td>
-		</tr>
-                <tr class="all paraips">
-			<td>
-				<?php
-                                echo $this->Form->input('fchautorizacion',array(
-		                                      'class'=>'datepicker', 
-		                                      'type'=>'text',
-		                                      'label'=>'Fch. Autorizacion',
-		                                      'default'=>'',//date('d-m-Y'),
-		                                      'style'=>'width:75%'
-		                                      )); 
-                                ?>
-			</td>
-			<td>
-				<?php echo $this->Form->input('numeropoliza',array('label'=>'Numero poliza')); ?>
-			</td>
-			<td>
-				<?php echo $this->Form->input('numerosiniestro',array('label'=>'Numero siniestro')); ?>
-			</td>
-			<td>
-				<?php 
-                                $tipoips=[
-                                    'Lapida para nicho Opc 1'=>'Lapida para nicho Opc 1', 
-                                    'Lapida para nicho Opc 2'=>'Lapida para nicho Opc 2', 
-                                    'Lapida para parcela'=>'Lapida para parcela', 
-                                    'Agregadod de nivel'=>  'Agregadod de nivel'
-                                ];
-                                echo $this->Form->input('tipoips',array(
-                                    'label'=>'Tipo trabajo',
-                                    'type'=>'select',
-                                    'options'=>$tipoips,
-                                    )); 
-                                echo $this->Form->input('niveldeips',array(
-                                    'label'=>'Nivel para IPS',
-                                    'type'=>'select',
-                                    'options'=>[1=>'1',2=>'2',3=>'3'],
-                                    )); 
-                                ?>
 			</td>
 		</tr>
-		<tr class="a1b1r1 a2b2r2 a3b3r3">		
-			<td>
-				<?php echo $this->Form->input('numsectorparcela',array('label'=>'N� y Sector de Parcela')); ?>
-			</td>
-		</tr>
-		<?php
-		/*GRABADO O DATOS PLACA*/
-		?>
-		<tr class="ncmg placbronce placnicho">
-			<td colspan="4" style="text-align:center">
-				<h2><?php echo __('Grabado o Datos de placa'); ?></h2>
-			</td>
-		</tr>	
-		<?php
-		/*3er Nivel*/
-		?>
-		<tr class="a1b1r1 a2b2r2 a3b3r3">
-			<td colspan="4" style="text-align:center">
-				<h2><?php echo __('Datos de placa'); ?></h2>
-			</td>
-		</tr>
-		<tr class="a1b1r1 a2b2r2 a3b3r3">
-			<td colspan="4" style="text-align:center">
-				<h2><?php echo __('Datos nivel'); ?></h2>
-			</td>
-		</tr>
-		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placnicho">		
-			<td>
-				<?php
-				$optionSimbolo = array(
-					'ninguno'=>'ninguno',
-					'1'=>'1',
-					'2'=>'2',
-					'3'=>'3',
-					'4'=>'4',
-					'5'=>'5',
-					'6'=>'6',
-					'7'=>'7',
-					'8'=>'8',
-					'9'=>'9',
-					'10'=>'10',
-					'11'=>'11',
-					'12'=>'12',
-					'13'=>'13',
-					'14'=>'14',
-					'15'=>'15',
-					'16'=>'16',
-					'17'=>'17',
-					'18'=>'18',
-					'19'=>'19',
-					'20'=>'20',
-					'21'=>'21',
-					'22'=>'22',
-					'23'=>'23',
-					'24'=>'24',
-					'25'=>'25',
-					'26'=>'26',
-					'27'=>'27',
-					'28'=>'28',
-					'29'=>'29',
-					'30'=>'30',
-					'31'=>'31',
-					'32'=>'32',
-					'33'=>'33',
-					'34'=>'34',
-					'35'=>'35',
-					'36'=>'36',
-					'37'=>'37',
-					'38'=>'38',
-					'39'=>'39',
-					'40'=>'40',
-					'41'=>'41',
-					'42'=>'42',
-					'43'=>'43',
-					'44'=>'44',
-					'45'=>'45',
-					'46'=>'46',
-					'47'=>'47',
-					'48'=>'48',
-					'49'=>'49',
-					'50'=>'50',
-				);
-				echo $this->Form->input('simboloreligioso',array('type'=>'select','options'=>$optionSimbolo,'label'=>'Simbolo Religioso')); ?>
-			</td>
-
-		</tr>
-		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">		
-			<td>
-				<?php echo $this->Form->input('nombreyapellido3',array('label'=>'Nombre y Apellido')); ?>
-			</td>
-			<td>
-				<?php 
-				$isDate = validateDate($this->request->data['Ordentrabajo']['fechanacimiento3']);
-                                
-				if($isDate){
-					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['fechanacimiento3']));
-				}else{
-					$procesedDate = "";
-				}
-                                
-				echo $this->Form->input('fechanacimiento3',array(
-		                                      'class'=>'datepicker', 
-		                                      'type'=>'text',
-		                                      'label'=>'Fch. Nacimiento',
-		                                      'value'=>$procesedDate,//date('d-m-Y'),
-		                                      'style'=>'width:75%'
-		                                      )); ?>
-			</td>
-			<td>
-				<?php 
-				$isDate = validateDate($this->request->data['Ordentrabajo']['fechadefuncion3']);
-				if($isDate){
-					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['fechadefuncion3']));
-				}else{
-					$procesedDate = "";
-				}
-				echo $this->Form->input('fechadefuncion3',array(
-		                                      'class'=>'datepicker', 
-		                                      'type'=>'text',
-		                                      'label'=>'Fch. Defuncion',
-		                                      'value'=>$procesedDate,//date('d-m-Y'),
-		                                      'style'=>'width:75%'
-		                                      )); ?>
-			</td>
-			<td>
-				<?php echo $this->Form->input('nivel3',array('label'=>'Nivel','options'=>['1'=>'1','2'=>'2','3'=>'3'])); ?>
-			</td>
-		</tr><?php
-		/*2do Nivel*/
-		?>
-		<tr class="a2b2r2 a3b3r3">
-			<td colspan="4" style="text-align:center">
-				<h2><?php echo __('Datos nivel'); ?></h2>
-			</td>
-		</tr>
-		<tr class="a2b2r2 a3b3r3">		
-			<td>
-				<?php echo $this->Form->input('nombreyapellido2',array('label'=>'Nombre y Apellido')); ?>
-			</td>
-			<td>
-				<?php 
-				$isDate = validateDate($this->request->data['Ordentrabajo']['fechanacimiento2']);
-				if($isDate){
-					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['fechanacimiento2']));
-				}else{
-					$procesedDate = "";
-				}
-				echo $this->Form->input('fechanacimiento2',array(
-		                                      'class'=>'datepicker', 
-		                                      'type'=>'text',
-		                                      'label'=>'Fch. Nacimiento',
-		                                      'value'=>$procesedDate,//date('d-m-Y'),
-		                                      'style'=>'width:75%'
-		                                      )); ?>
-			</td>
-			<td>
-				<?php 
-				$isDate = validateDate($this->request->data['Ordentrabajo']['fechadefuncion2']);
-				if($isDate){
-					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['fechadefuncion2']));
-				}else{
-					$procesedDate = "";
-				}
-				echo $this->Form->input('fechadefuncion2',array(
-		                                      'class'=>'datepicker', 
-		                                      'type'=>'text',
-		                                      'label'=>'Fch. Defuncion',
-		                                      'default'=>'',//date('d-m-Y'),
-		                                      'style'=>'width:75%'
-		                                      )); ?>
-			</td>
-			<td>
-				<?php echo $this->Form->input('nivel2',array('label'=>'Nivel','options'=>['1'=>'1','2'=>'2','3'=>'3'])); ?>
-			</td>
-		</tr>	
-		<?php
-		/*1er Nivel*/
-		?>
-		<tr class="a3b3r3">
-			<td colspan="4" style="text-align:center">
-				<h2><?php echo __('Datos nivel'); ?></h2>
-			</td>
-		</tr>
-		<tr class="a3b3r3">		
-			<td>
-				<?php echo $this->Form->input('nombreyapellido1',array('label'=>'Nombre y Apellido')); ?>
-			</td>
-			<td>
-				<?php 
-				$isDate = validateDate($this->request->data['Ordentrabajo']['fechanacimiento1']);
-				if($isDate){
-					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['fechanacimiento1']));
-				}else{
-					$procesedDate = "";
-				}
-				echo $this->Form->input('fechanacimiento1',array(
-		                                      'class'=>'datepicker', 
-		                                      'type'=>'text',
-		                                      'label'=>'Fch. Nacimiento',
-		                                      'value'=>$procesedDate,//date('d-m-Y'),
-		                                      'style'=>'width:75%'
-		                                      )); ?>
-			</td>
-			<td>
-				<?php 
-				$isDate = validateDate($this->request->data['Ordentrabajo']['fechadefuncion1']);
-				if($isDate){
-					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['fechadefuncion1']));
-				}else{
-					$procesedDate = "";
-				}
-				echo $this->Form->input('fechadefuncion1',array(
-		                                      'class'=>'datepicker', 
-		                                      'type'=>'text',
-		                                      'label'=>'Fch. Defuncion',
-		                                      'value'=>$procesedDate,
-		                                      'style'=>'width:75%'
-		                                      )); ?>
-			</td>
-			<td>
-				<?php echo $this->Form->input('nivel1',array('label'=>'Nivel','options'=>['1'=>'1','2'=>'2','3'=>'3'])); ?>
-			</td>
-		</tr>	
-		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
-			<td colspan="4" >
-				<?php echo $this->Form->input('dedicatoria',array('type'=>'textarea','rows' => 2)); ?>
-			</td>
-		</tr>	
-		<!--<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
-			<td colspan="4" >
-				<?php echo $this->Form->input('observaciones',array('type'=>'textarea','rows' => 2)); ?>
-			</td>
-		</tr>-->
 		<?php
 		/*Datos Del Solicitante*/
-		?>		
+		?>
 		<tr class="all">
 			<td colspan="4" style="text-align:center"><h2><?php echo __('Datos Solicitante'); ?></h2></td>
 		</tr>
-		<tr  class="all">
-			<!--<td width="25%">				
-				<?php echo $this->Form->input('tipocliente_id',array('label'=>'Tipo de Cliente')); ?>			
-			</td>-->
+		<tr class="all">
+			<td colspan="1" width="25%">				
+				<?php echo $this->Form->input('solicnombre',array('label'=>'Nombre y Apellido')); ?>			
+			</td>
+			<td colspan="1" width="25%">				
+				<?php echo $this->Form->input('solictelefono',array('label'=>'Telefono')); ?>			
+			</td>
+			<td colspan="2" width="25%">				
+				<?php echo $this->Form->input('solicdireccion',array('label'=>'Direccion')); ?>			
+			</td>
+		</tr>			
+		<tr class="all">
 			<td width="25%">				
 				<div class="input select">
 				<?php
-				echo $this->Form->input('cliente_id',array('label'=>'Cliente', 'div' => false, 'style' => 'width:80%'));				
+				echo $this->Form->input('cliente_id',array('label'=>'Cliente', 'div' => false, 'style' => 'width:80%','type'=>'hidden'));				
 				echo $this->Html->image('bg-search.png', array('height' => '15', 'style'=>'padding-left:5px; padding-top:5px; cursor:pointer', 'title' => 'Buscar Cliente', 'onClick' => 'cargarCliente();'))				
 				;?>
 				</div>
 			</td>			
 			
 			<td width="25%">
-				<?php 
-				$isDate = validateDate($this->request->data['Ordentrabajo']['fechaencargo']);
-				if($isDate){
-					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['fechaencargo']));
-				}else{
-					$procesedDate = "";
-				}
-				echo $this->Form->input('fechaencargo', array(
+				<?php echo $this->Form->input('fechaencargo', array(
 		                                      'class'=>'datepicker', 
 		                                      'type'=>'text',
 		                                      'label'=>'Fch. Encargo',
-		                                      'value'=>$procesedDate,
+		                                      'default'=>'',//date('d-m-Y'),
 		                                      'style'=>'width:75%'
 		                                      )); ?></td>	
 	
 				
 			</td>
 			<td width="25%">				
-				<?php 
-				$isDate = validateDate($this->request->data['Ordentrabajo']['fechaentrega']);
-				if($isDate){
-					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['fechaentrega']));
-				}else{
-					$procesedDate = "";
-				}
-				echo $this->Form->input('fechaentrega',array(
+				<?php echo $this->Form->input('fechaentrega',array(
 		                                      'class'=>'datepicker', 
 		                                      'type'=>'text',
 		                                      'label'=>'Fch. Entrega',
-		                                      'value'=>$procesedDate,
+		                                      'default'=>'',//date('d-m-Y'),
 		                                      'style'=>'width:75%'
 		                                      )); ?>
 			</td>		
 		</tr>
 		<tr class="all">
-			<td colspan="2" width="25%">				
-				<?php echo $this->Form->input('solicnombre',array('label'=>'Nombre y Apellido')); ?>			
-			</td>
-			<td colspan="2" width="25%">				
-				<?php echo $this->Form->input('solictelefono',array('label'=>'Telefono')); ?>			
-			</td>
+			<td colspan="4" style="text-align:center"><h2><?php echo __('Mesada'); ?></h2></td>
 		</tr>
-		<tr  class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
+		<tr class="all">
+			<td  colspan="1">
+				<?php echo $this->Form->input('material',array('label'=>'Material','type'=>'textarea','rows' => 2)); ?>
+			</td>
+			<td  colspan="1">
+				<?php echo $this->Form->radio('zocalos', [1 => 'Si' ,0 => 'No'], ['legend'=>'Zocalos']); ?>
+			</td>
+			<td  colspan="1">
+				<?php echo $this->Form->input('medidas',array('label'=>'Medidas','type'=>'textarea','rows' => 2)); ?>
+			</td>
+			<td  colspan="1">
+				<?php echo $this->Form->input('griferia',array(
+					'label'=>'Griferia',
+					'options'=>[
+                		'Monocomando '=>'Monocomando',
+                		'2 Perforaciones'=>'2 Perforaciones',
+                		'3 Perforaciones'=>'3 Perforaciones',
+                	])); ?>
+			</td>
+        </tr>
+		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
 			<td width="25%">
 				<?php echo $this->Form->input('total',array('label'=>'Total $')); ?>
 			</td>
@@ -480,108 +121,63 @@
 			<td width="25%">
 				<?php echo $this->Form->input('saldo',array('label'=>'Saldo $')); ?>
 			</td>
-		</tr>
+		</tr>	
 		<?php
 		/*AVANCES DEL TRABAJO	*/
 		?>
-
 		<tr class="all">
 			<td colspan="4" style="text-align:center"><h2><?php echo __('Avances del Trabajo'); ?></h2></td>
 		</tr>	
 		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placnicho">
-			<td width="25%">
-				<?php echo $this->Form->input('vinilos',array('label'=>'Vinilos')); ?>
-			</td>
-			<td width="25%">
+			<?php 
+			/*<td width="25%">
 				<?php echo $this->Form->input('preparada',array(
-					'label'=>'Preparada','options'=>$userPreparas,
+					'type'=>'select',
+					'label'=>'Preparada',
+					'options'=>$userPreparas,
 					'empty'=>'Seleccionar usuario que prepara'
 				)); ?>
 			</td>
+			*/ ?>
 			<td width="25%">
+				<div style="margin-top:25px">
+				<?php echo $this->Form->radio('corte', [1 => 'Si' ,0 => 'No'], ['legend'=>'Corte']); ?>
+				</div>
+			</td>
+			<td width="25%">
+				<div style="margin-top:25px">
+				<?php echo $this->Form->radio('medidastomadas', [1 => 'Si' ,0 => 'No'], ['legend'=>'Medidas tomadas']); ?>
+				</div>
+			</td>
+			<?php
+			/*<td width="25%">
 				<div style="margin-top:25px">
 				<?php echo $this->Form->radio('retirar', [1 => 'Si' ,0 => 'No'], ['legend'=>'Retirar']); ?>
 				</div>
 			</td>
 			<td width="25%">
 				<div style="margin-top:25px">
-				<?php echo $this->Form->radio('retirada', [1 => 'Si' ,0 => 'No'], ['legend'=>'Retirada']); ?>
+				<?php echo $this->Form->radio('retirada', [1 => 'Si' ,0 => 'No'], ['legend'=>'Retirada', 'value'=>0]); ?>
 				</div>
 			</td>
-		</tr>	
-		<tr class="placbronce">
-			<td width="25%">				
-				<?php 
-				$isDate = validateDate($this->request->data['Ordentrabajo']['bronce']);
-				if($isDate){
-					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['bronce']));
-				}else{
-					$procesedDate = "";
-				}	                                
-				echo $this->Form->input('bronce',array(
-		                                      'class'=>'datepicker', 
-		                                      'type'=>'text',
-		                                      'label'=>'Bronce',
-		                                      'value'=>$procesedDate,
-		                                      'style'=>'width:75%'
-		                                      )); ?>
-			</td>
+			*/ ?>
 		</tr>		
-		
 		<tr class="all">
-			<td width="25%">				
-				<?php 
-				$isDate = validateDate($this->request->data['Ordentrabajo']['foto']);
-				if($isDate){
-					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['foto']));
-				}else{
-					$procesedDate = "";
-				}
-				echo $this->Form->input('foto',array(
-		                                      'class'=>'datepicker', 
-		                                      'type'=>'text',
-		                                      'label'=>'Foto',
-		                                      'value'=>$procesedDate,
-		                                      'style'=>'width:75%'
-		                                      )); ?>
-			</td>
 			<td width="25%">
 				<div style="margin-top:25px">
 				<?php echo $this->Form->input('terminada',array('label'=>'Terminada', 'div' => false)); ?>
 				</div>
 			</td>
-			<td width="25%">
-				<div style="margin-top:25px">
-					<?php echo $this->Form->input('yaentregada',array('label'=>'Entregada', 'div' => false)); ?>
-				</div>
-			</td>
 			<td width="25%">				
-				<?php 
-				$isDate = validateDate($this->request->data['Ordentrabajo']['entregada']);
-				if($isDate){
-					$procesedDate = date('d-m-Y',strtotime($this->request->data['Ordentrabajo']['entregada']));
-				}else{
-					$procesedDate = "";
-				}
-				echo $this->Form->input('entregada',array(
-		                                      'class'=>'datepicker', 
-		                                      'type'=>'text',
-		                                      'value'=>$procesedDate,
-		                                      'style'=>'width:75%'
-		                                      )); ?>
+				<?php echo $this->Form->input('entregada',array(
+              		'class'=>'datepicker', 
+              		'type'=>'text',
+              		'label'=>'Entregada',
+              		'default'=>'',//date('d-m-Y'),
+              		'style'=>'width:75%'
+              	)); ?>
 			</td>			
 		</tr>
-		<tr class="all">
-			<td  colspan="1">
-				<?php echo $this->Form->input('material',array('label'=>'Material','type'=>'textarea','rows' => 2)); ?>
-			</td>
-			<td  colspan="1">
-				<?php echo $this->Form->input('medidas',array('label'=>'Medidas','type'=>'textarea','rows' => 2)); ?>
-			</td>
-            <td id="tdDetalleObservacion"  colspan="4">
-				<?php echo $this->Form->input('tipoycolorletra',array('label'=>'Tipo y Color de Letra','type'=>'textarea','rows' => 2)); ?>
-            </td>	
-        </tr>
 		<tr class="all">
 			<td colspan="4" style="text-align:center"><h2><?php echo __('Observaciones'); ?></h2></td>
 		</tr>
@@ -713,10 +309,13 @@
 				<table id="tableDOT" cellpadding="0" cellspacing="0" class="tbl_add">
 					<thead>
 						<tr class="all">
-							<th>Producto</th>
-							<th>Precio</th>
-							<th>Cantidad</th>
-							<th>Descripcion</th>
+							<th>CONCEPTO</th>
+							<th>ANCHO</th>
+							<th>LARGO</th>
+							<th>CANT. M2/ML</th>
+							<th>PRECIO UNIT.</th>
+							<th>TOTAL</th>
+							<th>DESCRIPCION</th>
 						</tr>						
 					</thead>
 					<tbody>						
@@ -730,10 +329,19 @@
                                     <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.nombreproducto',['value'=>$producto['Producto']['nombre']]) ?>
                                 </td>
                                 <td>
-                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.precio',['value'=>$producto['precio'],'class'=>'recalculable']) ?>
+                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.ancho',['value'=>$producto['ancho'],'class'=>'recalculable']) ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.largo',['value'=>$producto['largo'],'class'=>'recalculable']) ?>
                                 </td>
                                 <td>
                                     <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.cantidad',['value'=>$producto['cantidad'],'class'=>'recalculable']) ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.precio',['value'=>$producto['precio'],'class'=>'recalculable']) ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.total',['value'=>$producto['precio'],'class'=>'recalculable']) ?>
                                 </td>
                                 <td>
                                     <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.descripcion',['value'=>$producto['descripcion'],'class'=>'recalculable']) ?>

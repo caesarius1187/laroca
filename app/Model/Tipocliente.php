@@ -7,19 +7,7 @@ class Tipocliente extends AppModel {
 	public $displayField = 'tipo';
 
 	public $hasMany = array(
-		'Ordentrabajo' => array(
-			'className' => 'Ordentrabajo',
-			'foreignKey' => 'tipocliente_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)		
+		
 	);
 
 	public $validate = array(		

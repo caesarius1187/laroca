@@ -10,7 +10,7 @@ if(isset($productos['Producto']['precioventa'])){
 		'label'=>'Cantidad',
 		'value'=>1,
 		'id'=>'OrdentrabajoCantidaddetalle',
-		'onChange'=>'checkstock()',
+		//'onChange'=>'checkstock()',
 		'style'=>'width:40px;'
 		));
 	echo $this->Form->input('stockdetalle',array(

@@ -30,7 +30,6 @@ class OrdentrabajosController extends AppController {
 				'User',
 				'Prepara',
 				'Cliente',
-				'Tipocliente',
 				'Observacione',
 				'Detalleordentrabajo'=>[
 					'Producto'=>[
@@ -59,7 +58,6 @@ class OrdentrabajosController extends AppController {
 				'User',
 				'Prepara',
 				'Cliente',
-				'Tipocliente',
 				'Observacione',
 				'Detalleordentrabajo'=>array(
 					'Producto'
@@ -87,7 +85,6 @@ class OrdentrabajosController extends AppController {
 				'User',
 				'Prepara',
 				'Cliente',
-				'Tipocliente',
 				'Observacione',
 				'Detalleordentrabajo'=>array(
 					'Producto'
@@ -114,7 +111,6 @@ class OrdentrabajosController extends AppController {
 				'User',
 				'Prepara',
 				'Cliente',
-				'Tipocliente',
 				'Observacione',
 				'Detalleordentrabajo'=>array(
 					'Producto'
@@ -138,7 +134,6 @@ class OrdentrabajosController extends AppController {
 				'User',
 				'Prepara',
 				'Cliente',
-				'Tipocliente',
 				'Detalleordentrabajo'=>array(
 					'Producto'
 				),
@@ -270,61 +265,41 @@ class OrdentrabajosController extends AppController {
 		$this->loadModel('Manodeobra');
 		if ($this->request->is('post')) {
 			$this->Ordentrabajo->create();
-                        if($this->request->data['Ordentrabajo']['fchautorizacion']!=null&&$this->request->data['Ordentrabajo']['fchautorizacion']!='')
-			$this->request->data('Ordentrabajo.fchautorizacion',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fchautorizacion'])));
-			if($this->request->data['Ordentrabajo']['fechanacimiento1']!=null&&$this->request->data['Ordentrabajo']['fechanacimiento1']!='')
-                            $this->request->data('Ordentrabajo.fechanacimiento1',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechanacimiento1'])));
-			if($this->request->data['Ordentrabajo']['fechadefuncion1']!=null&&$this->request->data['Ordentrabajo']['fechadefuncion1']!='')
-                            $this->request->data('Ordentrabajo.fechadefuncion1',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechadefuncion1'])));
-			if($this->request->data['Ordentrabajo']['fechanacimiento2']!=null&&$this->request->data['Ordentrabajo']['fechanacimiento2']!='')
-                            $this->request->data('Ordentrabajo.fechanacimiento2',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechanacimiento2'])));
-			if($this->request->data['Ordentrabajo']['fechadefuncion2']!=null&&$this->request->data['Ordentrabajo']['fechadefuncion2']!='')
-                            $this->request->data('Ordentrabajo.fechadefuncion2',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechadefuncion2'])));
-			if($this->request->data['Ordentrabajo']['fechanacimiento3']!=null&&$this->request->data['Ordentrabajo']['fechanacimiento3']!='')
-                            $this->request->data('Ordentrabajo.fechanacimiento3',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechanacimiento3'])));
-			if($this->request->data['Ordentrabajo']['fechadefuncion3']!=null&&$this->request->data['Ordentrabajo']['fechadefuncion3']!='')
-                            $this->request->data('Ordentrabajo.fechadefuncion3',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechadefuncion3'])));
+			
 			if($this->request->data['Ordentrabajo']['fechaencargo']!=null&&$this->request->data['Ordentrabajo']['fechaencargo']!='')
                             $this->request->data('Ordentrabajo.fechaencargo',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechaencargo'])));
 			if($this->request->data['Ordentrabajo']['fechaentrega']!=null&&$this->request->data['Ordentrabajo']['fechaentrega']!='')
                             $this->request->data('Ordentrabajo.fechaentrega',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechaentrega'])));
-			if($this->request->data['Ordentrabajo']['foto']!=null&&$this->request->data['Ordentrabajo']['foto']!='')
-                            $this->request->data('Ordentrabajo.foto',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['foto'])));
-			if($this->request->data['Ordentrabajo']['bronce']!=null&&$this->request->data['Ordentrabajo']['bronce']!='')
-                            $this->request->data('Ordentrabajo.bronce',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['bronce'])));
+			
 			if($this->request->data['Ordentrabajo']['entregada']!=null&&$this->request->data['Ordentrabajo']['entregada']!='')
                             $this->request->data('Ordentrabajo.entregada',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['entregada'])));
-            if($this->request->data['Ordentrabajo']['fechaencargobronce']!=null&&$this->request->data['Ordentrabajo']['fechaencargobronce']!='')
-                $this->request->data('Ordentrabajo.fechaencargobronce',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechaencargobronce'])));
 
-			/*$numerodeorden = $this->Ordentrabajo->find('first' , array ('fields' => array('MAX(Ordentrabajo.numerodeorden+1) as numerodeorden'  )));
-			if(!isset($numerodeorden[0]['numerodeorden'])){
-				$numerodeorden[0]['numerodeorden']=2000;
-			}
-			$this->request->data['Ordentrabajo']['numerodeorden']=$numerodeorden[0]['numerodeorden'];*/
 			$msg="";
 			if ($this->Ordentrabajo->saveAll($this->request->data, array('deep' => true))) {
+				
 				$this->Session->setFlash(__('La orden de trabajo a sido guardada con exito.'));
-				foreach ($this->request->data['Detalleordentrabajo'] as $detalle) {					
-					$this->Producto->id = $detalle['producto_id'];
-
-					$cantVendida =	 $detalle['cantidad'];
-					$cantAnterior = $this->Producto->field('cantidad');
-					$newstock =  $cantAnterior - $cantVendida;
-											
-					$this->Producto->id = $detalle['producto_id'];
-					if($this->Producto->saveField('cantidad', $newstock)){
-						$msg.='La orden de trabajo a sido guardada con exito';
-						$this->Session->setFlash($msg);
-					}else{
-						$msg.='La orden de trabajo NO a sido registrada con exito.';
-						$this->Session->setFlash($msg);
-						return $this->redirect(array('action' => 'index'));
+				if(isset($this->request->data['Detalleordentrabajo'])){
+					foreach ($this->request->data['Detalleordentrabajo'] as $detalle) {	
+						$this->Producto->id = $detalle['producto_id'];
+						$cantVendida =	 $detalle['cantidad'];
+						$cantAnterior = $this->Producto->field('cantidad');
+						$newstock =  $cantAnterior - $cantVendida;
+						$this->Producto->id = $detalle['producto_id'];
+						if($this->Producto->saveField('cantidad', $newstock)){
+							$msg.='La orden de trabajo a sido guardada con exito';
+							$this->Session->setFlash($msg);
+						}else{
+							$msg.='La orden de trabajo NO a sido registrada con exito.';
+							$this->Session->setFlash($msg);
+							return $this->redirect(array('action' => 'index'));
+						}
 					}
 				}
+				
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('La orden de trabajo No pudo ser guardada, por favor intente mas tarde.'));
+				return $this->redirect(array('action' => 'index'));
 			}
 		}
 		
@@ -334,13 +309,12 @@ class OrdentrabajosController extends AppController {
 		
 		$clientes = $this->Ordentrabajo->Cliente->find('list',array('order'=>'Cliente.nombre'));
 		$tablaclientes = $this->Ordentrabajo->Cliente->find('all',['fields'=>['id','nombre'],'contain'=>[]]);		
-		$tipoclientes = $this->Ordentrabajo->Tipocliente->find('list');					
 		
 		$optionProductos=array('order' => 'Producto.nombre', );
 		$productos = $this->Producto->find('list',$optionProductos);
 		
 		$manodeobras = $this->Manodeobra->find('list');
-		$this->set(compact('users', 'userPreparas', 'clientes','tipoclientes','productos','manodeobras','tablaclientes'));
+		$this->set(compact('users', 'userPreparas', 'clientes','productos','manodeobras','tablaclientes'));
 
 		$numerodeorden = $this->Ordentrabajo->find('first' , array ('fields' => array('MAX(Ordentrabajo.numerodeorden+1) as numerodeorden'  )));
 		if(!isset($numerodeorden[0]['numerodeorden'])){
@@ -371,44 +345,15 @@ class OrdentrabajosController extends AppController {
 		}
 		if ($this->request->is( 'put')) {
 			$this->Ordentrabajo->create();
-			if($this->request->data['Ordentrabajo']['fchautorizacion']!=null&&$this->request->data['Ordentrabajo']['fchautorizacion']!='')
-			$this->request->data('Ordentrabajo.fchautorizacion',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fchautorizacion'])));
 			
-                        if($this->request->data['Ordentrabajo']['fechanacimiento1']!=null&&$this->request->data['Ordentrabajo']['fechanacimiento1']!='')
-			$this->request->data('Ordentrabajo.fechanacimiento1',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechanacimiento1'])));
-
-			if($this->request->data['Ordentrabajo']['fechadefuncion1']!=null&&$this->request->data['Ordentrabajo']['fechadefuncion1']!='')
-			$this->request->data('Ordentrabajo.fechadefuncion1',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechadefuncion1'])));
-
-			if($this->request->data['Ordentrabajo']['fechanacimiento2']!=null&&$this->request->data['Ordentrabajo']['fechanacimiento2']!='')
-			$this->request->data('Ordentrabajo.fechanacimiento2',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechanacimiento2'])));
-
-			if($this->request->data['Ordentrabajo']['fechadefuncion2']!=null&&$this->request->data['Ordentrabajo']['fechadefuncion2']!='')
-			$this->request->data('Ordentrabajo.fechadefuncion2',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechadefuncion2'])));
-
-			if($this->request->data['Ordentrabajo']['fechanacimiento3']!=null&&$this->request->data['Ordentrabajo']['fechanacimiento3']!='')
-			$this->request->data('Ordentrabajo.fechanacimiento3',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechanacimiento3'])));
-
-			if($this->request->data['Ordentrabajo']['fechadefuncion3']!=null&&$this->request->data['Ordentrabajo']['fechadefuncion3']!='')
-			$this->request->data('Ordentrabajo.fechadefuncion3',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechadefuncion3'])));
-
 			if($this->request->data['Ordentrabajo']['fechaencargo']!=null&&$this->request->data['Ordentrabajo']['fechaencargo']!='')
 			$this->request->data('Ordentrabajo.fechaencargo',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechaencargo'])));
 
 			if($this->request->data['Ordentrabajo']['fechaentrega']!=null&&$this->request->data['Ordentrabajo']['fechaentrega']!='')
 			$this->request->data('Ordentrabajo.fechaentrega',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechaentrega'])));
 
-			if($this->request->data['Ordentrabajo']['foto']!=null&&$this->request->data['Ordentrabajo']['foto']!='')
-			$this->request->data('Ordentrabajo.foto',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['foto'])));
-
-			if($this->request->data['Ordentrabajo']['bronce']!=null&&$this->request->data['Ordentrabajo']['bronce']!='')
-			$this->request->data('Ordentrabajo.bronce',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['bronce'])));
-
 			if($this->request->data['Ordentrabajo']['entregada']!=null&&$this->request->data['Ordentrabajo']['entregada']!='')
 			$this->request->data('Ordentrabajo.entregada',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['entregada'])));
-
-			if($this->request->data['Ordentrabajo']['fechaencargobronce']!=null&&$this->request->data['Ordentrabajo']['fechaencargobronce']!='')
-			$this->request->data('Ordentrabajo.fechaencargobronce',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['fechaencargobronce'])));
 
 			if ($this->Ordentrabajo->saveAll($this->request->data, array('deep' => true))) {
 				$this->Session->setFlash(__('La orden de trabajo a sido guardada.'));
@@ -423,9 +368,7 @@ class OrdentrabajosController extends AppController {
 										      'User',
 										      
 										      'Cliente',
-										      'Tipocliente',
 										      'Observacione'=>['User'],
-										      //'Producto',										      	
 										      'Detalleordentrabajo'=>array(
 										      	'Producto'=>array('fields'=>array('nombre'))
 										      	),
@@ -433,7 +376,7 @@ class OrdentrabajosController extends AppController {
 										      	),
 										      'Manoobraxordentrabajo' =>array(
 										      	'Manodeobra'=>array('fields'=>array('nombre'))
-										      	)										      	
+										      	)			
 										    ),
 										   'conditions' => array(
 											                'Ordentrabajo.id' => $id, // <-- Notice this addition
@@ -454,11 +397,10 @@ class OrdentrabajosController extends AppController {
 		
 		//$cliCond = array('conditions' => array('Cliente.id' => $this->request->data['Ordentrabajo']['cliente_id'] ));
 		$clientes = $this->Ordentrabajo->Cliente->find('list');//,$cliCond);		
-		$tipoclientes = $this->Ordentrabajo->Tipocliente->find('list');		
 		$tablaclientes = $this->Ordentrabajo->Cliente->find('all',['fields'=>['id','nombre'],'contain'=>[]]);
 		$optionProductos=array('order' => 'Producto.nombre', );
 		$productos = $this->Producto->find('list',$optionProductos);
-		$this->set(compact('users', 'clientes','tipoclientes','tablaclientes','productos','userPreparas'));
+		$this->set(compact('users', 'clientes','tablaclientes','productos','userPreparas'));
 	}
 
 /**

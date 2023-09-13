@@ -6,7 +6,6 @@ App::uses('AppModel', 'Model');
  * @property Usuario $Usuario
  * @property UsuarioRepara $UsuarioRepara
  * @property Cliente $Cliente
- * @property Tipocliente $Tipocliente
  * @property Producto $Producto
  * @property Venta $Venta
  * @property Falla $Falla
