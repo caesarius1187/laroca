@@ -56,8 +56,8 @@ $cakeDescription = __d('cake_dev', 'In Memorian');
 		</script>
 		<div id="header">
 			<!--<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>-->
-			<?php echo $this->Html->image('larokalogo.jpg', array('alt' => 'Azul Refrigeracion', 'height' => '60')); ?>
-			<!--<div style="height:60px; width:200px"><h1>INMEMORIAN</h1></div>-->
+			<?php echo $this->Html->image('larokalogo.jpg', array('alt' => 'LA ROCA', 'height' => '60')); ?>
+			<!--<div style="height:60px; width:200px"><h1>LA ROCA</h1></div>-->
 
 			<?php if ($this->Session->read('Auth.User.username')) { ?>
 

@@ -37,7 +37,7 @@
 <table class="tbl_ot" cellspacing="0" id="">
 	<tr  class="all">
 		<td colspan="3" rowspan="8" style="text-align:center">
-			<?php echo $this->Html->image('inmemorianlogo.png',array('alt'=>'logo inmemorian','style'=>'')); ?> 
+			<?php echo $this->Html->image('larokalogo.png',array('alt'=>'logo La Roca','style'=>'')); ?> 
 		</td> 	
 	</tr>
 	<tr  class="all">
