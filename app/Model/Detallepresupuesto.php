@@ -24,6 +24,13 @@ class Detallepresupuesto extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
+		'Material' => array(
+			'className' => 'Producto',
+			'foreignKey' => 'material_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'Presupuesto' => array(
 			'className' => 'Presupuesto',
 			'foreignKey' => 'presupuesto_id',

@@ -148,18 +148,27 @@ class ProductosController extends AppController {
 	}
 	public function getdetalle() {
 		$producto_id = 0;
-		if(isset($this->request->data['Ordentrabajo']))
-			$producto_id = $this->request->data['Ordentrabajo']['producto_id'];		
+		if(isset($this->request->data['Ordentrabajo'])){
+			if(isset($this->request->data['Ordentrabajo']['producto_id']))
+				$producto_id = $this->request->data['Ordentrabajo']['producto_id'];		
+			if(isset($this->request->data['Ordentrabajo']['material_id']))
+				$producto_id = $this->request->data['Ordentrabajo']['material_id'];	
 			$productos = $this->Producto->find('first', array(
-			'conditions' => array('Producto.id' => $producto_id),
-			'recursive' => -1
-		));
-		if(isset($this->request->data['Presupuesto']))
-			$producto_id = $this->request->data['Presupuesto']['producto_id'];		
+				'conditions' => array('Producto.id' => $producto_id),
+				'recursive' => -1
+			));
+		}
+		
+		if(isset($this->request->data['Presupuesto'])){
+			if(isset($this->request->data['Presupuesto']['producto_id']))
+				$producto_id = $this->request->data['Presupuesto']['producto_id'];		
+			if(isset($this->request->data['Presupuesto']['material_id']))
+				$producto_id = $this->request->data['Presupuesto']['material_id'];			
 			$productos = $this->Producto->find('first', array(
-			'conditions' => array('Producto.id' => $producto_id),
-			'recursive' => -1
-		)); 
+				'conditions' => array('Producto.id' => $producto_id),
+				'recursive' => -1
+			)); 
+		}
 		$this->set('productos',$productos);
 		$this->layout = 'ajax';
 	}

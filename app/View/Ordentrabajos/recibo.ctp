@@ -30,7 +30,7 @@
 	}
 </script>
 
-<?php echo $this->Form->input('tipoorden',array('type'=>'hidden','value'=>$ordentrabajo['Ordentrabajo']['tipoorden'])); 
+<?php 
 	$esOperario = $usuarioTipo == 'operario';
 ?>
 <div class="ordentrabajos" id="otrabajoid" style="width:100%;">
@@ -42,49 +42,40 @@
 	</tr>
 	<tr  class="all">
 		<td colspan="3" style="text-align:center">
-			<h3>E-mail: inmemorian-salta@live.com.ar</h3>
+			<h3>E-mail: larocamarmoleria@gmail.com</h3>
 		</td> 
 	</tr>
 	<tr  class="all">
 		<td colspan="3" style="text-align:center">
-			<h3>Direcci&oacute;n: Alvarado 1129</h3>
+			<h3>Local Comercial: San Juan 1158</h3>
 		</td> 
 	</tr>
 	<tr  class="all">
 		<td colspan="3" style="text-align:center">
-			<h3>Tel&eacute;fono: 2437408 (FIJO)</h3>
+			<h3>Fabrica: Av. Delgadillo 2265 - Parque Industrial</h3>
 		</td> 			
 	</tr>
 	<tr  class="all">
 		<td colspan="3" style="text-align:center">
-			<h3>Whatsapp: 3875459412 </h3>
+			<h3>Tel&eacute;fono: (0387) 155333077</h3>
 		</td> 			
 	</tr>
 	<tr  class="all">
 		<td colspan="3" style="text-align:center">
-			<h3>Facebook: In Memoriam </h3>
+			<h3>Facebook: La Roca Marmoleria </h3>
 		</td> 			
 	</tr>
 	<tr  class="all">
 		<td colspan="3" style="text-align:center">
-			<h3>Instagram: @inmemoriam.salta </h3>
+			<h3>Instagram: @ilarocamarmoleriasalta </h3>
 		</td> 			
 	</tr>
-	<tr  class="all">
-		<td colspan="3" style="text-align:center">
-			<h3>Web: https://inmemoriam.com.ar/ </h3>
-		</td> 			
-	</tr>
-	
 	<tr class="all">
 		<td colspan="1"  class="print_td_title_1">
 			Cliente
 		</td>
 		<td>
 				<?php
-	            if($ordentrabajo['Cliente']['nombre']!='PARTICULAR') {
-	                echo $ordentrabajo['Cliente']['nombre'] ;
-	            }
 				echo " " . $ordentrabajo['Ordentrabajo']['solicnombre'];?>
 		</td>
 		<td colspan="6" >
@@ -108,15 +99,15 @@
 			<?php echo $ordentrabajo['Ordentrabajo']['numerodeorden']; ?>
 		</td>
 		<td colspan="3" >
-			Cementerio: <?php echo $ordentrabajo['Ordentrabajo']['cementerio']; ?>
-		</td>
-		<td colspan="3" >
 			Fecha <?php echo date('d-m-Y'); ?>
 		</td>
 	</tr>
 	<tr class="all">
 		<td>Concepto</td>
-		<td>Cantidad</td>
+		<td>Material</td>
+		<td>Ancho</td>
+		<td>Largo</td>
+		<td>Cant M2/ML</td>
 		<td>Precio Unit</td>
 		<td>Total</td>
 	</tr>
@@ -125,6 +116,15 @@
 		<tr>
 			<td>
 				<?php echo $detalleordentrabajo['Producto']['nombre'] ?>
+			</td>
+			<td>
+				<?php echo $detalleordentrabajo['Material']['nombre'] ?>
+			</td>
+			<td>
+				<?php echo $detalleordentrabajo['ancho'] ?>
+			</td>
+			<td>
+				<?php echo $detalleordentrabajo['largo'] ?>
 			</td>
 			<td>
 				<?php echo $detalleordentrabajo['cantidad'] ?>

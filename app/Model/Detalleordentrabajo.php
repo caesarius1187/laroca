@@ -24,6 +24,13 @@ class Detalleordentrabajo extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
+		'Material' => array(
+			'className' => 'Producto',
+			'foreignKey' => 'material_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'Ordentrabajo' => array(
 			'className' => 'Ordentrabajo',
 			'foreignKey' => 'ordentrabajo_id',

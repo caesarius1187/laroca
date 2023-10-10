@@ -3,7 +3,8 @@ $(document).ready(function(){
         actualizarTotal();
     });
     actualizarTotal();
-     $('#PresupuestoProductoId').trigger('change');
+    $('#PresupuestoProductoId').trigger('change');
+    getDetallesProducto(1);
 });
 //Obtiene los detalles del producto seleccionado para vender en la orden de trabajo
 function getDetallesProducto(){
@@ -19,6 +20,29 @@ function getDetallesProducto(){
 				$('#tdDetalleProducto').html(data);		
  				$("#OrdentrabajoCantidaddetalle").parent().hide();
 
+				}, 
+			error: function(xhr,textStatus,error){ 
+				alert(textStatus); 
+			} 
+		});	
+		return false; 
+}	
+function getDetallesProducto(producto){
+	//var formData = $('#OrdentrabajoProductodetalleId').serialize(); 
+	if(producto==1){
+		formData = $('#PresupuestoProductoId').serialize(); 	
+	}else{
+		formData = $('#PresupuestoMaterialId').serialize(); 	
+
+	}
+	//alert(formData);
+	$.ajax({ 
+			type: 'POST', 
+			url: serverLayoutURL+'/productos/getdetalle', 
+			data: formData, 
+			success: function(data,textStatus,xhr){ 
+				$('#tdDetalleProducto').empty();
+				$('#tdDetalleProducto').html(data);				
 				}, 
 			error: function(xhr,textStatus,error){ 
 				alert(textStatus); 
@@ -49,10 +73,17 @@ function agregarproducto(){
 	newDetalle +='		<input name="data[Detallepresupuesto]['+numDetalle+'][producto_id]" readonly="readonly" id="Detallepresupuesto'+numDetalle+'ProductoId" type="hidden" value="'+idProducto+'">';
 	newDetalle +='	</div>';
 	newDetalle +='</td> ';
-	
+	newDetalle +=' <td>';
+	newDetalle +='	<div class="input text">';
+	var nombreMaterial = $('#PresupuestoMaterialId option[value=' + $('#PresupuestoMaterialId').val() + ']').html();
+	newDetalle +='		<input readonly="readonly" value="'+nombreMaterial+'" >';
+	var idMaterial = $('#PresupuestoMaterialId').val();
+	newDetalle +='		<input name="data[Detallepresupuesto]['+numDetalle+'][material_id]" readonly="readonly" id="Detallepresupuesto'+numDetalle+'MaterialId" type="hidden" value="'+idMaterial+'">';
+	newDetalle +='	</div>';
+	newDetalle +='</td> ';
 	newDetalle +='<td>';
 	newDetalle +='	<div class="input number">';
-	var precioProducto = $('#OrdentrabajoPreciodetalle').val();
+	var precioProducto = $('#PresupuestoPreciodetalle').val();
 	newDetalle +='		<input name="data[Detallepresupuesto]['+numDetalle+'][ancho]" onchange="actualizarDetalle('+numDetalle+');" step="any" id="Detallepresupuesto'+numDetalle+'Ancho" type="number" value="" class="changeTotal">';
 	newDetalle +='	</div>';
 	newDetalle +='</td> ';

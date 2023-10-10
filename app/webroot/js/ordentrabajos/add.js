@@ -1,7 +1,7 @@
 $(document).ready(function(){
     //var iTamPantalla = calcularTamPantalla();		
     //getDetallesManoDeObra();
-    getDetallesProducto();
+    getDetallesProducto(1);
 
     $('#OrdentrabajoCosto').val('');
 
@@ -45,6 +45,7 @@ function calcularSaldo(){
 
 }
 
+/*
 //Obtiene los modelos de la marca seleccionada para la seleccion del producto a reparar
 function getModelos(){
 	var formData = $('#OrdentrabajoMarcaId').serialize(); 
@@ -121,6 +122,7 @@ function getModelosDetalle(){
 		});	
 		return false; 
 	}
+	
 //obtiene los productos del modelo seleccionado para agregar productos a vender en la orden de trabajo
 function getProductosDetalle(){
 	var formData = $('#OrdentrabajoModelodetalleId').serialize(); 
@@ -140,6 +142,7 @@ function getProductosDetalle(){
 		});	
 		return false; 
 }	
+*/
 //Agrega un pagos para la orden de trabajo
 function agregarpago(){
 		 
@@ -231,6 +234,14 @@ function agregarproducto(){
 	newDetalle +='		<input readonly="readonly" value="'+nombreProducto+'" >';
 	var idProducto = $('#OrdentrabajoProductoId').val();
 	newDetalle +='		<input name="data[Detalleordentrabajo]['+numDetalle+'][producto_id]" readonly="readonly" id="Detalleordentrabajo'+numDetalle+'ProductoId" type="hidden" value="'+idProducto+'">';
+	newDetalle +='	</div>';
+	newDetalle +='</td> ';
+	newDetalle +=' <td>';
+	newDetalle +='	<div class="input text">';
+	var nombreMaterial = $('#OrdentrabajoMaterialId option[value=' + $('#OrdentrabajoMaterialId').val() + ']').html();
+	newDetalle +='		<input readonly="readonly" value="'+nombreMaterial+'" >';
+	var idMaterial = $('#OrdentrabajoMaterialId').val();
+	newDetalle +='		<input name="data[Detalleordentrabajo]['+numDetalle+'][material_id]" readonly="readonly" id="Detalleordentrabajo'+numDetalle+'MaterialId" type="hidden" value="'+idMaterial+'">';
 	newDetalle +='	</div>';
 	newDetalle +='</td> ';
 	newDetalle +='<td>';
@@ -351,10 +362,7 @@ function eliminarDetalleGuardado(numDetalle){
     });
     return false;
 }
-function eliminarDetalleManoDeObra(numDetalle){
-	$('#RowDetalleManoDeObra'+numDetalle).remove() ;
-	actualizarTotal();
-}
+
 //Checkea el stock del producto que se quiere vender en la orden de trabajo
 function checkstock(){
 	//no vamos a checkiar el stock
@@ -426,9 +434,14 @@ function actualizarTotal(){
     calcularSaldo();
 }
 //Obtiene los detalles del producto seleccionado para vender en la orden de trabajo
-function getDetallesProducto(){
+function getDetallesProducto(producto){
 	//var formData = $('#OrdentrabajoProductodetalleId').serialize(); 
-	formData = $('#OrdentrabajoProductoId').serialize(); 	
+	if(producto==1){
+		formData = $('#OrdentrabajoProductoId').serialize(); 	
+	}else{
+		formData = $('#OrdentrabajoMaterialId').serialize(); 	
+
+	}
 	//alert(formData);
 	$.ajax({ 
 			type: 'POST', 
@@ -445,6 +458,8 @@ function getDetallesProducto(){
 		return false; 
 }	
 //Obtiene los detalles de la mano de obra seleccionada para agregar a la orden de trabajo
+/*
+ya no se usa mano de obra
 function getDetallesManoDeObra(){
 	var formData = $('#OrdentrabajoManodeobraId').serialize(); 
 	$.ajax({ 
@@ -497,6 +512,10 @@ function agregarmanodeobra(){
 	$('#tableDMOXOT').append(newDetalle);
 	actualizarTotal();
 }
+function eliminarDetalleManoDeObra(numDetalle){
+	$('#RowDetalleManoDeObra'+numDetalle).remove() ;
+	actualizarTotal();
+}*/
 function cargarCliente()
 {
 	location.href = "#lnkListaClientes";

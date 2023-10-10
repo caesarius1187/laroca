@@ -1,6 +1,9 @@
 <?php echo $this->Html->script('presupuestos/view',array('inline'=>false));
 ?>
 <style type="text/css">
+	.tdTabla {
+		height: 20px;
+	}
 	.print_td_border{
 		border-bottom: 1px black dotted;
 	}
@@ -29,119 +32,126 @@
 
 	}
 </script>
-<div class="presupuestos" id="otrabajoid" style="width:100%;">
-	<table class="tbl_ot" cellspacing="0" id="tblAddOrdenTrabajo">
+<div class="presupuestos" id="otrabajoid" style="width:185mm;height:210mm;overflow:hidden;overflow-y:hidden;">
+	<table class="tbl_ot" cellspacing="0" id="tblAddOrdenTrabajo" style="height: inherit;">
 		<tr  class="all">
-			<td colspan="3" rowspan="7" style="text-align:center; border: 1px solid">
+			<td colspan="4" rowspan="7" style="text-align:center; border: 1px solid">
 				<?php echo $this->Html->image('larokalogo.jpg',array('alt'=>'logo la roca','style'=>'width: 100px;')); ?> 
 			</td> 	
 		</tr>
-		<tr  class="all">
-			<td colspan="3" style="text-align:center; border-top: 1px solid; border-right: 1px solid">
+		<tr  class="all" >
+			<td class="tdTabla" colspan="3" style="text-align:center; border-top: 1px solid; border-right: 1px solid">
 				E-mail: larocamarmoleria@gmail.com
 			</td> 
 		</tr>
 		<tr  class="all">
-			<td colspan="3" style="text-align:center; border-right: 1px solid">
+			<td class="tdTabla" colspan="3" style="text-align:center; border-right: 1px solid">
 				Direcci&oacute;n: San Juan 1158
 			</td> 
 		</tr>
 		<tr  class="all">
-			<td colspan="3" style="text-align:center; border-right: 1px solid">
+			<td class="tdTabla" colspan="3" style="text-align:center; border-right: 1px solid">
 				Fabrica: Av. Delgadillo 2265 - Parque Industrial
 			</td> 
 		</tr>
 		<tr  class="all">
-			<td colspan="3" style="text-align:center; border-right: 1px solid">
+			<td class="tdTabla" colspan="3" style="text-align:center; border-right: 1px solid">
 				Tel&eacute;fono: (387)155333077
 			</td> 			
 		</tr>
 		<tr  class="all">
-			<td colspan="3" style="text-align:center; border-bottom: 1px solid; border-right: 1px solid">
+			<td class="tdTabla" colspan="3" style="text-align:center; border-bottom: 1px solid; border-right: 1px solid">
 				Conoce nuestros trabajos
 			</td> 			
 		</tr>
 		<tr  class="all">
-			<td colspan="3" style="text-align:center; border-bottom: 1px solid; border-right: 1px solid">
+			<td class="tdTabla" colspan="3" style="text-align:center; border-bottom: 1px solid; border-right: 1px solid">
 				<?php echo $this->Html->image('instagram.png',array('alt'=>'logo la roca','style'=>'width: 20px;')); ?> larocamarmoleriasalta 
 				<?php echo $this->Html->image('facebook.png',array('alt'=>'logo la roca','style'=>'width: 20px;')); ?> 
 				La Roca Marmoleria
 			</td> 			
 		</tr>
 		<tr  class="all">
-			<td colspan="6" style="text-align:center; border: 1px solid; color: white;background-color: black;">
+			<td class="tdTabla" colspan="7" style="text-align:center; border: 1px solid; color: white;background-color: black;">
 				<?php echo __('Presupuesto'); ?>
 			</td> 			
 		</tr>	
 		<tr class="all">
-			<td colspan="1" class="print_td_title_1" style="border: 1px solid" >
+			<td colspan="1" class="tdTabla print_td_title_1" style="border: 1px solid" >
 				<b><?php echo __('Cliente:'); ?></b>
 			</td>
-			<td colspan="3" style="border: 1px solid;" text-align="left">	
+			<td colspan="4" style="border: 1px solid;" text-align="left">	
 				<?php
-				echo $presupuesto['Presupuesto']['nombre'];?>asd
+				echo $presupuesto['Presupuesto']['nombre'];?>
 			</td>
-			<td colspan="1" class="print_td_title_1" style="border: 1px solid" >
+			<td colspan="1" class="tdTabla print_td_title_1" style="border: 1px solid" >
 				<b><?php echo __('Numero:'); ?></b>
 			</td>
-			<td colspan="1" style="border: 1px solid;">
+			<td colspan="1" class="tdTabla" style="border: 1px solid;">
 				<?php echo $presupuesto['Presupuesto']['id']; ?>
 			</td>
 		</tr>
 		<tr class="all">
-			<td colspan="1" class="print_td_title_1" style="border: 1px solid" >
+			<td colspan="1" class="tdTabla print_td_title_1" style="border: 1px solid" >
 				<b><?php echo __('Direccion:'); ?></b>
 			</td>
-			<td colspan="3" style="border: 1px solid;" text-align="left">	
+			<td class="tdTabla" colspan="4" style="border: 1px solid;" text-align="left">	
 				<?php
-				echo $presupuesto['Presupuesto']['direccion'];?>asd
+				echo $presupuesto['Presupuesto']['direccion'];?>
 			</td>
-			<td colspan="1" class="print_td_title_1" style="border: 1px solid" >
+			<td colspan="1" class="tdTabla print_td_title_1" style="border: 1px solid" >
 				<b><?php echo __('Fecha:'); ?></b>
 			</td>
-			<td colspan="1" style="border: 1px solid;">
+			<td class="tdTabla" colspan="1" style="border: 1px solid;">
 				<?php echo $today = date_format(date_create($presupuesto['Presupuesto']['created']),"d-m-Y");  ?>
 			</td>
 		</tr>
 		<tr class="all">
-			<td style="border: 1px solid;" colspan=""><b>CONCEPTOS</b></td>
-			<td style="border: 1px solid;"><b>ANCHO</b></td>
-			<td style="border: 1px solid;"><b>LARGO</b></td>
-			<td style="border: 1px solid;"><b>CANT.M2/ML</b></td>
-			<td style="border: 1px solid;"><b>PRECIO UNIT.</b></td>
-			<td style="border: 1px solid;"><b>TOTAL</b></td>
+			<td class="tdTabla" style="border: 1px solid;" colspan=""><b>CONCEPTOS</b></td>
+			<td class="tdTabla" style="border: 1px solid;" colspan=""><b>MATERIAL</b></td>
+			<td class="tdTabla" style="border: 1px solid;"><b>ANCHO</b></td>
+			<td class="tdTabla" style="border: 1px solid;"><b>LARGO</b></td>
+			<td class="tdTabla" style="border: 1px solid;"><b>CANT.M2/ML</b></td>
+			<td class="tdTabla" style="border: 1px solid;"><b>PRECIO UNIT.</b></td>
+			<td class="tdTabla" style="border: 1px solid;"><b>TOTAL</b></td>
 		</tr>
 			<?php
 				foreach ($presupuesto['Detallepresupuesto'] as $detallepresupuesto) {
 					?>
 					<tr>
-						<td colspan="" class="all" style="border: 1px solid;">
+						<td colspan="" class="tdTabla" style="border: 1px solid;">
 							<?= $detallepresupuesto['Producto']['nombre'] ?>
 						</td>
-						<td colspan="" class="all" style="border: 1px solid;">
+						<td colspan="" class="tdTabla" style="border: 1px solid;">
+							<?= $detallepresupuesto['Material']['nombre'] ?>
+						</td>
+						<td colspan="" class="tdTabla" style="border: 1px solid;">
 							<?= $detallepresupuesto['ancho'] ?>
 						</td>
-						<td colspan="" class="all" style="border: 1px solid;">
+						<td colspan="" class="tdTabla" style="border: 1px solid;">
 							<?= $detallepresupuesto['largo'] ?>
 						</td>
-						<td colspan="" class="print_td_title_1" style="border: 1px solid;">
+						<td colspan="" class="tdTabla print_td_title_1" style="border: 1px solid;">
 							<?= $detallepresupuesto['cantidad'] ?>
 						</td>
-						<td colspan="" class="print_td_title_1" style="border: 1px solid;">
+						<td colspan="" class="tdTabla print_td_title_1" style="border: 1px solid;">
 							$<?= $detallepresupuesto['precio']?>
 						</td>
-						<td colspan="" class="print_td_title_1" style="border: 1px solid;">
+						<td colspan="" class="tdTabla print_td_title_1" style="border: 1px solid;">
 							$<?= $detallepresupuesto['precio']*$detallepresupuesto['cantidad'] ?>
 						</td>
 					</tr>
 				<?php
 				}
 				?>
-			
 		<tr class="all">
-			<td colspan="4" style="border: 1px solid;" ></td>
-			<td colspan="1" style="border: 1px solid;" ><b>TOTAL:</b></td>
-			<td colspan="1" class="print_td_title_1" style="border: 1px solid;">
+			<td colspan="7" style="border: 1px solid; min-height: 400px; height: fit-content;" ></td>
+			</td>
+		</tr>	
+		<tr class="all">
+			<td class="tdTabla" colspan="5" style="border: 1px solid;" ></td>
+			<td class="tdTabla" colspan="1" style="border: 1px solid;" ><b>TOTAL:</b></td>
+			<td class="tdTabla" colspan="1" class="tdTabla print_td_title_1" style="border: 1px solid;">
 				<?php
 					echo "$".$presupuesto['Presupuesto']['total'];
 				?>

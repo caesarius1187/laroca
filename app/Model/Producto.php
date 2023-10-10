@@ -64,6 +64,19 @@ class Producto extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
+		'Detalleordentrabajo' => array(
+			'className' => 'Detalleordentrabajo',
+			'foreignKey' => 'material_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'Detalleventa' => array(
 			'className' => 'Detalleventa',
 			'foreignKey' => 'producto_id',

@@ -166,7 +166,8 @@ class OrdentrabajosController extends AppController {
 			'contain'=>[
 				'Observacione'=>[],
 				'Detalleordentrabajo'=>[
-					'Producto'
+					'Producto',
+					'Material',
 				],
 				'Cliente'
 			],
@@ -194,7 +195,8 @@ class OrdentrabajosController extends AppController {
 		$options = array(
 			'contain'=>[
 				'Detalleordentrabajo'=>[
-					'Producto'
+					'Producto',
+					'Material'
 				],
 				'Pago'=>[
 					'order' => ['id' => 'DESC'],
@@ -310,11 +312,19 @@ class OrdentrabajosController extends AppController {
 		$clientes = $this->Ordentrabajo->Cliente->find('list',array('order'=>'Cliente.nombre'));
 		$tablaclientes = $this->Ordentrabajo->Cliente->find('all',['fields'=>['id','nombre'],'contain'=>[]]);		
 		
-		$optionProductos=array('order' => 'Producto.nombre', );
+		$optionProductos=array(
+			'order' => 'Producto.nombre', 
+			'conditions' => ['tipo'=>'Producto'], 
+		);
 		$productos = $this->Producto->find('list',$optionProductos);
+		$optionMateriales=array(
+			'order' => 'Producto.nombre', 
+			'conditions' => ['tipo'=>'Material'], 
+		);
+		$materiales = $this->Producto->find('list',$optionMateriales);
 		
 		$manodeobras = $this->Manodeobra->find('list');
-		$this->set(compact('users', 'userPreparas', 'clientes','productos','manodeobras','tablaclientes'));
+		$this->set(compact('users', 'userPreparas', 'clientes','productos','materiales','manodeobras','tablaclientes'));
 
 		$numerodeorden = $this->Ordentrabajo->find('first' , array ('fields' => array('MAX(Ordentrabajo.numerodeorden+1) as numerodeorden'  )));
 		if(!isset($numerodeorden[0]['numerodeorden'])){
@@ -370,7 +380,8 @@ class OrdentrabajosController extends AppController {
 										      'Cliente',
 										      'Observacione'=>['User'],
 										      'Detalleordentrabajo'=>array(
-										      	'Producto'=>array('fields'=>array('nombre'))
+										      	'Producto'=>array('fields'=>array('nombre')),
+										      	'Material'=>array('fields'=>array('nombre'))
 										      	),
 										      'Pago'=>array(
 										      	),
@@ -400,7 +411,13 @@ class OrdentrabajosController extends AppController {
 		$tablaclientes = $this->Ordentrabajo->Cliente->find('all',['fields'=>['id','nombre'],'contain'=>[]]);
 		$optionProductos=array('order' => 'Producto.nombre', );
 		$productos = $this->Producto->find('list',$optionProductos);
-		$this->set(compact('users', 'clientes','tablaclientes','productos','userPreparas'));
+		$optionMateriales=array(
+			'order' => 'Producto.nombre', 
+			'conditions' => ['tipo'=>'Material'], 
+		);
+		$materiales = $this->Producto->find('list',$optionMateriales);
+		
+		$this->set(compact('users', 'clientes','tablaclientes','productos','materiales','userPreparas'));
 	}
 
 /**

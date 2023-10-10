@@ -28,11 +28,15 @@
 		</tr>
 		<tr class="all">
 			<td class="td_3">				
-				<!--<?php echo $this->Form->input('productodetalle_id',array('label'=>'Producto','onChange'=>'getDetallesProducto()', 'style' => 'max-width:240px')); ?>-->
+				<!--<?php echo $this->Form->input('productodetalle_id',array('label'=>'Producto','onChange'=>'getDetallesProducto(1)', 'style' => 'max-width:240px')); ?>-->
 
-				
-				<?php echo $this->Form->input('producto_id',array('label'=>'Producto','style' => 'max-width:240px', 'onChange'=>'getDetallesProducto()')); ?>
-				
+				<?php echo $this->Form->input('producto_id',array('label'=>'Producto','style' => 'max-width:240px', 'onChange'=>'getDetallesProducto(1)')); ?>
+				<?php echo $this->Form->input('material_id',array(
+					'label'=>'Material',
+					'style' => 'max-width:240px', 
+					'onChange'=>'getDetallesProducto(2)',
+					'options'=>$materiales
+				)); ?>
 				
 				<input type="button" value="Agregar Producto" id="btnAgregarProducto" onClick="agregarproducto()" class="btn_ot"/>
 			</td>
@@ -47,6 +51,7 @@
 				<table id="tableDOT" cellpadding="0" cellspacing="0" class="tbl_add" style="margin-top:20px;">
 					<thead>
 						<th>CONCEPTO</th>
+						<th>MATERIAL</th>
 						<th>ANCHO</th>
 						<th>LARGO</th>
 						<th>CANT. M2/ML</th>
@@ -60,8 +65,10 @@
 						<th></th>
 						<th></th>
 						<th></th>
+						<th></th>
 					</tfoot>-->
 					<tbody>
+						<td></td>
 						<td></td>
 						<td></td>
 						<td></td>

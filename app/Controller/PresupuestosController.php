@@ -51,7 +51,8 @@ class PresupuestosController extends AppController {
 		$options = array(
 			'contain'=>[
 				'Detallepresupuesto'=>[
-					'Producto'
+					'Producto',
+					'Material'
 				],
 			],
 			'conditions' => array(
@@ -82,7 +83,12 @@ class PresupuestosController extends AppController {
 		}
 		$optionProductos=array('order' => 'Producto.nombre', );
 		$productos = $this->Producto->find('list',$optionProductos);
-		$this->set(compact('productos'));
+		$optionMateriales=array(
+			'order' => 'Producto.nombre', 
+			'conditions' => ['tipo'=>'Material'], 
+		);
+		$materiales = $this->Producto->find('list',$optionMateriales);
+		$this->set(compact('productos','materiales'));
 	}
 
 /**

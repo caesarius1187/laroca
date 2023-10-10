@@ -93,21 +93,12 @@
 		</tr>
 		<tr class="all">
 			<td  colspan="1">
-				<?php echo $this->Form->input('material',array('label'=>'Material','type'=>'textarea','rows' => 2)); ?>
-			</td>
-			<td  colspan="1">
-				<?php echo $this->Form->radio('zocalos', [1 => 'Si' ,0 => 'No'], ['legend'=>'Zocalos']); ?>
-			</td>
-			<td  colspan="1">
-				<?php echo $this->Form->input('medidas',array('label'=>'Medidas','type'=>'textarea','rows' => 2)); ?>
-			</td>
-			<td  colspan="1">
 				<?php echo $this->Form->input('griferia',array(
 					'label'=>'Griferia',
 					'options'=>[
-                		'Monocomando '=>'Monocomando',
-                		'2 Perforaciones'=>'2 Perforaciones',
-                		'3 Perforaciones'=>'3 Perforaciones',
+						'Grifería', 
+						'Sin griferia', 
+						'A definir',
                 	])); ?>
 			</td>
         </tr>
@@ -241,55 +232,28 @@
             </td>	
         </tr>
         <tr class="all">
-            <td colspan="2" class="td_1">
+            <td colspan="4" class="td_1">
                 <h2>Productos</h2>
             </td>
-            <td colspan="2" class="td_2">
-                <h2>Pagos</h2>
-            </td>
-            <td colspan="2" class="td_2" style="display:none">
-                <h2>Mano de Obra</h2>
-            </td>
         </tr>
+       
         <tr class="all">
             <td class="td_3">
-                <!--<?php echo $this->Form->input('productodetalle_id',array('label'=>'Producto','onChange'=>'getDetallesProducto()', 'style' => 'max-width:240px')); ?>-->
-                <?php echo $this->Form->input('producto_id',array('label'=>'Producto','style' => 'max-width:240px', 'onChange'=>'getDetallesProducto()')); ?>
+                <!--<?php echo $this->Form->input('productodetalle_id',array('label'=>'Producto','onChange'=>'getDetallesProducto(1)', 'style' => 'max-width:240px')); ?>-->
+                <?php echo $this->Form->input('producto_id',array('label'=>'Producto','style' => 'max-width:240px', 'onChange'=>'getDetallesProducto(1)')); ?>
+                <?php echo $this->Form->input('material_id',array(
+					'label'=>'Material',
+					'style' => 'max-width:240px', 
+					'onChange'=>'getDetallesProducto(2)',
+					'options'=>$materiales
+				)); ?>
                 <input type="button" value="Agregar Producto" id="btnAgregarProducto" onClick="agregarproducto()" class="btn_ot"/>
             </td>
             <td id="tdDetalleProducto" class="td_4">
 
             </td>
 
-            <td class="td_5" colspan="2">
-            	<table>
-            		<tr class="all">
-            			<td>
-			                <?php
-			                echo $this->Form->input('montoPagado',array('label'=>'Monto pagado','type'=>'number'));
-			                ?>
-			            </td>
-			            <td>
-			                <?php
-			                echo $this->Form->input('medioPago',array(
-			                	'label'=>'Medio de pago',
-			                	'options'=>[
-			                		'efectivo'=>'Efectivo',
-			                		'tarjeta'=>'Tarjeta',
-			                		'tarjeta debito'=>'Tarjeta Debito',
-			                		'tarjeta credito'=>'Tarjeta Credito',
-			                		'cheque'=>'Cheque',
-			                		'transferencia'=>'Transferencia'
-			                	],
-			                ));
-			                ?>
-			            </td>
-			            <td>
-                			<input type="button" value="Agregar Pago" id="btnAgregarPago" onClick="agregarpago()" class="btn_ot" />
-                		</td>
-                	</tr>
-                </table>
-            </td>
+            
 
             <td id="tdDetalleManodeobra" class="td_6" style="display:none">
             </td>
@@ -304,12 +268,14 @@
             <td id="tdDetalleManodeobra" class="td_6" style="display:none">
             </td>
         </tr>
+
         <tr class="all">
-			<td colspan="2">
+			<td colspan="4">
 				<table id="tableDOT" cellpadding="0" cellspacing="0" class="tbl_add">
 					<thead>
 						<tr class="all">
 							<th>CONCEPTO</th>
+							<th>MATERIAL</th>
 							<th>ANCHO</th>
 							<th>LARGO</th>
 							<th>CANT. M2/ML</th>
@@ -327,6 +293,10 @@
                                 <td>
                                     <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.id',['value'=>$producto['id'],'type'=>'hidden']) ?>
                                     <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.nombreproducto',['value'=>$producto['Producto']['nombre']]) ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.id',['value'=>$producto['id'],'type'=>'hidden']) ?>
+                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.nombrematerial',['value'=>$producto['Material']['nombre']]) ?>
                                 </td>
                                 <td>
                                     <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.ancho',['value'=>$producto['ancho'],'class'=>'recalculable']) ?>
@@ -356,7 +326,48 @@
 				</table>
                 <?php echo $this->Form->input('numDetalle',array('value'=>$k+1,'type'=>'hidden')); ?>
             </td>
-            <td colspan="2">
+        </tr>
+        <tr class="all">
+            <td colspan="2" class="td_2">
+                <h2>Pagos</h2>
+            </td>
+            <td colspan="2" class="td_2" style="display:none">
+                <h2>Mano de Obra</h2>
+            </td>
+        </tr>
+        <tr class="all">
+        	<td class="td_5" colspan="2">
+            	<table>
+            		<tr class="all">
+            			<td>
+			                <?php
+			                echo $this->Form->input('montoPagado',array('label'=>'Monto pagado','type'=>'number'));
+			                ?>
+			            </td>
+			            <td>
+			                <?php
+			                echo $this->Form->input('medioPago',array(
+			                	'label'=>'Medio de pago',
+			                	'options'=>[
+			                		'efectivo'=>'Efectivo',
+			                		'tarjeta'=>'Tarjeta',
+			                		'tarjeta debito'=>'Tarjeta Debito',
+			                		'tarjeta credito'=>'Tarjeta Credito',
+			                		'cheque'=>'Cheque',
+			                		'transferencia'=>'Transferencia'
+			                	],
+			                ));
+			                ?>
+			            </td>
+			            <td>
+                			<input type="button" value="Agregar Pago" id="btnAgregarPago" onClick="agregarpago()" class="btn_ot" />
+                		</td>
+                	</tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="all">
+            <td colspan="4">
 				<table id="tablePagos" cellpadding="0" cellspacing="0" class="tbl_add">
 					<thead>
 						<tr class="all">

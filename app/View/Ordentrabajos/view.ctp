@@ -30,32 +30,9 @@
 	}
 </script>
 <div style="width:100%; text-align:center" align="center">
-	<h2><?php echo __('IN MEMORIAN'); ?></h2>
+	<h2><?php echo __('La Roca Marmoleria'); ?></h2>
 </div>
-<div id="bottoneraHead" style="width:100%;display:none" >
-	<div id="btnN-CMG" class="buttonTipoOrdenDesactivado buttonheader">
-		N-CMG
-	</div>
-	<div id="btna1b1r1" class="buttonTipoOrdenDesactivado buttonheader">
-		A1-B1-R1
-	</div>
-	<div id="btna2b2r2" class="buttonTipoOrdenDesactivado buttonheader">
-		A2-B2-R2
-	</div>
-	<div id="btna3b3r3" class="buttonTipoOrdenDesactivado buttonheader">
-		A3-B3-R3
-	</div>
-	<div id="btnplacbronce" class="buttonTipoOrdenDesactivado buttonheader">
-		Placa de bronce
-	</div>
-	<div id="btnplacnicho" class="buttonTipoOrdenDesactivado buttonheader">
-		Placa para nicho
-	</div>
-	<div id="btnplacips" class="buttonTipoOrdenDesactivado buttonheader">
-		Placa para IPS
-	</div>
-</div>
-<?php echo $this->Form->input('tipoorden',array('type'=>'hidden','value'=>$ordentrabajo['Ordentrabajo']['tipoorden'])); ?>
+
 <div class="ordentrabajos" id="otrabajoid" style="width:100%;">
 <table class="tbl_ot" cellspacing="0" id="tblAddOrdenTrabajo">
 	<tr  class="all">
@@ -64,12 +41,6 @@
 		</td> 			
 	</tr>	
 	<tr class="all">
-		<td class="print_td_title_1">
-			<?php echo __('Cementerio/Agencia:'); ?>
-		</td>
-		<td colspan="2" style="border-bottom: 1px dotted;">
-			<?php echo $ordentrabajo['Ordentrabajo']['cementerio']; ?>
-		</td>
 		<td class="print_td_title_2">
 			<?php echo __('Pedido Nro:'); ?>
 		</td>
@@ -77,230 +48,12 @@
 			<?php echo $ordentrabajo['Ordentrabajo']['numerodeorden'];?>
 		</td>		
 	</tr>
-<!--	<tr class="all">-->
-<!--		<td class="print_td_title_1">-->
-<!--			--><?php //echo __('Tipo de Trabajo:'); ?>
-<!--		</td>-->
-<!--		<td colspan="5" style="border-bottom: 1px dotted;">-->
-<!--			--><?php //echo $ordentrabajo['Ordentrabajo']['tipotrabajo'];?>
-<!--		</td>		-->
-<!--	</tr>-->
-	<tr class="ncmg placnicho notInReducida">
-		<td class="print_td_title_1">
-		<?php echo __('N� de nicho:'); ?>
-		</td>
-		<td colspan="5" style="border-bottom: 1px dotted;">
-			<?php echo $ordentrabajo['Ordentrabajo']['numnicho'];?>
-		</td>
-	</tr>
-	<tr class="a1b1r1 a2b2r2 a3b3r3 notInReducida">
-		<td class="print_td_title_1">
-			<?php echo __('Nro Sector y Parcela:'); ?>
-		</td>
-		<td colspan="5" style="border-bottom: 1px dotted;">
-			<?php echo $ordentrabajo['Ordentrabajo']['numsectorparcela']; ?>
-		</td>
-	</tr>	
-	<tr class="ncmg placnicho notInReducida">
-		<td class="print_td_title_1">
-			<?php echo __('Medida Placa:'); ?>
-		</td>
-		<td colspan="2" style="border-bottom: 1px dotted;"> 
-			<?php echo $ordentrabajo['Ordentrabajo']['medidasplaca']; ?>
-		</td>
-		<td class="print_td_title_1">
-			<?php echo __('Medida Laterales:'); ?>
-		</td>
-		<td colspan="2" style="border-bottom: 1px dotted;"> 
-			<?php echo $ordentrabajo['Ordentrabajo']['medidaslaterales']; ?>
-		</td>
-	</tr>
-	<?php
-	/*GRABADO O DATOS PLACA*/
-	?>
-	<tr class="ncmg placbronce placnicho notInReducida">
-		<td colspan="6" style="text-align:center; padding-top:30px">
-			<h2><?php echo __('Grabado o Datos de placa'); ?></h2>
-		</td> 			
-	</tr>
-	<?php
-	/*3er Nivel*/
-	?>
-	<tr class="a1b1r1 a2b2r2 a3b3r3 notInReducida">
-		<td colspan="6" style="text-align:center; padding-top:30px">
-			<h2><?php echo __($ordentrabajo['Ordentrabajo']['nivel3'].' Nivel'); ?></h2>
-		</td>
-	</tr>	
-	<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placnicho notInReducida">
-		<td class="print_td_title_1 ">
-			<?php echo __('Simbolo Religioso:'); ?>
-		</td>
-		<td colspan="5" style="border-bottom: 1px dotted;">
-			<?php echo $ordentrabajo['Ordentrabajo']['simboloreligioso'];?>
-		</td>
-	</tr>
-
-	<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho notInReducida">
-		<td class="print_td_title_1">
-			<?php echo __('Nombre y Apellido:'); ?>
-		</td>
-		<td colspan="5" style="border-bottom: 1px dotted;"> 
-			<?php echo $ordentrabajo['Ordentrabajo']['nombreyapellido3']; ?>
-			&nbsp;
-		</td>
-	</tr>
-	<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho notInReducidas">
-		<td class="print_td_title_1">
-			<?php echo __('Fecha Nacimiento:'); ?>
-		</td>
-		<td colspan="2" style="border-bottom: 1px dotted;"> 
-			<?php 
-			$isDate = validateDate($ordentrabajo['Ordentrabajo']['fechanacimiento3']);
-			if($isDate){
-				echo date('d-m-Y',strtotime($ordentrabajo['Ordentrabajo']['fechanacimiento3'])); 
-			}else{
-				echo ''; 
-			}?>
-			&nbsp;
-		</td>
-		<td class="print_td_title_2">
-			<?php echo __('Fecha Defuncion:'); ?>
-		</td>
-		<td colspan="2" style="border-bottom: 1px dotted;">
-			<?php 
-			$isDate = validateDate($ordentrabajo['Ordentrabajo']['fechadefuncion3']);
-			if($isDate){
-				echo date('d-m-Y',strtotime($ordentrabajo['Ordentrabajo']['fechadefuncion3'])); 
-			}else{
-				echo ''; 
-			}?>
-			&nbsp;
-		</td>		
-	</tr>	
-	<?php
-	/*2do Nivel*/
-	?>
-	<tr class="a2b2r2 a3b3r3 notInReducida">
-		<td colspan="6" style="text-align:center; padding-top:30px">
-			<h2><?php echo __($ordentrabajo['Ordentrabajo']['nivel2'].' Nivel'); ?></h2>
-		</td>
-	</tr>	 
-	<tr class="a2b2r2 a3b3r3 notInReducida">
-		<td class="print_td_title_1">
-			<?php echo __('Nombre y Apellido:'); ?>
-		</td>
-		<td colspan="5" style="border-bottom: 1px dotted;"> 
-			<?php echo $ordentrabajo['Ordentrabajo']['nombreyapellido2']; ?>
-			&nbsp;
-		</td>
-	</tr>
-	<tr class="a2b2r2 a3b3r3 notInReducida">
-		<td class="print_td_title_1">
-			<?php echo __('Fecha Nacimiento:'); ?>
-		</td>
-		<td colspan="2" style="border-bottom: 1px dotted;"> 
-			<?php 
-			$isDate = validateDate($ordentrabajo['Ordentrabajo']['fechanacimiento2']);
-			if($isDate){
-				echo date('d-m-Y',strtotime($ordentrabajo['Ordentrabajo']['fechanacimiento2'])); 
-			}else{
-				echo ''; 
-			}?>
-			&nbsp;
-		</td>
-		<td class="print_td_title_2">
-			<?php echo __('Fecha Defuncion:'); ?>
-		</td>
-		<td colspan="2" style="border-bottom: 1px dotted;">
-			<?php 
-			$isDate = validateDate($ordentrabajo['Ordentrabajo']['fechadefuncion2']);
-			if($isDate){
-				echo date('d-m-Y',strtotime($ordentrabajo['Ordentrabajo']['fechadefuncion2'])); 
-			}else{
-				echo ''; 
-			}?>
-			&nbsp;
-		</td>		
-	</tr>	
-	<?php
-	/*1er Nivel*/
-	?>
-	<tr class="a3b3r3 notInReducida">
-		<td colspan="6" style="text-align:center; padding-top:30px">
-			<h2><?php echo __($ordentrabajo['Ordentrabajo']['nivel1'].' Nivel'); ?></h2>
-		</td>
-	</tr>	
-	<tr class="a3b3r3 notInReducida">
-		<td class="print_td_title_1">
-			<?php echo __('Nombre y Apellido:'); ?>
-		</td>
-		<td colspan="5" style="border-bottom: 1px dotted;"> 
-			<?php echo $ordentrabajo['Ordentrabajo']['nombreyapellido1']; ?>
-			&nbsp;
-		</td>
-	</tr>
-	<tr class="a3b3r3 notInReducida">
-		<td class="print_td_title_1">
-			<?php echo __('Fecha Nacimiento:'); ?>
-		</td>
-		<td colspan="2" style="border-bottom: 1px dotted;"> 
-			<?php 
-			$isDate = validateDate($ordentrabajo['Ordentrabajo']['fechanacimiento1']);
-			if($isDate){
-				echo date('d-m-Y',strtotime($ordentrabajo['Ordentrabajo']['fechanacimiento1'])); 
-			}else{
-				echo ''; 
-			}?>
-			&nbsp;
-		</td>
-		<td class="print_td_title_2">
-			<?php echo __('Fecha Defuncion:'); ?>
-		</td>
-		<td colspan="2" style="border-bottom: 1px dotted;">
-			<?php 
-			$isDate = validateDate($ordentrabajo['Ordentrabajo']['fechadefuncion1']);
-			if($isDate){
-				echo date('d-m-Y',strtotime($ordentrabajo['Ordentrabajo']['fechadefuncion1'])); 
-			}else{
-				echo ''; 
-			}?>
-			&nbsp;
-		</td>		
-	</tr>	
-	<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho notInReducida">
-		<td class="print_td_title_1">
-			<?php echo __('Dedicatoria:'); ?>
-		</td>
-		<td colspan="5" style="border-bottom: 1px dotted;">
-			<?php echo $ordentrabajo['Ordentrabajo']['dedicatoria']; ?>
-		</td>		
-	</tr>	
-	<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho notInReducida">
-		<td class="print_td_title_1">
-			<?php echo __('Material:'); ?>
-		</td>
-		<td colspan="1" style="border-bottom: 1px dotted;">
-			<?php echo $ordentrabajo['Ordentrabajo']['material']; ?>
-		</td>		
-		<td class="print_td_title_1">
-			<?php echo __('Medidas:'); ?>
-		</td>
-		<td colspan="1" style="border-bottom: 1px dotted;">
-			<?php echo $ordentrabajo['Ordentrabajo']['medidas']; ?>
-		</td>		
-		<td class="print_td_title_1">
-			<?php echo __('Tipo y Color de letra:'); ?>
-		</td>
-		<td colspan="1" style="border-bottom: 1px dotted;">
-			<?php echo $ordentrabajo['Ordentrabajo']['tipoycolorletra']; ?>
-		</td>		
-	</tr>	
+	
 	<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho notInReducida">
 		<td class="print_td_title_1">
 			<?php echo __('Observaciones:'); ?>
 		</td>
 		<td colspan="5" style="border-bottom: 1px dotted;">
-			<?php echo $ordentrabajo['Ordentrabajo']['observaciones']; ?>
 			<?php 
 			foreach ($ordentrabajo['Observacione'] as $k => $observacion) {
 				echo $observacion['descripcion']."/ ";
@@ -389,7 +142,7 @@
 		<td colspan="80" class="all" style="border-bottom: 1px dotted;">
 			<?php
 			foreach ($ordentrabajo['Detalleordentrabajo'] as $detalleordentrabajo) {
-				echo $detalleordentrabajo['Producto']['nombre']."-".$detalleordentrabajo['cantidad'];
+				echo $detalleordentrabajo['Producto']['nombre']."-".$detalleordentrabajo['Material']['nombre']."-".$detalleordentrabajo['cantidad'];
 				if(!$esOperario) {
 					echo "-$".$detalleordentrabajo['precio']." / ";
 				}else{
