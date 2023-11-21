@@ -34,6 +34,7 @@
 		?>
 		<tr class="all">
 			<td >
+				<?php echo $this->Form->input('id'); ?>
 				<?php echo $this->Form->input('numerodeorden',array('label'=>'Pedido N�', 'style'=>'width:70%')); ?>
 			</td>
 			<td >
@@ -299,10 +300,10 @@
                                     <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.nombrematerial',['value'=>$producto['Material']['nombre']]) ?>
                                 </td>
                                 <td>
-                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.ancho',['value'=>$producto['ancho'],'class'=>'recalculable']) ?>
+                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.ancho',['value'=>$producto['ancho'],'class'=>'recalculable','onchange'=>'actualizarDetalle('.$k.')']) ?>
                                 </td>
                                 <td>
-                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.largo',['value'=>$producto['largo'],'class'=>'recalculable']) ?>
+                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.largo',['value'=>$producto['largo'],'class'=>'recalculable','onchange'=>'actualizarDetalle('.$k.')']) ?>
                                 </td>
                                 <td>
                                     <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.cantidad',['value'=>$producto['cantidad'],'class'=>'recalculable']) ?>
@@ -341,7 +342,7 @@
             		<tr class="all">
             			<td>
 			                <?php
-			                echo $this->Form->input('montoPagado',array('label'=>'Monto pagado','type'=>'number'));
+			                echo $this->Form->input('montoPagado',array('label'=>'Monto pagado'));
 			                ?>
 			            </td>
 			            <td>

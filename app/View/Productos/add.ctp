@@ -27,7 +27,7 @@
 	                         );?>
 						</td>		
 						<td>
-							<?php $DdlOpcioneTipo = array('Producto' => 'Producto', 'Articulo'=> 'Articulo');?>
+							<?php $DdlOpcioneTipo = array('Producto' => 'Producto', 'Material'=> 'Material');?>
 							<?php echo $this->Form->input('tipo', array('type' => 'select', 'options' => $DdlOpcioneTipo, 'style' => 'width:200px', 'onchange' => 'selectProducto(this)', 'default' => 'Producto')); ?>
 						</td>	
 					</tr>

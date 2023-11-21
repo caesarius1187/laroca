@@ -247,30 +247,30 @@ function agregarproducto(){
 	newDetalle +='<td>';
 	newDetalle +='	<div class="input number">';
 	var precioProducto = $('#OrdentrabajoPreciodetalle').val();
-	newDetalle +='		<input name="data[Detalleordentrabajo]['+numDetalle+'][ancho]" onchange="actualizarDetalle('+numDetalle+');" step="any" id="Detalleordentrabajo'+numDetalle+'Ancho" type="number" value="" class="changeTotal">';
+	newDetalle +='		<input name="data[Detalleordentrabajo]['+numDetalle+'][ancho]" onchange="actualizarDetalle('+numDetalle+');" step="any" id="Detalleordentrabajo'+numDetalle+'Ancho"  value="" class="changeTotal">';
 	newDetalle +='	</div>';
 	newDetalle +='</td> ';
 	newDetalle +='<td>';
 	newDetalle +='	<div class="input number">';
 	var precioProducto = $('#OrdentrabajoPreciodetalle').val();
-	newDetalle +='		<input name="data[Detalleordentrabajo]['+numDetalle+'][largo]" onchange="actualizarDetalle('+numDetalle+');" step="any" id="Detalleordentrabajo'+numDetalle+'Largo" type="number" value="" class="changeTotal">';
+	newDetalle +='		<input name="data[Detalleordentrabajo]['+numDetalle+'][largo]" onchange="actualizarDetalle('+numDetalle+');" step="any" id="Detalleordentrabajo'+numDetalle+'Largo"  value="" class="changeTotal">';
 	newDetalle +='	</div>';
 	newDetalle +='</td> ';
 	newDetalle +='<td>';
-	newDetalle +='	<div class="input number">';
-	newDetalle +='		<input name="data[Detalleordentrabajo]['+numDetalle+'][cantidad]" id="Detalleordentrabajo'+numDetalle+'Cantidad" type="number" value="" class="changeTotal">';
+	newDetalle +='	<div class="input ">';
+	newDetalle +='		<input name="data[Detalleordentrabajo]['+numDetalle+'][cantidad]" id="Detalleordentrabajo'+numDetalle+'Cantidad" value="" class="changeTotal">';
 	newDetalle +='	</div>';
 	newDetalle +='</td>';
 	newDetalle +='<td>';
 	newDetalle +='	<div class="input number">';
 	var precioProducto = $('#OrdentrabajoPreciodetalle').val();
-	newDetalle +='		<input name="data[Detalleordentrabajo]['+numDetalle+'][precio]" onchange="actualizarTotal();" step="any" id="Detalleordentrabajo'+numDetalle+'Precio" type="number" value="'+precioProducto+'" class="changeTotal">';
+	newDetalle +='		<input name="data[Detalleordentrabajo]['+numDetalle+'][precio]" onchange="actualizarTotal();" step="any" id="Detalleordentrabajo'+numDetalle+'Precio"  value="'+precioProducto+'" class="changeTotal">';
 	newDetalle +='	</div>';
 	newDetalle +='</td> ';
 	newDetalle +='<td>';
 	newDetalle +='	<div class="input number">';
 	var precioProducto = $('#OrdentrabajoPreciodetalle').val();
-	newDetalle +='		<input name="data[Detalleordentrabajo]['+numDetalle+'][subtotal]" onchange="actualizarDetalle('+numDetalle+');" step="any" id="Detalleordentrabajo'+numDetalle+'Subtotal" type="number" value="'+precioProducto+'" class="changeTotal">';
+	newDetalle +='		<input name="data[Detalleordentrabajo]['+numDetalle+'][subtotal]" onchange="actualizarDetalle('+numDetalle+');" step="any" id="Detalleordentrabajo'+numDetalle+'Subtotal"  value="'+precioProducto+'" class="changeTotal">';
 	newDetalle +='	</div>';
 	newDetalle +='</td> ';
 	newDetalle +='<td>';
@@ -390,9 +390,11 @@ function actualizarDetalle(numDetalle){
 	var ancho = $('#Detalleordentrabajo'+numDetalle+'Ancho').val();
 	var largo = $('#Detalleordentrabajo'+numDetalle+'Largo').val();
 	var cantidad = ancho*largo;
+	cantidad = cantidad.toFixed(2);
 	$('#Detalleordentrabajo'+numDetalle+'Cantidad').val(cantidad);
 	var precio = $('#Detalleordentrabajo'+numDetalle+'Precio').val();
 	var subtotal = precio*cantidad;
+	subtotal = subtotal.toFixed(2);
 	$('#Detalleordentrabajo'+numDetalle+'Subtotal').val(subtotal);
 	actualizarTotal();
 }
@@ -422,7 +424,8 @@ function actualizarTotal(){
 	$(".porPagar").each(function () {
 		yaPagado += $(this).val()*1;
 	})
-
+	total = total.toFixed(2)
+	yaPagado = yaPagado.toFixed(2)
 	$('#OrdentrabajoCosto').val(total);
 	$('#OrdentrabajoPagado').val(yaPagado);
 	$('#OrdentrabajoSaldoTotal').val(total-yaPagado);
