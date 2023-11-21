@@ -29,17 +29,47 @@
 
 	}
 </script>
-<div style="width:100%; text-align:center" align="center">
-	<h2><?php echo __('La Roca Marmoleria'); ?></h2>
-</div>
-
 <div class="ordentrabajos" id="otrabajoid" style="width:100%;">
 <table class="tbl_ot" cellspacing="0" id="tblAddOrdenTrabajo">
 	<tr  class="all">
-		<td colspan="6" style="text-align:center">
-			<h2 onclick="reducir();"><?php echo __('Orden de Trabajo'); ?></h2>
+		<td rowspan="7">
+			<?php echo $this->Html->image('larokalogo.jpg',array('alt'=>'logo La Roca','style'=>'width: 150px;margin-top: 50%;margin-left: 50%;')); ?> 
+		</td>
+		<td colspan="4" style="text-align:right;">
+			<h2 onclick="reducir();" style="margin-top: 63px;"><?php echo __('Orden de Trabajo'); ?></h2>
 		</td> 			
 	</tr>	
+	<tr  class="all">
+		<td colspan="4" style="text-align:right;">
+			E-mail: larocamarmoleria@gmail.com
+		</td> 
+	</tr>
+	<tr  class="all">
+		<td colspan="4" style="text-align:right">
+			Local Comercial: San Juan 1158
+		</td> 
+	</tr>
+	<tr  class="all">
+		<td colspan="4" style="text-align:right">
+			Fabrica: Av. Delgadillo 2265 - Parque Industrial
+		</td> 			
+	</tr>
+	<tr  class="all">
+		<td colspan="4" style="text-align:right">
+			Tel&eacute;fono: (0387) 155333077
+		</td> 			
+	</tr>
+	<tr  class="all">
+		<td colspan="4" style="text-align:right">
+			Facebook: La Roca Marmoleria 
+		</td> 			
+	</tr>
+	<tr  class="all">
+		<td colspan="4" style="text-align:right">
+			Instagram: @ilarocamarmoleriasalta 
+		</td> 			
+	</tr>
+	
 	<tr class="all">
 		<td class="print_td_title_2">
 			<?php echo __('Pedido Nro:'); ?>

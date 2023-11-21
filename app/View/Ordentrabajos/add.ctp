@@ -119,17 +119,7 @@
         </tr>
 		
 		
-		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
-			<td width="25%">
-				<?php echo $this->Form->input('total',array('label'=>'Total $')); ?>
-			</td>
-			<td width="25%">
-				<?php echo $this->Form->input('acuenta',array('label'=>'A Cuenta $')); ?>
-			</td>
-			<td width="25%">
-				<?php echo $this->Form->input('saldo',array('label'=>'Saldo $')); ?>
-			</td>
-		</tr>	
+		
 		<?php
 		/*AVANCES DEL TRABAJO	*/
 		?>
@@ -327,6 +317,17 @@
 				</table>
 			</td>
 		</tr>		
+		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
+			<td width="25%">
+				<?php echo $this->Form->input('total',array('label'=>'Total $')); ?>
+			</td>
+			<td width="25%">
+				<?php echo $this->Form->input('acuenta',array('label'=>'A Cuenta $')); ?>
+			</td>
+			<td width="25%">
+				<?php echo $this->Form->input('saldo',array('label'=>'Saldo $')); ?>
+			</td>
+		</tr>	
 		<tr class="all">
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>

@@ -125,7 +125,7 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 			<th>Detalle </th>
 			<th>Obvservacion </th>
 			<th>Retirar </th>							
-			<th>Retirada </th>							
+			<th>Medidas Tomadas</th>							
 			<th>Terminada </th>							
 			<th>Saldo</th>							
 			<th class="actions" style="text-align:center">Acciones</th>
@@ -193,7 +193,7 @@ echo $this->Html->script('buttons.html5.min.js',array('inline'=>false));?>
 					<?php echo $ordentrabajo['Ordentrabajo']['retirar']? "SI":"NO"; ?>
 				</td>
 				<td>
-					<?php echo $ordentrabajo['Ordentrabajo']['retirada']? "SI":"NO"; ?>
+					<?php echo $ordentrabajo['Ordentrabajo']['medidastomadas']? "SI":"NO"; ?>
 				</td>	
 							
 

@@ -103,7 +103,7 @@
                 	])); ?>
 			</td>
         </tr>
-		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
+		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho" style="display: none;">
 			<td width="25%">
 				<?php echo $this->Form->input('total',array('label'=>'Total $')); ?>
 			</td>

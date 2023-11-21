@@ -277,8 +277,7 @@ class OrdentrabajosController extends AppController {
                             $this->request->data('Ordentrabajo.entregada',date('Y-m-d',strtotime($this->request->data['Ordentrabajo']['entregada'])));
 
 			$msg="";
-			if ($this->Ordentrabajo->saveAll($this->request->data, array('deep' => true))) {
-				
+			if ($this->Ordentrabajo->saveAll($this->request->data, array('deep' => true))) {				
 				$this->Session->setFlash(__('La orden de trabajo a sido guardada con exito.'));
 				if(isset($this->request->data['Detalleordentrabajo'])){
 					foreach ($this->request->data['Detalleordentrabajo'] as $detalle) {	
@@ -288,8 +287,8 @@ class OrdentrabajosController extends AppController {
 						$newstock =  $cantAnterior - $cantVendida;
 						$this->Producto->id = $detalle['producto_id'];
 						if($this->Producto->saveField('cantidad', $newstock)){
-							$msg.='La orden de trabajo a sido guardada con exito';
-							$this->Session->setFlash($msg);
+							//$msg.='La orden de trabajo a sido guardada con exito';
+							//$this->Session->setFlash($msg);
 						}else{
 							$msg.='La orden de trabajo NO a sido registrada con exito.';
 							$this->Session->setFlash($msg);
