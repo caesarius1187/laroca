@@ -22,7 +22,7 @@ $(document).ready(function(){
     
 });
  function calcularFooterTotales(mitabla){
-    mitabla.columns([1,2,3,6,7]).every( function () {
+    mitabla.columns([1,2,3,6]).every( function () {
           var column = this;
           var select = $('<select><option value=""></option></select>')
                   .addClass("datatablefilter")

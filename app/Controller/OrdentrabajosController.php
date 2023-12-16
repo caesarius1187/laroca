@@ -33,7 +33,7 @@ class OrdentrabajosController extends AppController {
 				'Observacione',
 				'Detalleordentrabajo'=>[
 					'Producto'=>[
-						'fields'=>['codigo','cantidad'],
+						'fields'=>['nombre','cantidad'],
 					]
 				],
 			],

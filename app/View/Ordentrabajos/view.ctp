@@ -36,7 +36,7 @@
 			<?php echo $this->Html->image('larokalogo.jpg',array('alt'=>'logo La Roca','style'=>'width: 150px;margin-top: 50%;margin-left: 50%;')); ?> 
 		</td>
 		<td colspan="4" style="text-align:right;">
-			<h2 onclick="reducir();" style="margin-top: 63px;"><?php echo __('Orden de Trabajo'); ?></h2>
+			<h2 onclick="reducir();" style="margin-top: 63px;"><?php echo __('Datos de Contacto'); ?></h2>
 		</td> 			
 	</tr>	
 	<tr  class="all">
@@ -61,11 +61,13 @@
 	</tr>
 	<tr  class="all">
 		<td colspan="4" style="text-align:right">
+			<?php echo $this->Html->image('facebook.png',array('alt'=>'FB','style'=>'width: 20px;')); ?> 
 			Facebook: La Roca Marmoleria 
 		</td> 			
 	</tr>
 	<tr  class="all">
 		<td colspan="4" style="text-align:right">
+			<?php echo $this->Html->image('instagram.png',array('alt'=>'FB','style'=>'width: 10px;')); ?> 
 			Instagram: @ilarocamarmoleriasalta 
 		</td> 			
 	</tr>
@@ -161,7 +163,7 @@
 			<?php echo __('Saldo:'); ?>			
 		</td>
 		<td style="border-bottom: 1px dotted;">
-			<?php echo $ordentrabajo['Ordentrabajo']['saldo']; ?>
+			<?php echo number_format((float)$ordentrabajo['Ordentrabajo']['saldo'], 2, '.', ''); ?>
 		</td>
 	</tr>
 	<?php
@@ -178,6 +180,7 @@
 				}else{
 					echo " / ";
 				}
+				echo "<br> ";
 			}
 			?>
 		</td>
