@@ -36,7 +36,7 @@
 	<table class="tbl_ot" cellspacing="0" id="tblAddOrdenTrabajo" style="height: inherit;">
 		<tr  class="all">
 			<td colspan="4" rowspan="7" style="text-align:center; border: 1px solid">
-				<?php echo $this->Html->image('larokalogo.jpg',array('alt'=>'logo la roca','style'=>'width: 100px;')); ?> 
+				<?php echo $this->Html->image('laroka.png',array('alt'=>'logo la roca','style'=>'width: 190px;')); ?> 
 			</td> 	
 		</tr>
 		<tr  class="all" >

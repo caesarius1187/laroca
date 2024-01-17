@@ -33,7 +33,7 @@
 <table class="tbl_ot" cellspacing="0" id="tblAddOrdenTrabajo">
 	<tr  class="all">
 		<td rowspan="7">
-			<?php echo $this->Html->image('larokalogo.jpg',array('alt'=>'logo La Roca','style'=>'width: 150px;margin-top: 50%;margin-left: 50%;')); ?> 
+			<?php echo $this->Html->image('laroka.png',array('alt'=>'logo La Roca','style'=>'width: 150px;margin-top: 50%;margin-left: 50%;')); ?> 
 		</td>
 		<td colspan="4" style="text-align:right;">
 			<h2 onclick="reducir();" style="margin-top: 63px;"><?php echo __('Datos de Contacto'); ?></h2>

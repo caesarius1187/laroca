@@ -1,6 +1,6 @@
-<div class="page-container">
+<div class="page-container" style="background-color: white; !important">
 	
-	<?php echo $this->Html->image('larokalogo.jpg', array('alt' => 'La Roca', 'width' => '350')); ?>
+	<?php echo $this->Html->image('laroka.png', array('alt' => 'La Roca', 'width' => '350')); ?>
 	<form action="users/login" controller="users" id="UserLoginForm" method="post" accept-charset="utf-8">
 		<div style="display:none;">
 			<input type="hidden" name="_method" value="POST">
