@@ -384,6 +384,8 @@ class OrdentrabajosController extends AppController {
 										      	),
 										      'Pago'=>array(
 										      	),
+										      'Preciodetalle'=>array(
+										      	),
 										      'Manoobraxordentrabajo' =>array(
 										      	'Manodeobra'=>array('fields'=>array('nombre'))
 										      	)			

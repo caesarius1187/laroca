@@ -105,7 +105,7 @@
         </tr>
 		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho" style="display: none;">
 			<td width="25%">
-				<?php echo $this->Form->input('total',array('label'=>'Total $')); ?>
+				<?php // echo $this->Form->input('total',array('label'=>'Total $')); ?>
 			</td>
 			<td width="25%">
 				<?php echo $this->Form->input('acuenta',array('label'=>'A Cuenta $')); ?>
@@ -246,7 +246,8 @@
 					'label'=>'Material',
 					'style' => 'max-width:240px', 
 					'onChange'=>'getDetallesProducto(2)',
-					'options'=>$materiales
+					'options'=>$materiales,
+					'empty'=>'Seleccionar Material'
 				)); ?>
                 <input type="button" value="Agregar Producto" id="btnAgregarProducto" onClick="agregarproducto()" class="btn_ot"/>
             </td>
@@ -312,7 +313,7 @@
                                     <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.precio',['value'=>$producto['precio'],'class'=>'recalculable']) ?>
                                 </td>
                                 <td>
-                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.total',['value'=>$producto['precio'],'class'=>'recalculable']) ?>
+                                    <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.total',['value'=>$producto['precio']*$producto['cantidad'],'class'=>'recalculable']) ?>
                                 </td>
                                 <td>
                                     <?php echo $this->Form->input('Detalleordentrabajo.'.$k.'.descripcion',['value'=>$producto['descripcion'],'class'=>'recalculable']) ?>
@@ -331,9 +332,6 @@
         <tr class="all">
             <td colspan="2" class="td_2">
                 <h2>Pagos</h2>
-            </td>
-            <td colspan="2" class="td_2" style="display:none">
-                <h2>Mano de Obra</h2>
             </td>
         </tr>
         <tr class="all">
@@ -408,28 +406,92 @@
 				</table>
                 <?php echo $this->Form->input('numPago',array('value'=>$j+1,'type'=>'hidden')); ?>
             </td>
-			<td colspan="2" style="display:none">
-				<?php echo $this->Form->input('numDetalleManoDeObra',array('value'=>0,'type'=>'hidden')); ?>
-				<table id="tableDMOXOT" cellpadding="0" cellspacing="0" class="tbl_add">
+		</tr>
+		<tr class="all">
+            <td colspan="2" class="td_2">
+                <h2>Conformacion del precio</h2>
+            </td>
+        </tr>
+        <tr class="all">
+        	<td class="td_5" colspan="2">
+            	<table>
+            		<tr class="all">
+            			<td>
+			                <?php
+			                echo $this->Form->input('montoConformado',array('label'=>'Monto a Conformar'));
+			                ?>
+			            </td>
+			            <td>
+			                <?php
+			                echo $this->Form->input('medioPagoConformacion',array(
+			                	'label'=>'Medio de pago',
+			                	'options'=>[
+			                		'efectivo'=>'Efectivo',
+			                		'tarjeta bancarizada 6 cuotas'=>'Tarjeta Bancarizada 6 cuotas',
+			                		'tarjeta bancarizada 12 cuotas'=>'Tarjeta Bancarizada 12 cuotas',
+			                		'tarjeta naranja z'=>'tarjeta naranja z',
+			                		'link de pago 12 cuotas'=>'Link de pago 12 cuotas'
+			                		,
+			                		'link de pago 18 cuotas'=>'Link de pago 18 cuotas'
+			                	],
+			                ));
+			                ?>
+			            </td>
+			            <td>
+                			<input type="button" value="Agregar Conformacion de Precio" id="btnAgregarConformacionPrecio" onClick="agregarConformacionPrecio()" class="btn_ot" />
+                		</td>
+                	</tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="all">
+            <td colspan="4">
+				<table id="tableConformacionPrecio" cellpadding="0" cellspacing="0" class="tbl_add">
 					<thead>
-						<th>Mano de obra</th>
-						<th>Precio</th>						
-						<th>Cantidad</th>						
+						<tr class="all">
+							<th>Numero</th>
+							<th>Monto</th>
+							<th>Medio de pago</th>
+							<th>Interes</th>
+							<th>Descuento</th>
+							<th>Sub Total</th>
+						</tr>						
 					</thead>
-					<tbody>
-						<?php 
-						foreach ($this->request->data['Manoobraxordentrabajo'] as $producto) {
+					<tbody>						
+						<?php
+                        $k=0;
+						foreach ($this->request->data['Preciodetalle'] as $k => $preciodetalle) {
 							?>
-							<tr>
-								<td><?php echo $producto['Manodeobra']['nombre']?></td>
-								<td><?php echo $producto['precio']?></td>
-								<td><?php echo $producto['cantidad']?></td>
+                            <tr id="RowConformacionPrecio<?php echo $preciodetalle['id'] ?>" class="all">
+                                <td>
+                                    <?php echo $preciodetalle['id']*1 ?>
+                                </td>
+                                <td>
+                                    <?php echo $preciodetalle['monto']*1 ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Form->label($preciodetalle['mediodepago']) ?>
+                                </td>
+                                <td>
+                                    <?php echo $preciodetalle['interes']*1 ?>
+                                </td>
+                                <td>
+                                    <?php echo $preciodetalle['descuento']*1 ?>
+                                </td>
+                                <td>
+                                    <?php echo $preciodetalle['subtotal']*1 ?>
+                                    <?php echo $this->Form->input('montoconformado'.$preciodetalle['id'], ['value'=>$preciodetalle['subtotal'], 'type'=>'hidden', 'class'=>'porPagarConformado']) ?>
+                                </td>
+                                <td>
+                                    <input  type="button" value="X"  title="Eliminar" onclick="eliminarPrecioDetalle(<?php echo $preciodetalle['id']; ?>)" class="eliminar">
+                                </td>
 							</tr>
-							<?php
-						}?>	
+						<?php
+						} ?>						
 					</tbody>
 				</table>
-			</td>
+                <?php echo $this->Form->input('numConformacionPrecio',array('value'=>$k+1,'type'=>'hidden')); ?>
+            </td>
 		</tr>
         <tr class="all">
             <td colspan="4">
@@ -438,17 +500,24 @@
                         <td style="text-align: right; vertical-align:middle;">
                             <label class="lbl_ot">Precio</label>
                         </td>
-                        <td width="40%">
-                            <?php echo $this->Form->input('costo', array('type' => 'money','value'=>0, 'label'=>'', 'style' => 'width:90%; font-size:150%;')); ?></td>
+                        <td width="20%">
+                            <?php echo $this->Form->input('total',array('label'=>'Total','value'=>0, 'label'=>'', 'style' => 'width:90%; font-size:150%;')); ?>
+                            <?php //echo $this->Form->input('costo', array('type' => 'money','value'=>0, 'label'=>'', 'style' => 'width:90%; font-size:150%;')); ?></td>
+                        <td style="text-align: right; vertical-align:middle;">
+                            <label class="lbl_ot">Total Conformado</label>
+                        </td>
+                        <td width="20%">
+							<?php echo $this->Form->input('totalconformado', array('type' => 'money','value'=>0, 'label'=>'', 'style' => 'width:90%; font-size:150%;')); ?>
+						</td>
                         <td style="text-align: right; vertical-align:middle;">
                             <label class="lbl_ot">Pagado</label>
                         </td>
-                        <td width="40%">
+                        <td width="20%">
                             <?php echo $this->Form->input('pagado', array('type' => 'money','value'=>0, 'label'=>'', 'style' => 'width:90%; font-size:150%;')); ?></td>
                         <td style="text-align: right; vertical-align:middle;">
                             <label class="lbl_ot">Saldo Total</label>
                         </td>
-                        <td width="40%">
+                        <td width="20%">
                             <?php echo $this->Form->input('saldoTotal', array('type' => 'money','value'=>0, 'label'=>'', 'style' => 'width:90%; font-size:150%;')); ?></td>
                     </tr>
                 </table>

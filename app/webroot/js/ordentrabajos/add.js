@@ -216,10 +216,155 @@ function agregarpago(){
 	$('#OrdentrabajoNumPago').val(numPago*1+1);	
 	actualizarTotal();
 }
+function agregarConformacionPrecio(){
+		 
+	var numPago = $('#OrdentrabajoNumConformacionPrecio').val()*1+1;
+
+	var rowPago = $("<tr>")
+						.attr('id',"RowConformacionPrecio"+numPago);
+
+	var dt = new Date();
+
+	var dd = String(dt.getDate()).padStart(2, '0');
+	var mm = String(dt.getMonth() + 1).padStart(2, '0'); //January is 0!
+	var yyyy = dt.getFullYear();
+	var date = yyyy + "-" + mm + "-" + dd;
+
+	var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+	var montoDejado = $("#OrdentrabajoMontoConformado").val();
+	var mediopago = $('#OrdentrabajoMedioPagoConformacion').val()
+	var interes = 0;
+	var descuento = 0;
+	switch (mediopago){
+		case "efectivo":
+			descuento = montoDejado * 0.1;
+		break;
+		case "tarjeta bancarizada 6 cuotas":
+			interes = montoDejado * 0.51;
+		break;
+		case "tarjeta bancarizada 12 cuotas":
+			interes = montoDejado * 0.93;
+		break;
+		case "tarjeta naranja z":
+			interes = montoDejado * 0.205;
+		break;
+		case "link de pago 12 cuotas":
+			interes = montoDejado * 0.56;
+		break;
+		case "link de pago 18 cuotas":
+			interes = montoDejado * 0.89;
+		break;
+	}
+	
+	var subtotal = montoDejado*1 + interes*1 - descuento*1;
+	rowPago
+		.append(
+			$('<td>').html(numPago)
+		)
+		.append(
+			$('<td>').append(
+				$('<div>')
+					.addClass('input text')
+					.append(
+						$('<input>')
+							.attr('id','Preciodetalle'+numPago+'Monto')
+							.attr('name','data[Preciodetalle]['+numPago+'][monto]')
+							.val(montoDejado)
+					)
+			)	
+		)
+		.append(
+			$('<td>').append(
+				$('<div>')
+					.addClass('input text')
+					.append(
+						$('<input>')
+							.attr('id','Preciodetalle'+numPago+'Mediodepago')
+							.attr('name','data[Preciodetalle]['+numPago+'][mediodepago]')
+							.val(mediopago)
+					)
+			)	
+		)
+		.append(
+			$('<td>').append(
+				$('<div>')
+					.addClass('input text')
+					.append(
+						$('<input>')
+							.attr('id','Preciodetalle'+numPago+'Interes')
+							.attr('name','data[Preciodetalle]['+numPago+'][interes]')
+							.val(interes)
+					)
+			)	
+		)
+		.append(
+			$('<td>').append(
+				$('<div>')
+					.addClass('input text')
+					.append(
+						$('<input>')
+							.attr('id','Preciodetalle'+numPago+'Descuento')
+							.attr('name','data[Preciodetalle]['+numPago+'][descuento]')
+							.val(descuento)
+					)
+			)	
+		)
+		.append(
+			$('<td>').append(
+				$('<div>')
+					.addClass('input text')
+					.append(
+						$('<input>')
+							.attr('id','Preciodetalle'+numPago+'Subtotal')
+							.attr('name','data[Preciodetalle]['+numPago+'][subtotal]')
+							.addClass('porPagarConformado')
+							.val(subtotal)
+					)
+			)	
+		)
+		.append(
+			$('<td>').append(
+				$('<input>')
+					.attr('onClick', 'eliminarDetalleOnTheFlyPrecioConformado('+numPago+')')
+					.attr('type','button')
+					.attr('value','X')
+					.attr('title','Eliminar')
+			)
+		);
+	$("#tableConformacionPrecio").find('tbody').append(rowPago);
+	$('#OrdentrabajoNumConformacionPrecio').val(numPago*1+1);	
+	actualizarTotal();
+}
 function eliminarDetalleOnTheFly(numPago){
 	$("#RowPago"+numPago).remove();
 	actualizarTotal();
 }
+function eliminarDetalleOnTheFlyPrecioConformado(numPago){
+	$("#RowConformacionPrecio"+numPago).remove();
+	actualizarTotal();
+}
+function eliminarPrecioDetalle(numDetalle){
+    formData = "";
+    //alert(formData);
+    $.ajax({
+        type: 'POST',
+        url: serverLayoutURL+'/preciodetalle/delete/'+numDetalle,
+        data: formData,
+        success: function(data,textStatus,xhr){
+            var respuesta = JSON.parse(data);
+            alert(respuesta.respuesta);
+            if(respuesta.error=="0"){
+                $('#RowConformacionPrecio'+numDetalle).remove() ;
+                actualizarTotal();
+            }
+        },
+        error: function(xhr,textStatus,error){
+            alert(textStatus);
+        }
+    });
+    return false;
+}
+
 //Agrega un producto para vender en la orden de trabajo
 function agregarproducto(){
 	/*if(!checkstock()){
@@ -418,18 +563,24 @@ function actualizarTotal(){
 		}		
 	}*/
 	var yaPagado = 0;	
+	var porPagarConformado = 0;	
 	$(".pagadoYaCargado").each(function () {
 		yaPagado += $(this).val()*1;
 	});
 	$(".porPagar").each(function () {
 		yaPagado += $(this).val()*1;
 	})
+	$(".porPagarConformado").each(function () {
+		porPagarConformado += $(this).val()*1;
+	})
 	total = total.toFixed(2)
 	yaPagado = yaPagado.toFixed(2)
-	$('#OrdentrabajoCosto').val(total);
+	$('#OrdentrabajoCosto').val(porPagarConformado);
 	$('#OrdentrabajoPagado').val(yaPagado);
-	$('#OrdentrabajoSaldoTotal').val(total-yaPagado);
-	$('#OrdentrabajoSaldo').val(total-yaPagado);
+	$('#OrdentrabajoTotalconformado').val(porPagarConformado);
+	$('#OrdentrabajoSaldoTotal').val(porPagarConformado-yaPagado);
+	$('#OrdentrabajoSaldo').val(porPagarConformado-yaPagado);
+
 	$('#OrdentrabajoAcuenta').val(yaPagado);
 	$('#OrdentrabajoTotal').val(total);
 	OrdentrabajoAcuenta

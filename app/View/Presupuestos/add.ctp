@@ -35,7 +35,8 @@
 					'label'=>'Material',
 					'style' => 'max-width:240px', 
 					'onChange'=>'getDetallesProducto(2)',
-					'options'=>$materiales
+					'options'=>$materiales,
+					'empty'=>'Seleccionar Material'
 				)); ?>
 				
 				<input type="button" value="Agregar Producto" id="btnAgregarProducto" onClick="agregarproducto()" class="btn_ot"/>

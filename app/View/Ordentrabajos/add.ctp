@@ -192,7 +192,8 @@
 					'label'=>'Material',
 					'style' => 'max-width:240px', 
 					'onChange'=>'getDetallesProducto(2)',
-					'options'=>$materiales
+					'options'=>$materiales,
+					'empty'=>'Seleccionar Material'
 				)); ?>
 				
 				<input type="button" value="Agregar Producto" id="btnAgregarProducto" onClick="agregarproducto()" class="btn_ot"/>
@@ -317,9 +318,69 @@
 				</table>
 			</td>
 		</tr>		
+		<tr class="all">
+			<td colspan="4" class="td_1">
+				<h2>Conformacion del precio</h2>
+			</td>
+		</tr>
+		<tr class="all">	
+			<td class="td_5" colspan="4">
+            	<table>
+            		<tr class="all">
+            			<td>
+			                <?php
+			                echo $this->Form->input('montoConformado',array('label'=>'Monto a Conformar'));
+			                ?>
+			            </td>
+			            <td>
+			                <?php
+			                echo $this->Form->input('medioPagoConformacion',array(
+			                	'label'=>'Medio de pago',
+			                	'options'=>[
+			                		'efectivo'=>'Efectivo',
+			                		'tarjeta bancarizada 6 cuotas'=>'Tarjeta Bancarizada 6 cuotas',
+			                		'tarjeta bancarizada 12 cuotas'=>'Tarjeta Bancarizada 12 cuotas',
+			                		'tarjeta naranja z'=>'tarjeta naranja z',
+			                		'link de pago 12 cuotas'=>'Link de pago 12 cuotas'
+			                		,
+			                		'link de pago 18 cuotas'=>'Link de pago 18 cuotas'
+			                	],
+			                ));
+			                ?>
+			            </td>
+			            <td>
+                			<input type="button" value="Agregar Conformacion de Precio" id="btnAgregarConformacionPrecio" onClick="agregarConformacionPrecio()" class="btn_ot" />
+                		</td>
+                	</tr>
+                </table>
+            </td>
+		</tr>		
+		<tr class="all">	
+			<td colspan="2">
+				<table id="tableConformacionPrecio" cellpadding="0" cellspacing="0" class="tbl_add">
+					<thead>
+						<tr class="all">
+							<th>Numero</th>
+							<th>Monto</th>
+							<th>Medio de pago</th>
+							<th>Interes</th>
+							<th>Descuento</th>
+							<th>Sub Total</th>
+						</tr>						
+					</thead>
+					<tbody>						
+							
+					</tbody>
+				</table>
+                <?php echo $this->Form->input('numConformacionPrecio',array('value'=>0,'type'=>'hidden')); ?>
+            </td>
+		</tr>		
 		<tr class="ncmg a1b1r1 a2b2r2 a3b3r3 placbronce placnicho">
 			<td width="25%">
 				<?php echo $this->Form->input('total',array('label'=>'Total $')); ?>
+			</td>
+			<td width="25%">
+				<?php echo $this->Form->input('totalconformado',array('label'=>'Total Conformado $')); ?>
 			</td>
 			<td width="25%">
 				<?php echo $this->Form->input('acuenta',array('label'=>'A Cuenta $')); ?>

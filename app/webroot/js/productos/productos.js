@@ -134,7 +134,11 @@ function sugerirPrecio()
 				pocentaje = parseInt(pocentaje);
 		
 		//alert(parseFloat(preciocompra) + " : " +parseFloat(parseFloat(preciocompra) * parseFloat(pocentaje / 100)))
-		precioVenta = parseFloat(preciocompra) + parseFloat(parseFloat(preciocompra) * parseFloat(pocentaje / 100));	
+		precioVenta = parseFloat(preciocompra) * (1 + parseFloat(pocentaje / 100));	
+		
+		//esto funciona con valores de menos de 100
+		//no con valores de + de 100 
+
 		precioVenta = parseFloat(precioVenta).toFixed(2);
 		$("#ProductoPrecioventa").val(precioVenta);
 		$("#ProductoPrecio").val(precioVenta);					
